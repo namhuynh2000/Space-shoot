@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import socket from "../../connections/socket";
 
 export default function PlayerList() {
   const [players, setPlayers] = useState([]);
-  const [room, setRoom] = useState("");
+  const { room } = useParams();
   useEffect(() => {
+    socket.emit("fetchPlayersInRoom", room);
+
     socket.on("receive__players", (data) => {
       console.log(data);
-      setRoom(data[0].room);
       setPlayers(data);
     });
   }, [socket]);
