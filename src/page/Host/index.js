@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import socket from "../../connections/socket";
+import {
+  setReduxPlayerRole,
+  setReduxPlayerRoom,
+} from "../../redux/reducers/userReducer";
 
 export default function HostPage() {
   const [quizList, setQuizList] = useState([]);
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   useEffect(() => {
     socket.emit("fetchQuizList");
@@ -14,7 +21,10 @@ export default function HostPage() {
 
     socket.on("hostGameRes", (payload) => {
       if (payload.result) {
-        navigate(`/host/lobby/${payload.game.id}`);
+        console.log(payload);
+        dispatch(setReduxPlayerRole("Host"));
+        dispatch(setReduxPlayerRoom(payload.game.roomId));
+        navigate(`/host/lobby/?quizId=${payload.game.quizId}`);
       }
     });
   }, [socket]);

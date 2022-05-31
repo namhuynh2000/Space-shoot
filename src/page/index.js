@@ -1,5 +1,5 @@
 import HomePage from "./Homepage";
-import PlayerListPage from "./PlayerList";
+import HostWaiting from "./HostWaiting";
 import PlayerWaitingPage from "./PlayerWaiting";
 import HostPage from "./Host";
-export { HomePage, PlayerListPage, PlayerWaitingPage, HostPage };
+export { HomePage, HostWaiting, PlayerWaitingPage, HostPage };

@@ -3,12 +3,20 @@ import JoinInput from "../../components/JoinInput/JoinInput";
 import socket from "../../connections/socket";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {
+  setReduxPlayerRole,
+  setReduxPlayerName,
+  setReduxPlayerRoom,
+} from "../../redux/reducers/userReducer";
 export default function HomePage() {
   const [playerName, setPlayerName] = useState("");
   const [room, setRoom] = useState("");
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
   const _handlePlayerNameInput = (e) => {
     setPlayerName(e.target.value);
   };
@@ -23,9 +31,13 @@ export default function HomePage() {
 
   useEffect(() => {
     socket.on("joinRoomRes", (res) => {
-      console.log(res);
       if (res.result) {
-        navigate("/waiting");
+        dispatch(setReduxPlayerName(res.player.name));
+        dispatch(setReduxPlayerRoom(res.player.room));
+        dispatch(setReduxPlayerRole("Player"));
+        navigate(
+          `/waiting?room=${res.player.room}&playerName=${res.player.name}`
+        );
       } else {
         setError(res.msg);
       }
