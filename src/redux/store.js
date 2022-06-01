@@ -1,7 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "./reducers/userReducer";
+import playerReducer from "./reducers/playerReducer";
+import hostReducer from "./reducers/hostReducer";
 export const store = configureStore({
   reducer: {
-    user: userReducer,
+    player: playerReducer,
+    host: hostReducer,
   },
 });

@@ -2,50 +2,62 @@ import React, { useEffect, useState } from "react";
 import PlayerList from "../../components/PlayerList/PlayerList";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import socket from "../../connections/socket";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
-  selectUser,
-  setReduxPlayerRoom,
-  setReduxPlayerRole,
-} from "../../redux/reducers/userReducer";
+  setReduxHostGame,
+  setReduxHostRoom,
+} from "../../redux/reducers/hostReducer";
+
 export default function HostWaiting() {
   const [players, setPlayers] = useState([]);
   const [params] = useSearchParams();
   const [room, setRoom] = useState("");
-  const user = useSelector(selectUser);
-
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
   useEffect(() => {
-    if (!user.role) {
-      const quizId = params.get("quizId");
-      console.log(quizId);
-      socket.emit("hostGame", quizId);
-      return;
-    }
-    setRoom(user.room);
+    const quizId = params.get("quizId");
+    socket.emit("hostGame", quizId);
   }, []);
 
   useEffect(() => {
+    //Send request to get player list
     socket.emit("fetchPlayersInRoom", room);
 
+    //Listen to receive player list
     socket.on("receive__players", (data) => {
       console.log(data);
       setPlayers(data);
     });
 
+    // Listen to host game result
     socket.on("hostGameRes", (res) => {
       if (!res.result) {
         alert("Host failed");
         navigate("/host");
         return;
       }
+      dispatch(setReduxHostRoom(res.game.roomId));
+      dispatch(setReduxHostGame(res.game.name));
       setRoom(res.game.roomId);
-      dispatch(setReduxPlayerRole("Host"));
-      dispatch(setReduxPlayerRoom(res.game.roomId));
     });
   }, [socket]);
 
-  return <PlayerList players={players} room={room} />;
+  const startBtn_click = (e) => {
+    const quizId = params.get("quizId");
+
+    navigate(`/host/start?quizId=${quizId}`);
+  };
+
+  return (
+    <div>
+      <PlayerList players={players} room={room} />
+      <button
+        onClick={startBtn_click}
+        disabled={players.length > 0 ? false : true}
+      >
+        Start game
+      </button>
+    </div>
+  );
 }

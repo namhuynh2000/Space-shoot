@@ -3,20 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import socket from "../../connections/socket";
 import {
-  selectUser,
+  selectPlayer,
   setReduxPlayerName,
   setReduxPlayerRoom,
-  setReduxPlayerRole,
-} from "../../redux/reducers/userReducer";
+} from "../../redux/reducers/playerReducer";
+import { checkPlayerExist } from "../../libs/library";
 
 export default function PlayerWaitingPage() {
   const [searchParams] = useSearchParams();
-  const user = useSelector(selectUser);
+  const player = useSelector(selectPlayer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user.playerName) {
+    //Handle user join by link
+    if (!checkPlayerExist(player)) {
       const room = searchParams.get("room");
       const playerName = searchParams.get("playerName");
       if (room && playerName) {
@@ -30,11 +31,15 @@ export default function PlayerWaitingPage() {
       if (res.result) {
         dispatch(setReduxPlayerName(res.player.name));
         dispatch(setReduxPlayerRoom(res.player.room));
-        dispatch(setReduxPlayerRole("Player"));
       } else {
         alert("Join failed");
         navigate("/");
       }
+    });
+
+    //  Listen for event game start result
+    socket.on("hostStartingGame", () => {
+      navigate("/start");
     });
   }, []);
   return <div>Waiting...</div>;
