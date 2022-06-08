@@ -1,4 +1,4 @@
 export const checkPlayerExist = (state) => {
-  if (!state.room || !state.playerName) return false;
+  if (!state.room || !state.name) return false;
   return true;
 };

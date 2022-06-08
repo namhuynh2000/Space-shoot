@@ -1,10 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   player: {
     score: 0,
-    playerName: "",
+    name: "",
     room: "",
+    id: "",
   },
 };
 
@@ -23,6 +24,12 @@ export const playerSlice = createSlice({
     setReduxPlayerRoom: (state, action) => {
       state.player.room = action.payload;
     },
+    setReduxPlayerId: (state, action) => {
+      state.player.id = action.payload;
+    },
+    setReduxPlayer: (state, action) => {
+      state.player = action.payload;
+    },
   },
 });
 
@@ -31,6 +38,8 @@ export const {
   setReduxPlayerScore,
   setReduxPlayerName,
   setReduxPlayerRoom,
+  setReduxPlayer,
+  setReduxPlayerId,
   isExisted,
 } = playerSlice.actions;
 

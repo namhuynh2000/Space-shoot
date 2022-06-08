@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
-import JoinInput from "../../components/JoinInput/JoinInput";
-import socket from "../../connections/socket";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import {
-  setReduxPlayerName,
-  setReduxPlayerRoom,
-} from "../../redux/reducers/playerReducer";
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+
+import JoinInput from '../../components/JoinInput/JoinInput';
+import socket from "../../connections/socket"
+import { setReduxPlayer } from "../../redux/reducers/playerReducer"
+
 export default function HomePage() {
   const [playerName, setPlayerName] = useState("");
   const [room, setRoom] = useState("");
@@ -31,8 +29,7 @@ export default function HomePage() {
   useEffect(() => {
     socket.on("joinRoomRes", (res) => {
       if (res.result) {
-        dispatch(setReduxPlayerName(res.player.name));
-        dispatch(setReduxPlayerRoom(res.player.room));
+        dispatch(setReduxPlayer(res.player));
         navigate(
           `/waiting?room=${res.player.room}&playerName=${res.player.name}`
         );
