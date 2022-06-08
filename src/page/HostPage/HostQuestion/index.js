@@ -1,11 +1,12 @@
 import './index.scss';
 
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import socket from '../../../connections/socket';
 import { selectHost } from '../../../redux/reducers/hostReducer';
+import {countPlayerAnswers} from "../../../libs/library";
 
 const HostQuestionPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -15,7 +16,12 @@ const HostQuestionPage = () => {
   const [params] = useSearchParams();
   const { room } = useSelector(selectHost);
 
-  const [playerAnswers, setPlayerAnswers] = useState([]);
+
+  const resultRef = useRef(null);
+  const [totalAnswer, setTotalAnswer] = useState({
+    id:"",
+    playerAnswers: [],
+  });
   const navigate = useNavigate();
   useEffect(() => {
     if (!room) {
@@ -38,9 +44,10 @@ const HostQuestionPage = () => {
       if (res.result) {
         setQuestion(res.questionData);
         setIsLoading(false);
-        let countDown = 20;
+        let countDown = 5;
+        setQuestionCountDown(countDown);
         interval = setInterval(()=>{
-          if(countDown === -1)
+          if(countDown === 0)
           {
             socket.emit("stopQuestion",room,questionIndex)
             clearInterval(interval);
@@ -57,7 +64,7 @@ const HostQuestionPage = () => {
 
     socket.on("playerAnswerRes", (playerAnswerList) => {
       console.log(playerAnswerList);
-      setPlayerAnswers(playerAnswerList);
+      setTotalAnswer(playerAnswerList);
     });
 
     socket.on("questionTimeOut",(playerAnswersList)=>{
@@ -70,6 +77,26 @@ const HostQuestionPage = () => {
     })
   }, []);
 
+useEffect(()=>{
+  if(totalAnswer.playerAnswers.length === 0) return;
+
+  if(resultRef.current)
+  {
+    const list = resultRef.current;
+    const items = resultRef.current.children;
+
+    console.log(items);
+    const totalResult = totalAnswer.playerAnswers.length;
+
+        Array.from(items).forEach((item,index)=>{
+      const itemHeight = countPlayerAnswers(totalAnswer.playerAnswers,question.choices[index].content)*100 / totalResult;
+      console.log(itemHeight);
+      item.children[0].style.height = itemHeight? itemHeight + "%": "10%";
+    })
+
+  }
+
+},[totalAnswer,isEnd])
 
 
   return (
@@ -81,17 +108,33 @@ const HostQuestionPage = () => {
         </div>
       )}
 
-      {!isEnd && !isLoading && question && (
+      {!isLoading && question && (
         <div className="hostQuestionDetail">
           <h1>{question.content}</h1>
 
-          <div className="hostQuestionInfo">
+          {!isEnd && <div className="hostQuestionInfo">
+
+
             <span>{questionCountDown}</span>
             <span className="playerAnswers">
-              <p>{playerAnswers.length}</p>
+              <p>{totalAnswer?.playerAnswers?.length ?? 0}</p>
               <p>Answers</p>
             </span>
-          </div>
+          </div>}
+
+
+          {isEnd && (
+              <ul className="hostQuestionResult" ref={resultRef}>
+                {question.choices.map((choice, index) => (
+                    <li key={index}>
+                      <div className="hostQuestionResultPercent">
+                        <p className="hostQuestionResultCount">{countPlayerAnswers(totalAnswer.playerAnswers,choice.content)}</p>
+                      </div>
+
+                    </li>
+                ))}
+              </ul>
+          )}
           <ul className="hostQuestionChoices">
             {question.choices.map((choice, index) => (
               <li key={index}>{choice.content}</li>
@@ -100,9 +143,7 @@ const HostQuestionPage = () => {
         </div>
       )}
 
-      {isEnd && (
-          <p>Result</p>
-      )}
+
     </div>
   );
 };

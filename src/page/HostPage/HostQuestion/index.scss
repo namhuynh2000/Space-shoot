@@ -1,6 +1,7 @@
 .hostQuestionPage {
   padding: 1.2rem 2rem;
   height: 100vh;
+
   .progress {
     height: 20px;
     background-color: grey;
@@ -11,18 +12,22 @@
   .hostQuestionDetail {
     height: 100%;
     display: grid;
-    grid-template-rows: 10% 20% 60%;
+    grid-template-rows: 10% 40% 40%;
     grid-row-gap: 5%;
+
     h1 {
       text-align: center;
       font-size: 3rem;
     }
+
     .hostQuestionInfo {
       display: flex;
       justify-content: space-between;
       align-items: center;
+
       span {
         font-weight: bold;
+
         &:first-of-type {
           padding: 1.6rem 2rem;
           background-color: rebeccapurple;
@@ -35,6 +40,7 @@
           p {
             font-size: 2rem;
           }
+
           text-align: center;
         }
       }
@@ -46,6 +52,7 @@
       grid-gap: 1.2rem;
       background-color: #dbdbdb;
       padding: 0 1.2rem;
+
       li {
         color: #fff;
         display: flex;
@@ -53,6 +60,7 @@
         justify-content: center;
         font-size: 2rem;
         cursor: pointer;
+
         &:nth-child(1) {
           background-color: red;
         }
@@ -70,7 +78,94 @@
         }
       }
     }
+
+    .hostQuestionResult {
+      display: grid;
+      width: 60%;
+      margin: 0 auto;
+      grid-template-columns: repeat(4, 1fr);
+      grid-column-gap: 2rem;
+
+      li {
+        padding: 0 2rem;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        text-align: end;
+        height: 100%;
+        justify-content: flex-end;
+
+        .hostQuestionResultPercent {
+          width: 100%;
+          position: relative;
+
+          .hostQuestionResultCount {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translate(-50%, 0);
+            color: #fff;
+            font-size: 2rem;
+            font-weight: 600;
+          }
+
+        }
+
+        &:nth-child(1) {
+          .hostQuestionResultPercent {
+
+            background-color: red;
+
+            .hostQuestionResultCount {
+              color: red;
+
+            }
+          }
+        }
+
+        &:nth-child(2) {
+          color: blue;
+
+          .hostQuestionResultPercent {
+            background-color: blue;
+
+            .hostQuestionResultCount {
+              color: blue;
+
+            }
+          }
+        }
+
+        &:nth-child(3) {
+          color: orange;
+
+          .hostQuestionResultPercent {
+            background-color: orange;
+
+            .hostQuestionResultCount {
+              color: orange;
+
+            }
+          }
+        }
+
+        &:nth-child(4) {
+          color: green;
+
+          .hostQuestionResultPercent {
+            background-color: green;
+
+            .hostQuestionResultCount {
+              color: green;
+
+            }
+          }
+        }
+      }
+    }
   }
+
+
 }
 
 @keyframes progressMove {

@@ -84,7 +84,7 @@ const PlayerQuestionPage = () => {
       )}
 
       {!isLoading && timeOut && !isAnswer &&(
-          <div>You have not answer the question</div>
+          <div>You have not answered the question</div>
       )}
     </div>
   );
