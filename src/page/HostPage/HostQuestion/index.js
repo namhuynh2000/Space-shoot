@@ -72,7 +72,29 @@ const HostQuestionPage = () => {
     };
   }, []);
 
- 
+  // useEffect(() => {
+  //   if (!isEnd) return;
+
+  //   if (resultRef.current) {
+  //     const items = resultRef.current.children;
+
+  //     console.log(items);
+  //     const totalResult = totalAnswer.playerAnswers.length;
+
+  //     Array.from(items).forEach((item, index) => {
+  //       const itemHeight =
+  //         (countPlayerAnswers(
+  //           totalAnswer.playerAnswers,
+  //           question.choices[index].content
+  //         ) *
+  //           100) /
+  //         totalResult;
+  //       console.log(itemHeight);
+  //       item.children[0].style.height = itemHeight ? itemHeight + "%" : "10%";
+  //     });
+  //   }
+  // }, [totalAnswer, isEnd]);
+
   return (
     <div className="host-question">
       {!isEnd && isLoading && (
