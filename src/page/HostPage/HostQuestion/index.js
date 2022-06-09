@@ -6,8 +6,9 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 import socket from "../../../connections/socket";
 import { selectHost } from "../../../redux/reducers/hostReducer";
-import { countPlayerAnswers } from "../../../libs/library";
-
+import { countPlayerAnswers, generateImage } from "../../../libs/library";
+import AnswerChoices from "../../../components/AnswerChoices/AnswerChoices";
+import AnswerChar from "../../../components/AnswerChart/AnswerChar";
 const HostQuestionPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [question, setQuestion] = useState("");
@@ -71,29 +72,28 @@ const HostQuestionPage = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (totalAnswer.playerAnswers.length === 0) return;
+  // useEffect(() => {
+  //   if (!isEnd) return;
 
-    if (resultRef.current) {
-      const list = resultRef.current;
-      const items = resultRef.current.children;
+  //   if (resultRef.current) {
+  //     const items = resultRef.current.children;
 
-      console.log(items);
-      const totalResult = totalAnswer.playerAnswers.length;
+  //     console.log(items);
+  //     const totalResult = totalAnswer.playerAnswers.length;
 
-      Array.from(items).forEach((item, index) => {
-        const itemHeight =
-          (countPlayerAnswers(
-            totalAnswer.playerAnswers,
-            question.choices[index].content
-          ) *
-            100) /
-          totalResult;
-        console.log(itemHeight);
-        item.children[0].style.height = itemHeight ? itemHeight + "%" : "10%";
-      });
-    }
-  }, [totalAnswer, isEnd]);
+  //     Array.from(items).forEach((item, index) => {
+  //       const itemHeight =
+  //         (countPlayerAnswers(
+  //           totalAnswer.playerAnswers,
+  //           question.choices[index].content
+  //         ) *
+  //           100) /
+  //         totalResult;
+  //       console.log(itemHeight);
+  //       item.children[0].style.height = itemHeight ? itemHeight + "%" : "10%";
+  //     });
+  //   }
+  // }, [totalAnswer, isEnd]);
 
   return (
     <div className="host-question">
@@ -109,8 +109,17 @@ const HostQuestionPage = () => {
           <h1>{question.content}</h1>
 
           {!isEnd && (
+            <button className="host-question__control-btn">Skip</button>
+          )}
+
+          {isEnd && (
+            <button className="host-question__control-btn">Next</button>
+          )}
+
+          {!isEnd && (
             <div className="host-question__detail-info">
               <span>{questionCountDown}</span>
+              <img src={generateImage(question?.image)} alt="" />
               <span>
                 <p>{totalAnswer?.playerAnswers?.length ?? 0}</p>
                 <p>Answers</p>
@@ -119,32 +128,14 @@ const HostQuestionPage = () => {
           )}
 
           {isEnd && (
-            <ul className={"host-question__result"} ref={resultRef}>
-              {question.choices.map((choice, index) => (
-                <li key={index}>
-                  <div className="host-question__result-percentage">
-                    <p className="host-question__result-count">
-                      {countPlayerAnswers(
-                        totalAnswer.playerAnswers,
-                        choice.content
-                      )}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ul>
+            <AnswerChar
+              choices={question.choices}
+              playerAnswers={totalAnswer.playerAnswers}
+              correctAnswer={question.correctAnswer}
+            />
           )}
-          <ul
-            className={
-              isEnd
-                ? "host-question__choices host-question__choices--disabled"
-                : "host-question__choices"
-            }
-          >
-            {question.choices.map((choice, index) => (
-              <li key={index}>{choice.content}</li>
-            ))}
-          </ul>
+
+          <AnswerChoices choices={question.choices} disabled={isEnd} />
         </div>
       )}
     </div>

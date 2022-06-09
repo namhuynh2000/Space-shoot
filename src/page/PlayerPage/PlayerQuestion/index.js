@@ -3,7 +3,7 @@ import "./index.scss";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import AnswerChoices from "../../../components/AnswerChoices/AnswerChoices";
 import socket from "../../../connections/socket";
 import {
   selectPlayer,
@@ -45,7 +45,7 @@ const PlayerQuestionPage = () => {
   };
 
   return (
-    <div className="playerQuestionPage">
+    <div className="player-question">
       {isLoading && (
         <div>
           <p>Loading...</p>
@@ -53,18 +53,23 @@ const PlayerQuestionPage = () => {
       )}
 
       {!isLoading && question && !isAnswer && !timeOut && (
-        <div className="playerQuestionDetail">
-          <div className="questionInfo">
+        <div className="player-question__detail">
+          <div className="player-question__detail-info">
             <p>Question {question.id}</p>
           </div>
-          <ul className="questionChoices">
+          {/* <ul className="player-question_">
             {question.choices.map((choice, index) => (
               <li key={index} onClick={() => _handlePlayerAnswer(choice)}>
                 {choice.content}
               </li>
             ))}
-          </ul>
-          <div className="playerInfo">
+          </ul> */}
+
+          <AnswerChoices
+            choices={question.choices}
+            clickHandle={_handlePlayerAnswer}
+          />
+          <div className="player-question__player-info">
             <p>{player.name}</p>
             <p>{player.score}</p>
           </div>
