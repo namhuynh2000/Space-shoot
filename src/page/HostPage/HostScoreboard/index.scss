@@ -1,0 +1,20 @@
+.scoreboard {
+  height: 100vh;
+  padding: 1.2rem 3rem;
+  overflow: hidden;
+  background-color: orange;
+
+  .scoreboard__container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    position: relative;
+  }
+  h1 {
+    font-size: 3rem;
+    text-align: center;
+  }
+}

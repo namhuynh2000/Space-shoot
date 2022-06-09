@@ -9,15 +9,19 @@ import {
   selectPlayer,
   setReduxPlayer,
 } from "../../../redux/reducers/playerReducer";
+import PlayerQuestionResult from "../../../components/PlayerQuestionResult/PlayerQuestionResult";
 
 const PlayerQuestionPage = () => {
   const [question, setQuestion] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isAnswer, setIsAnswer] = useState(false);
   const [timeOut, setTimeOut] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState(1);
   const navigate = useNavigate();
   const player = useSelector(selectPlayer);
   const dispatch = useDispatch();
+  const [playerChoice, setPlayerChoice] = useState("");
+
   useEffect(() => {
     socket.on("getQuestionRes", (res) => {
       if (res.result) {
@@ -36,12 +40,24 @@ const PlayerQuestionPage = () => {
     socket.on("questionTimeOut", () => {
       setTimeOut(true);
     });
-  }, []);
+
+    socket.on("nextQuestionRes", (res) => {
+      if (res.result) {
+        setIsLoading(true);
+        setTimeOut(false);
+        setIsAnswer(false);
+        setCurrentQuestion((old) => old + 1);
+      } else {
+        navigate("/summary");
+      }
+    });
+  }, [currentQuestion]);
 
   const _handlePlayerAnswer = (choice) => {
     console.log(choice);
     socket.emit("playerAnswer", player.id, question.id, choice.content);
     setIsAnswer(true);
+    setPlayerChoice(choice);
   };
 
   return (
@@ -57,13 +73,6 @@ const PlayerQuestionPage = () => {
           <div className="player-question__detail-info">
             <p>Question {question.id}</p>
           </div>
-          {/* <ul className="player-question_">
-            {question.choices.map((choice, index) => (
-              <li key={index} onClick={() => _handlePlayerAnswer(choice)}>
-                {choice.content}
-              </li>
-            ))}
-          </ul> */}
 
           <AnswerChoices
             choices={question.choices}
@@ -80,7 +89,12 @@ const PlayerQuestionPage = () => {
         <div>Your answer has been submitted</div>
       )}
 
-      {!isLoading && isAnswer && timeOut && <div>Score: {player.score}</div>}
+      {!isLoading && isAnswer && timeOut && (
+        <PlayerQuestionResult
+          isCorrect={question.correctAnswer === playerChoice.content}
+          score={player.score}
+        />
+      )}
 
       {!isLoading && timeOut && !isAnswer && (
         <div>You have not answered the question</div>

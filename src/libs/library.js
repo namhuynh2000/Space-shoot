@@ -1,6 +1,8 @@
-export const checkPlayerExist = (state) => {
-  if (!state.room || !state.name) return false;
-  return true;
+export const questionCountDownInit = 20;
+export const questionLoading = 4;
+
+export const checkObjectEmpty = (value) => {
+  return Object.keys(value).length === 0 && value.constructor === Object;
 };
 
 export const countPlayerAnswers = (AnswerList, answer) => {

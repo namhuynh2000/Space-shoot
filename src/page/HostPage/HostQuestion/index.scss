@@ -6,7 +6,7 @@
     height: 20px;
     background-color: grey;
     max-width: 100%;
-    animation: progressMove 4s forwards;
+    animation: progressMove forwards;
   }
 
   .host-question__detail {
@@ -51,18 +51,6 @@
         height: 100%;
         object-fit: contain;
       }
-    }
-
-    .host-question__control-btn {
-      position: absolute;
-      top: 0;
-      right: 0;
-      padding: 1.2rem 1.6rem;
-      font-size: 1.6rem;
-      cursor: pointer;
-      background-color: blue;
-      color: #fff;
-      border: none;
     }
   }
 }

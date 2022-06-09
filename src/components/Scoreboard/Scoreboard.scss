@@ -1,0 +1,14 @@
+.scoreboard__list {
+  width: 80%;
+  background-color: #fff;
+
+  .scoreboard__item {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 1.2rem 1.6rem;
+    p {
+      font-size: 2rem;
+    }
+  }
+}

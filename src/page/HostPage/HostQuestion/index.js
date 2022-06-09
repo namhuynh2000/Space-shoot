@@ -1,23 +1,29 @@
 import "./index.scss";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import socket from "../../../connections/socket";
 import { selectHost } from "../../../redux/reducers/hostReducer";
-import { countPlayerAnswers, generateImage } from "../../../libs/library";
+import {
+  generateImage,
+  questionCountDownInit,
+  questionLoading,
+} from "../../../libs/library";
 import AnswerChoices from "../../../components/AnswerChoices/AnswerChoices";
 import AnswerChar from "../../../components/AnswerChart/AnswerChar";
+import QuestionControlButton from "../../../components/QuestionControlButton/QuestionControlButton";
 const HostQuestionPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [question, setQuestion] = useState("");
   const [isEnd, setIsEnd] = useState(false);
-  const [questionCountDown, setQuestionCountDown] = useState(20);
+  const [questionCountDown, setQuestionCountDown] = useState(
+    questionCountDownInit
+  );
   const [params] = useSearchParams();
   const { room } = useSelector(selectHost);
 
-  const resultRef = useRef(null);
   const [totalAnswer, setTotalAnswer] = useState({
     id: "",
     playerAnswers: [],
@@ -27,41 +33,48 @@ const HostQuestionPage = () => {
     if (!room) {
       navigate("/");
     }
-  }, [room]);
+  }, [room, navigate]);
 
   useEffect(() => {
-    const questionIndex = params.get("question") ? params.get("question") : 1;
     let interval = null;
 
-    setTimeout(() => {
-      socket.emit("getQuestion", room, questionIndex);
-    }, 4000);
+    setIsLoading(true);
+    setIsEnd(false);
 
+    // Waiting for loading question
+    setTimeout(() => {
+      socket.emit("getQuestion", room);
+    }, questionLoading * 1000);
+
+    // Listen to get question response
     socket.on("getQuestionRes", (res) => {
       if (res.result) {
+        console.log(res.questionData);
         setQuestion(res.questionData);
         setIsLoading(false);
-        let countDown = 5;
+        let countDown = questionCountDownInit;
         setQuestionCountDown(countDown);
         interval = setInterval(() => {
           if (countDown === 0) {
-            socket.emit("stopQuestion", room, questionIndex);
+            socket.emit("stopQuestion", room);
             clearInterval(interval);
           } else {
             setQuestionCountDown(--countDown);
           }
         }, 1000);
       } else {
-        alert("Start question failed");
+        alert("Get question failed");
         navigate("/");
       }
     });
 
+    // Listen to player answer response
     socket.on("playerAnswerRes", (playerAnswerList) => {
       console.log(playerAnswerList);
       setTotalAnswer(playerAnswerList);
     });
 
+    // Listen to time out reponse
     socket.on("questionTimeOut", () => {
       console.log("Time out");
       setIsEnd(true);
@@ -70,37 +83,28 @@ const HostQuestionPage = () => {
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [params, navigate, room]);
 
-  // useEffect(() => {
-  //   if (!isEnd) return;
+  const _skipBtnClickHandle = () => {
+    socket.emit("stopQuestion", room);
+  };
 
-  //   if (resultRef.current) {
-  //     const items = resultRef.current.children;
-
-  //     console.log(items);
-  //     const totalResult = totalAnswer.playerAnswers.length;
-
-  //     Array.from(items).forEach((item, index) => {
-  //       const itemHeight =
-  //         (countPlayerAnswers(
-  //           totalAnswer.playerAnswers,
-  //           question.choices[index].content
-  //         ) *
-  //           100) /
-  //         totalResult;
-  //       console.log(itemHeight);
-  //       item.children[0].style.height = itemHeight ? itemHeight + "%" : "10%";
-  //     });
-  //   }
-  // }, [totalAnswer, isEnd]);
+  const _nextBtnClickHandle = () => {
+    // socket.emit("nextQuestion", room);
+    const quizId = params.get("quizId");
+    const question = params.get("question");
+    navigate(`/host/scoreboard?quizId=${quizId}&&question=${question}`);
+  };
 
   return (
     <div className="host-question">
-      {!isEnd && isLoading && (
+      {!isEnd && isLoading && params && (
         <div>
-          <p>Question {question.id}</p>
-          <div className="host-question__progress"></div>
+          <p>Question {params.get("question")}</p>
+          <div
+            className="host-question__progress"
+            style={{ animationDuration: `${questionLoading}s` }}
+          ></div>
         </div>
       )}
 
@@ -109,11 +113,31 @@ const HostQuestionPage = () => {
           <h1>{question.content}</h1>
 
           {!isEnd && (
-            <button className="host-question__control-btn">Skip</button>
+            // <button
+            //   className="host-question__control-btn"
+            //   onClick={_skipBtnClickHandle}
+            // >
+            //   Skip
+            // </button>
+
+            <QuestionControlButton
+              clickHandle={_skipBtnClickHandle}
+              content={"skip"}
+            />
           )}
 
           {isEnd && (
-            <button className="host-question__control-btn">Next</button>
+            // <button
+            //   className="host-question__control-btn"
+            //   onClick={_nextBtnClickHandle}
+            // >
+            //   Next
+            // </button>
+
+            <QuestionControlButton
+              clickHandle={_nextBtnClickHandle}
+              content={"Next"}
+            />
           )}
 
           {!isEnd && (

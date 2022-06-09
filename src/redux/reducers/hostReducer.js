@@ -1,21 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  host: {
-    room: "",
-    gameName: "",
-  },
+  host: {},
 };
 
 export const hostSlice = createSlice({
   name: "host",
   initialState,
   reducers: {
-    setReduxHostRoom: (state, action) => {
-      state.host.room = action.payload;
-    },
+    // setReduxHostRoom: (state, action) => {
+    //   state.host.room = action.payload;
+    // },
     setReduxHostGame: (state, action) => {
-      state.host.gameName = action.payload;
+      state.host = action.payload;
     },
   },
 });

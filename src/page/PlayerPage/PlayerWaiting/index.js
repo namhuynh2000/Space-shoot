@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import socket from "../../../connections/socket";
-import { checkPlayerExist } from "../../../libs/library";
+import { checkObjectEmpty } from "../../../libs/library";
 import {
   selectPlayer,
   setReduxPlayerName,
@@ -19,7 +19,7 @@ export default function PlayerWaitingPage() {
   useEffect(() => {
     //Handle user join by link
     console.log(player);
-    if (!checkPlayerExist(player)) {
+    if (checkObjectEmpty(player)) {
       const room = searchParams.get("room");
       const playerName = searchParams.get("playerName");
       if (room && playerName) {
@@ -41,7 +41,7 @@ export default function PlayerWaitingPage() {
 
     //  Listen for event game start result
     socket.on("hostStartingGame", () => {
-      navigate("/start");
+      navigate("/question");
     });
   }, []);
   return <div>Waiting...</div>;

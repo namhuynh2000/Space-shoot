@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
-import PlayerList from '../../../components/PlayerList/PlayerList';
-import socket from '../../../connections/socket';
-import { setReduxHostGame, setReduxHostRoom } from "../../../redux/reducers/hostReducer";
+import PlayerList from "../../../components/PlayerList/PlayerList";
+import socket from "../../../connections/socket";
+import { setReduxHostGame } from "../../../redux/reducers/hostReducer";
 
 export default function HostWaiting() {
   const [players, setPlayers] = useState([]);
@@ -35,16 +35,15 @@ export default function HostWaiting() {
         navigate("/host");
         return;
       }
-      dispatch(setReduxHostRoom(res.game.roomId));
-      dispatch(setReduxHostGame(res.game.data.name));
-      setRoom(res.game.roomId);
+      dispatch(setReduxHostGame(res.game));
+      setRoom(res.game.room);
     });
   }, [socket]);
 
   const startBtn_click = (e) => {
     const quizId = params.get("quizId");
-
-    navigate(`/host/start?quizId=${quizId}`);
+    socket.emit("startGame", room);
+    navigate(`/host/question?quizId=${quizId}&question=1`);
   };
 
   return (
