@@ -27,7 +27,6 @@ function App() {
           <Route path="/waiting" element={<PlayerWaitingPage />}></Route>
           <Route path="/start" element={<PlayerStartPage />}></Route>
           <Route path="/question" element={<PlayerQuestionPage />}></Route>
-
           {/*Host route*/}
           <Route path="/host" element={<HostPage />}></Route>
           <Route path="/host/lobby" element={<HostWaiting />}></Route>
