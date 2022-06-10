@@ -23,7 +23,7 @@ const PlayerQuestionPage = () => {
   const [playerChoice, setPlayerChoice] = useState("");
 
   useEffect(() => {
-    socket.on("getQuestionRes", (res) => {
+    socket.on("hostGetQuestionRes", (res) => {
       if (res.result) {
         setQuestion(res.questionData);
         setIsLoading(false);
@@ -93,6 +93,7 @@ const PlayerQuestionPage = () => {
         <PlayerQuestionResult
           isCorrect={question.correctAnswer === playerChoice.content}
           score={player.score}
+          rank={player.rank}
         />
       )}
 

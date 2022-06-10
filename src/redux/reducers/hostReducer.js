@@ -1,7 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  host: {},
+  host: {
+    questionLength: 0,
+    room: "",
+    gameName: "",
+  },
 };
 
 export const hostSlice = createSlice({

@@ -1,0 +1,103 @@
+.podium {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: flex-end;
+  justify-content: center;
+  margin: 0 auto;
+  width: 40%;
+  height: 50vh;
+  .podium__item {
+    background-color: #864cbf;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    justify-content: flex-start;
+    opacity: 0;
+    border-radius: 4px;
+    height: 0;
+    img {
+      width: 150px;
+      height: 150px;
+      object-fit: fill;
+    }
+    &:nth-child(1) {
+      //   height: 90%;
+      order: 2;
+      position: relative;
+      animation: first 1s forwards;
+      box-shadow: -1px 21px 29px 5px rgba(0, 0, 0, 0.75);
+      z-index: 999;
+    }
+
+    &:nth-child(2) {
+      //   height: 85%;
+      order: 1;
+      animation: second 1s forwards;
+      animation-delay: 1s;
+    }
+    &:nth-child(3) {
+      //   height: 80%;
+      order: 3;
+      animation: third 1s forwards;
+      animation-delay: 2s;
+    }
+
+    .podium__player-info {
+      color: #fff;
+      h2 {
+        font-size: 6rem;
+        font-weight: bold;
+        position: absolute;
+        top: -7rem;
+        display: block;
+        text-align: center;
+        width: 100%;
+        left: 0;
+      }
+
+      h3 {
+        font-size: 4rem;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+      }
+    }
+  }
+}
+
+@keyframes first {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+
+  to {
+    height: 100%;
+    opacity: 1;
+  }
+}
+
+@keyframes second {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+
+  to {
+    height: 80%;
+    opacity: 1;
+  }
+}
+
+@keyframes third {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+
+  to {
+    height: 70%;
+    opacity: 1;
+  }
+}

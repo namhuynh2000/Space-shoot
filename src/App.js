@@ -15,6 +15,8 @@ import {
   // PlayerStartPage,
   PlayerWaitingPage,
 } from "./page";
+import PlayerSummaryPage from "./page/PlayerPage/PlayerSummary";
+import HostSummaryPage from "./page/HostPage/HostSummary";
 
 function App() {
   return (
@@ -24,20 +26,17 @@ function App() {
 
         <Routes>
           {/*Player route*/}
-          <Route path="/" element={<HomePage />}></Route>
-          <Route path="/waiting" element={<PlayerWaitingPage />}></Route>
-          {/* <Route path="/start" element={<PlayerStartPage />}></Route> */}
-          <Route path="/question" element={<PlayerQuestionPage />}></Route>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/waiting" element={<PlayerWaitingPage />} />
+          <Route path="/question" element={<PlayerQuestionPage />} />
+          <Route path="/summary" element={<PlayerSummaryPage />} />
 
           {/*Host route*/}
-          <Route path="/host" element={<HostPage />}></Route>
-          <Route path="/host/lobby" element={<HostWaiting />}></Route>
-          {/* <Route path="/host/start" element={<HostStartPage />}></Route> */}
+          <Route path="/host" element={<HostPage />} />
+          <Route path="/host/lobby" element={<HostWaiting />} />
           <Route path="/host/question" element={<HostQuestionPage />} />
-          <Route
-            path="/host/scoreboard"
-            element={<HostScoreboardPage />}
-          ></Route>
+          <Route path="/host/scoreboard" element={<HostScoreboardPage />} />
+          <Route path="/host/summary" element={<HostSummaryPage />} />
         </Routes>
       </Router>
     </div>

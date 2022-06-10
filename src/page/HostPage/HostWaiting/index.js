@@ -35,7 +35,13 @@ export default function HostWaiting() {
         navigate("/host");
         return;
       }
-      dispatch(setReduxHostGame(res.game));
+      const newHost = {
+        room: res.game.room,
+        questionLength: res.game.data.questions.length,
+        name: res.game.data.name,
+      };
+
+      dispatch(setReduxHostGame(newHost));
       setRoom(res.game.room);
     });
   }, [socket]);

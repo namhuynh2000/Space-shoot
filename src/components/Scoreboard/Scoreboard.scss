@@ -1,8 +1,10 @@
 .scoreboard__list {
   width: 80%;
-  background-color: #fff;
 
   .scoreboard__item {
+    background-color: #fff;
+
+    margin-top: 2rem;
     display: flex;
     width: 100%;
     justify-content: space-between;

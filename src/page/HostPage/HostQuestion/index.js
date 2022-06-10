@@ -7,6 +7,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import socket from "../../../connections/socket";
 import { selectHost } from "../../../redux/reducers/hostReducer";
 import {
+  checkObjectEmpty,
   generateImage,
   questionCountDownInit,
   questionLoading,
@@ -22,18 +23,19 @@ const HostQuestionPage = () => {
     questionCountDownInit
   );
   const [params] = useSearchParams();
-  const { room } = useSelector(selectHost);
+  const host = useSelector(selectHost);
 
   const [totalAnswer, setTotalAnswer] = useState({
     id: "",
     playerAnswers: [],
   });
   const navigate = useNavigate();
+
   useEffect(() => {
-    if (!room) {
+    if (checkObjectEmpty(host)) {
       navigate("/");
     }
-  }, [room, navigate]);
+  }, [navigate]);
 
   useEffect(() => {
     let interval = null;
@@ -42,21 +44,25 @@ const HostQuestionPage = () => {
     setIsEnd(false);
 
     // Waiting for loading question
-    setTimeout(() => {
-      socket.emit("getQuestion", room);
-    }, questionLoading * 1000);
+    function wait(seconds) {
+      return new Promise((resolve) => {
+        setTimeout(resolve, seconds * 1000);
+      });
+    }
+
+    socket.emit("getQuestion", host.room, questionLoading);
 
     // Listen to get question response
-    socket.on("getQuestionRes", (res) => {
+    socket.on("getQuestionRes", async (res) => {
       if (res.result) {
-        console.log(res.questionData);
         setQuestion(res.questionData);
+        await wait(questionLoading);
         setIsLoading(false);
         let countDown = questionCountDownInit;
         setQuestionCountDown(countDown);
         interval = setInterval(() => {
           if (countDown === 0) {
-            socket.emit("stopQuestion", room);
+            socket.emit("stopQuestion", host.room);
             clearInterval(interval);
           } else {
             setQuestionCountDown(--countDown);
@@ -70,7 +76,6 @@ const HostQuestionPage = () => {
 
     // Listen to player answer response
     socket.on("playerAnswerRes", (playerAnswerList) => {
-      console.log(playerAnswerList);
       setTotalAnswer(playerAnswerList);
     });
 
@@ -83,24 +88,31 @@ const HostQuestionPage = () => {
     return () => {
       clearInterval(interval);
     };
-  }, [params, navigate, room]);
+  }, [params, navigate, host.room]);
 
   const _skipBtnClickHandle = () => {
-    socket.emit("stopQuestion", room);
+    socket.emit("stopQuestion", host.room);
   };
 
   const _nextBtnClickHandle = () => {
     // socket.emit("nextQuestion", room);
     const quizId = params.get("quizId");
     const question = params.get("question");
+
+    if (question >= host.questionLength) {
+      socket.emit("nextQuestion", host.room);
+      navigate(`/host/summary`);
+      return;
+    }
     navigate(`/host/scoreboard?quizId=${quizId}&&question=${question}`);
   };
 
   return (
     <div className="host-question">
-      {!isEnd && isLoading && params && (
+      {!isEnd && isLoading && question && (
         <div>
           <p>Question {params.get("question")}</p>
+          <h2>{question.content}</h2>
           <div
             className="host-question__progress"
             style={{ animationDuration: `${questionLoading}s` }}
@@ -110,16 +122,12 @@ const HostQuestionPage = () => {
 
       {!isLoading && question && (
         <div className="host-question__detail">
-          <h1>{question.content}</h1>
+          <div className="host-question__detail-top">
+            <h2>{`${params.get("question")}/${host.questionLength}`}</h2>
+            <h1>{question.content}</h1>
+          </div>
 
           {!isEnd && (
-            // <button
-            //   className="host-question__control-btn"
-            //   onClick={_skipBtnClickHandle}
-            // >
-            //   Skip
-            // </button>
-
             <QuestionControlButton
               clickHandle={_skipBtnClickHandle}
               content={"skip"}
@@ -127,13 +135,6 @@ const HostQuestionPage = () => {
           )}
 
           {isEnd && (
-            // <button
-            //   className="host-question__control-btn"
-            //   onClick={_nextBtnClickHandle}
-            // >
-            //   Next
-            // </button>
-
             <QuestionControlButton
               clickHandle={_nextBtnClickHandle}
               content={"Next"}
