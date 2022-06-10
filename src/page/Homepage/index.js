@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
-import JoinInput from '../../components/JoinInput/JoinInput';
-import socket from "../../connections/socket"
-import { setReduxPlayer } from "../../redux/reducers/playerReducer"
+import JoinInput from "../../components/JoinInput/JoinInput";
+import socket from "../../connections/socket";
+import { setReduxPlayer } from "../../redux/reducers/playerReducer";
 
 export default function HomePage() {
   const [playerName, setPlayerName] = useState("");

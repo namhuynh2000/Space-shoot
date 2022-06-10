@@ -9,21 +9,19 @@ import {
   HostPage,
   HostQuestionPage,
   HostScoreboardPage,
-  // HostStartPage,
   HostWaiting,
   PlayerQuestionPage,
-  // PlayerStartPage,
   PlayerWaitingPage,
 } from "./page";
 import PlayerSummaryPage from "./page/PlayerPage/PlayerSummary";
 import HostSummaryPage from "./page/HostPage/HostSummary";
-
+import SocketReconnect from "./components/SocketReconnect/SocketReconnect";
 function App() {
   return (
     <div className="App">
       <Router>
         <HostDisconnect />
-
+        <SocketReconnect />
         <Routes>
           {/*Player route*/}
           <Route path="/" element={<HomePage />} />

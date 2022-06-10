@@ -22,7 +22,6 @@ const HostSummaryPage = () => {
 
   const _exitBtnClickHandle = () => {
     socket.disconnect();
-    navigate("/");
   };
 
   return (
