@@ -14,6 +14,7 @@ export default function HomePage() {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
+
   const _handlePlayerNameInput = (e) => {
     setPlayerName(e.target.value);
   };

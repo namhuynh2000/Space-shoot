@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import socket from "../../../connections/socket";
-
+import { Link } from "react-router-dom";
 export default function HostPage() {
   const [quizList, setQuizList] = useState([]);
 
@@ -30,6 +30,7 @@ export default function HostPage() {
           ))}
         </ul>
       )}
+      <Link to="/host/create">Create Page</Link>
     </div>
   );
 }

@@ -1,0 +1,125 @@
+.host-create {
+  background-color: #f2f2f1;
+  height: 100vh;
+  .host-create__header-buttons {
+    display: flex;
+    gap: 1.2rem;
+  }
+  .host-create__btn {
+    background-color: #1260be;
+    color: #fff;
+    border: none;
+    padding: 1.2rem 1.6rem;
+    font-size: 1.6rem;
+    display: block;
+    cursor: pointer;
+  }
+  .host-create__container {
+    .host-create__header {
+      padding: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .host-create__quiz-name {
+        padding: 0.8rem 1.6rem;
+        font-size: 1.6rem;
+        outline: #1260be;
+      }
+    }
+
+    .host-create__body {
+      padding: 2rem 0;
+      .host-create__question-name {
+        display: block;
+        width: 100%;
+        border: none;
+        outline: none;
+        background-color: #fff;
+        font-size: 3rem;
+        padding: 1rem 1.6rem;
+        text-align: center;
+        box-shadow: 1px 3px 5px 2px #dbdbdd;
+      }
+
+      .host-create__answers {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.4rem;
+
+        li {
+          display: flex;
+          padding: 2rem;
+          align-items: center;
+          justify-content: space-between;
+          color: #fff;
+
+          .host-create__answers-content {
+            color: #fff;
+            height: 100%;
+            display: block;
+            border: none;
+            background-color: transparent;
+            font-size: 2rem;
+            outline: none;
+            flex: 1;
+
+            &::placeholder {
+              color: #dbdbdd;
+            }
+          }
+          .host-create__answers-correct {
+            // overflow: hidden;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+
+            input[type="radio"] {
+              width: 100%;
+              height: 100%;
+              cursor: pointer;
+            }
+          }
+          &:nth-child(1) {
+            background-color: red;
+          }
+
+          &:nth-child(2) {
+            background-color: blue;
+          }
+
+          &:nth-child(3) {
+            background-color: orange;
+          }
+
+          &:nth-child(4) {
+            background-color: green;
+          }
+        }
+      }
+    }
+
+    .host-create__bottom {
+      background-color: #fff;
+      padding: 2rem 1.2rem;
+
+      .host-create__questions-list {
+        display: flex;
+        gap: 2rem;
+        li {
+          padding: 1.2rem 1.4rem;
+          background-color: #dbdbdd;
+          cursor: pointer;
+          color: #000;
+        }
+
+        .host-create__questions-item--active {
+          box-shadow: 0px 0px 0px 3px #1260be;
+        }
+      }
+    }
+  }
+}

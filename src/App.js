@@ -16,6 +16,7 @@ import {
 import PlayerSummaryPage from "./page/PlayerPage/PlayerSummary";
 import HostSummaryPage from "./page/HostPage/HostSummary";
 import SocketReconnect from "./components/SocketReconnect/SocketReconnect";
+import HostCreateQuizPage from "./page/HostPage/HostCreateQuiz";
 function App() {
   return (
     <div className="App">
@@ -35,6 +36,7 @@ function App() {
           <Route path="/host/question" element={<HostQuestionPage />} />
           <Route path="/host/scoreboard" element={<HostScoreboardPage />} />
           <Route path="/host/summary" element={<HostSummaryPage />} />
+          <Route path="/host/create" element={<HostCreateQuizPage />} />
         </Routes>
       </Router>
     </div>
