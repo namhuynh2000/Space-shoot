@@ -10,6 +10,7 @@ export default function HostPage() {
     socket.emit("fetchQuizList");
 
     socket.on("fetchQuizListRes", (payload) => {
+      console.log(payload);
       setQuizList(payload);
     });
   }, []);
@@ -24,7 +25,7 @@ export default function HostPage() {
       {quizList && (
         <ul>
           {quizList.map((item) => (
-            <li key={item.id} onClick={() => _handleClickToHostGame(item.id)}>
+            <li key={item._id} onClick={() => _handleClickToHostGame(item._id)}>
               {item.name}
             </li>
           ))}

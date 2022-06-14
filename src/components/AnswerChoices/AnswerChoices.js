@@ -1,6 +1,6 @@
 import React from "react";
 import "./AnswerChoices.scss";
-const AnswerChoices = ({ choices, clickHandle, disabled }) => {
+const AnswerChoices = ({ choices, clickHandle, disabled, role }) => {
   const _choiceClickHandle = (choice) => {
     if (clickHandle) {
       clickHandle(choice);
@@ -15,7 +15,7 @@ const AnswerChoices = ({ choices, clickHandle, disabled }) => {
             _choiceClickHandle(choice);
           }}
         >
-          {choice.content}
+          {role !== "player" ? `${choice.content}` : ""}
         </li>
       ))}
     </ul>

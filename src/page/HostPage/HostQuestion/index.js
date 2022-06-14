@@ -17,6 +17,7 @@ const HostQuestionPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [question, setQuestion] = useState("");
   const [isEnd, setIsEnd] = useState(false);
+
   const [questionCountDown, setQuestionCountDown] = useState(
     questionCountDownInit
   );
@@ -27,12 +28,6 @@ const HostQuestionPage = () => {
     playerAnswers: [],
   });
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (checkObjectEmpty(host)) {
-  //     navigate("/");
-  //   }
-  // }, [navigate]);
 
   useEffect(() => {
     let interval = null;
@@ -122,7 +117,7 @@ const HostQuestionPage = () => {
             <h2>{`${question.questionIndex + 1}/${
               question.questionLength
             }`}</h2>
-            <h1>{question.content}</h1>
+            <h1>{question.questionData.content}</h1>
           </div>
 
           {!isEnd && (
@@ -142,7 +137,7 @@ const HostQuestionPage = () => {
           {!isEnd && (
             <div className="host-question__detail-info">
               <span>{questionCountDown}</span>
-              <img src={generateImage(question?.image)} alt="" />
+              <img src={generateImage(question.questionData?.image)} alt="" />
               <span>
                 <p>{totalAnswer?.playerAnswers?.length ?? 0}</p>
                 <p>Answers</p>
@@ -152,13 +147,16 @@ const HostQuestionPage = () => {
 
           {isEnd && (
             <AnswerChar
-              choices={question.choices}
+              choices={question.questionData.choices}
               playerAnswers={totalAnswer.playerAnswers}
-              correctAnswer={question.correctAnswer}
+              correctAnswer={question.questionData.correctAnswer}
             />
           )}
 
-          <AnswerChoices choices={question.choices} disabled={isEnd} />
+          <AnswerChoices
+            choices={question.questionData.choices}
+            disabled={isEnd}
+          />
         </div>
       )}
     </div>

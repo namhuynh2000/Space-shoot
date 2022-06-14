@@ -55,7 +55,12 @@ const PlayerQuestionPage = () => {
 
   const _handlePlayerAnswer = (choice) => {
     console.log(choice);
-    socket.emit("playerAnswer", player.id, question.id, choice.content);
+    socket.emit(
+      "playerAnswer",
+      player.id,
+      question.questionData.id,
+      choice.content
+    );
     setIsAnswer(true);
     setPlayerChoice(choice);
   };
@@ -71,12 +76,13 @@ const PlayerQuestionPage = () => {
       {!isLoading && question && !isAnswer && !timeOut && (
         <div className="player-question__detail">
           <div className="player-question__detail-info">
-            <p>Question {question.id}</p>
+            <p>Question {question.questionData.id}</p>
           </div>
 
           <AnswerChoices
-            choices={question.choices}
+            choices={question.questionData.choices}
             clickHandle={_handlePlayerAnswer}
+            role={"player"}
           />
           <div className="player-question__player-info">
             <p>{player.name}</p>
@@ -91,7 +97,9 @@ const PlayerQuestionPage = () => {
 
       {!isLoading && isAnswer && timeOut && (
         <PlayerQuestionResult
-          isCorrect={question.correctAnswer === playerChoice.content}
+          isCorrect={
+            question.questionData.correctAnswer === playerChoice.content
+          }
           score={player.score}
           rank={player.rank}
         />
