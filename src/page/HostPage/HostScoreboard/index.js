@@ -2,19 +2,16 @@ import React, { useEffect, useState } from "react";
 import "./index.scss";
 import Scoreboard from "../../../components/Scoreboard/Scoreboard";
 import socket from "../../../connections/socket";
-import { useSelector } from "react-redux";
-import { selectHost } from "../../../redux/reducers/hostReducer";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import QuestionControlButton from "../../../components/QuestionControlButton/QuestionControlButton";
 
 const HostScoreboardPage = () => {
   const [rankList, setRankList] = useState([]);
-  const { room } = useSelector(selectHost);
   const [params] = useSearchParams();
 
   const navigate = useNavigate();
   useEffect(() => {
-    socket.emit("getRankList", room);
+    socket.emit("getRankList");
 
     socket.on("getRankListRes", (res) => {
       if (res.result) {
@@ -37,10 +34,10 @@ const HostScoreboardPage = () => {
     });
 
     return () => {};
-  }, [room, navigate, params]);
+  }, [navigate, params]);
 
   const _nextBtnClickHandle = () => {
-    socket.emit("nextQuestion", room);
+    socket.emit("nextQuestion");
   };
 
   return (

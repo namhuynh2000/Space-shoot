@@ -4,13 +4,11 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 import PlayerList from "../../../components/PlayerList/PlayerList";
 import socket from "../../../connections/socket";
-import { setReduxHostGame } from "../../../redux/reducers/hostReducer";
 
 export default function HostWaiting() {
   const [players, setPlayers] = useState([]);
   const [params] = useSearchParams();
   const [room, setRoom] = useState("");
-  const dispatch = useDispatch();
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -20,7 +18,7 @@ export default function HostWaiting() {
 
   useEffect(() => {
     //Send request to get player list
-    socket.emit("fetchPlayersInRoom", room);
+    socket.emit("fetchPlayersInRoom");
 
     //Listen to receive player list
     socket.on("receive__players", (data) => {
@@ -35,20 +33,14 @@ export default function HostWaiting() {
         navigate("/host");
         return;
       }
-      const newHost = {
-        room: res.game.room,
-        questionLength: res.game.data.questions.length,
-        name: res.game.data.name,
-      };
 
-      dispatch(setReduxHostGame(newHost));
       setRoom(res.game.room);
     });
   }, [socket]);
 
   const startBtn_click = (e) => {
     const quizId = params.get("quizId");
-    socket.emit("startGame", room);
+    socket.emit("startGame");
     navigate(`/host/question?quizId=${quizId}&question=1`);
   };
 

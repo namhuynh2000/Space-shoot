@@ -1,7 +1,6 @@
 import React, { useEffect, useReducer, useState } from "react";
 import "./index.scss";
 import { Link } from "react-router-dom";
-import { BsCheckLg } from "react-icons/bs";
 const initState = {
   name: "",
   questions: [

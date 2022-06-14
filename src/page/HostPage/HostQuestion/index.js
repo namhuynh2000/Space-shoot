@@ -1,11 +1,9 @@
 import "./index.scss";
 
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import socket from "../../../connections/socket";
-import { selectHost } from "../../../redux/reducers/hostReducer";
 import {
   checkObjectEmpty,
   generateImage,
@@ -23,7 +21,6 @@ const HostQuestionPage = () => {
     questionCountDownInit
   );
   const [params] = useSearchParams();
-  const host = useSelector(selectHost);
 
   const [totalAnswer, setTotalAnswer] = useState({
     id: "",
@@ -31,11 +28,11 @@ const HostQuestionPage = () => {
   });
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (checkObjectEmpty(host)) {
-      navigate("/");
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   if (checkObjectEmpty(host)) {
+  //     navigate("/");
+  //   }
+  // }, [navigate]);
 
   useEffect(() => {
     let interval = null;
@@ -50,7 +47,7 @@ const HostQuestionPage = () => {
       });
     }
 
-    socket.emit("getQuestion", host.room, questionLoading);
+    socket.emit("getQuestion", questionLoading);
 
     // Listen to get question response
     socket.on("getQuestionRes", async (res) => {
@@ -62,7 +59,7 @@ const HostQuestionPage = () => {
         setQuestionCountDown(countDown);
         interval = setInterval(() => {
           if (countDown === 0) {
-            socket.emit("stopQuestion", host.room);
+            socket.emit("stopQuestion");
             clearInterval(interval);
           } else {
             setQuestionCountDown(--countDown);
@@ -79,7 +76,7 @@ const HostQuestionPage = () => {
       setTotalAnswer(playerAnswerList);
     });
 
-    // Listen to time out reponse
+    // Listen to time out response
     socket.on("questionTimeOut", () => {
       console.log("Time out");
       setIsEnd(true);
@@ -88,23 +85,22 @@ const HostQuestionPage = () => {
     return () => {
       clearInterval(interval);
     };
-  }, [params, navigate, host.room]);
+  }, [params, navigate]);
 
   const _skipBtnClickHandle = () => {
-    socket.emit("stopQuestion", host.room);
+    socket.emit("stopQuestion");
   };
 
   const _nextBtnClickHandle = () => {
-    // socket.emit("nextQuestion", room);
     const quizId = params.get("quizId");
-    const question = params.get("question");
+    const questionIndex = params.get("question");
 
-    if (question >= host.questionLength) {
-      socket.emit("nextQuestion", host.room);
+    if (questionIndex >= question.questionLength) {
+      socket.emit("nextQuestion");
       navigate(`/host/summary`);
       return;
     }
-    navigate(`/host/scoreboard?quizId=${quizId}&&question=${question}`);
+    navigate(`/host/scoreboard?quizId=${quizId}&&question=${questionIndex}`);
   };
 
   return (
@@ -123,7 +119,9 @@ const HostQuestionPage = () => {
       {!isLoading && question && (
         <div className="host-question__detail">
           <div className="host-question__detail-top">
-            <h2>{`${params.get("question")}/${host.questionLength}`}</h2>
+            <h2>{`${question.questionIndex + 1}/${
+              question.questionLength
+            }`}</h2>
             <h1>{question.content}</h1>
           </div>
 

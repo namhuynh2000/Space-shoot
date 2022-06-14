@@ -8,8 +8,8 @@ const PlayerSummaryPage = () => {
   const [rank, setRank] = useState("");
 
   useEffect(() => {
-    socket.on("playerRank", (rankList) => {
-      const rank = rankList.findIndex(
+    socket.on("playerRank", (res) => {
+      const rank = res.rankList.findIndex(
         (playerInfo) => playerInfo.id === player.id
       );
       console.log(rank);
