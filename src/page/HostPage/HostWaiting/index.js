@@ -21,21 +21,32 @@ export default function HostWaiting() {
     socket.emit("fetchPlayersInRoom");
 
     //Listen to receive player list
-    socket.on("receive__players", (data) => {
-      console.log(data);
+    function handlePlayerList(data) {
       setPlayers(data);
-    });
+    }
+    socket.on("receive__players", handlePlayerList);
+    // socket.on("receive__players", (data) => {
+    //   console.log(data);
+    //   setPlayers(data);
+    // });
 
     // Listen to host game result
-    socket.on("hostGameRes", (res) => {
+
+    function handleHostGameRes(res) {
       if (!res.result) {
         alert("Host failed");
         navigate("/host");
         return;
       }
-
+      socket.room = res.game.room;
       setRoom(res.game.room);
-    });
+    }
+    socket.on("hostGameRes", handleHostGameRes);
+    // socket.on("hostGameRes", (res) => {});
+    return () => {
+      socket.off("receive__players", handlePlayerList);
+      socket.off("hostGameRes", handleHostGameRes);
+    };
   }, [socket]);
 
   const startBtn_click = (e) => {

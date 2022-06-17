@@ -6,15 +6,13 @@ import JoinInput from "../../components/JoinInput/JoinInput";
 import socket from "../../connections/socket";
 import { setReduxPlayer } from "../../redux/reducers/playerReducer";
 
-import backgroundImg from "../../img/background.png"
-import "./index.css"
+import "./index.scss"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function HomePage() {
   const [playerName, setPlayerName] = useState("");
   const [room, setRoom] = useState("");
-  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -44,26 +42,12 @@ export default function HomePage() {
 
       }
     });
-  }, []);
+  }, [dispatch,navigate]);
 
   return (
-    <div className="homeContainer" style={{ backgroundImage: `url(${backgroundImg})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        width: '100vw',
-        height: '110vh',
-        display:'flex',
-        justifyContent:'center',
-        alignItems:'center'
-     }}>
+    <div className="homeContainer" >
       <ToastContainer />
-      <div className="groupButton" style={{
-        backgroundColor:'white',
-        padding:'10px',
-        borderRadius:'4px'
-    }}>
+      <div className="groupButton" >
       <JoinInput
         label={"Player name"}
         value={playerName}
@@ -75,9 +59,8 @@ export default function HomePage() {
         onChangeHandle={_handleRoomInput}
       />
       <button className="submitButton" onClick={_handleSubmit}>Enter</button>
-      {error && <p className="info">{error}</p>}
 
-      <Link to={"/host"}> <button className="createButton" >Create Game</button>
+      <Link to={"/host"}> <button className="createButton" >Host game</button>
     </Link>
         
       </div>

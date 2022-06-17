@@ -8,7 +8,7 @@ const PlayerSummaryPage = () => {
   const [rank, setRank] = useState("");
 
   useEffect(() => {
-    socket.on("playerRank", (res) => {
+    function handlePlayerRank(res) {
       const rank = res.rankList.findIndex(
         (playerInfo) => playerInfo.id === player.id
       );
@@ -16,7 +16,16 @@ const PlayerSummaryPage = () => {
       if (rank !== -1) {
         setRank(rank + 1);
       }
-    });
+    }
+
+    socket.on("playerRank", handlePlayerRank);
+    // socket.on("playerRank", (res) => {
+
+    // });
+
+    return () => {
+      socket.off("playerRank", handlePlayerRank);
+    };
   }, []);
   return <div>{rank}</div>;
 };

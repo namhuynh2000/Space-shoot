@@ -29,7 +29,7 @@ export default function PlayerWaitingPage() {
   }, []);
 
   useEffect(() => {
-    socket.on("joinRoomRes", (res) => {
+    function handleJoinRoomRes(res) {
       if (res.result) {
         dispatch(setReduxPlayerName(res.player.name));
         dispatch(setReduxPlayerRoom(res.player.room));
@@ -37,12 +37,22 @@ export default function PlayerWaitingPage() {
         alert("Join failed");
         navigate("/");
       }
-    });
+    }
+    socket.on("joinRoomRes", handleJoinRoomRes);
+    // socket.on("joinRoomRes", (res) => {});
 
     //  Listen for event game start result
-    socket.on("hostStartingGame", () => {
+    function handleHostStartGameRes(res) {
       navigate("/question");
-    });
+    }
+
+    socket.on("hostStartingGame", handleHostStartGameRes);
+    // socket.on("hostStartingGame", () => {});
+
+    return () => {
+      socket.off("joinRoomRes", handleJoinRoomRes);
+      socket.off("hostStartingGame", handleHostStartGameRes);
+    };
   }, []);
   return <div>Waiting...</div>;
 }

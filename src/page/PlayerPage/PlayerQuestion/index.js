@@ -23,7 +23,7 @@ const PlayerQuestionPage = () => {
   const [playerChoice, setPlayerChoice] = useState("");
 
   useEffect(() => {
-    socket.on("hostGetQuestionRes", (res) => {
+    function handleGetQuestionRes(res) {
       if (res.result) {
         setQuestion(res.questionData);
         setIsLoading(false);
@@ -31,17 +31,31 @@ const PlayerQuestionPage = () => {
         alert("Get question failed");
         navigate("/");
       }
-    });
+    }
+    socket.on("hostGetQuestionRes", handleGetQuestionRes);
+    // socket.on("hostGetQuestionRes", (res) => {
 
-    socket.on("updatePlayerInfo", (playerInfo) => {
+    // });
+
+    function handleUpdatePlayerRes(playerInfo) {
       dispatch(setReduxPlayer(playerInfo));
-    });
+    }
 
-    socket.on("questionTimeOut", () => {
+    socket.on("updatePlayerInfo", handleUpdatePlayerRes);
+    // socket.on("updatePlayerInfo", (playerInfo) => {
+    //   dispatch(setReduxPlayer(playerInfo));
+    // });
+
+    function handleQuestionTimeOut() {
       setTimeOut(true);
-    });
+    }
 
-    socket.on("nextQuestionRes", (res) => {
+    socket.on("questionTimeOut", handleQuestionTimeOut);
+    // socket.on("questionTimeOut", () => {
+    //   setTimeOut(true);
+    // });
+
+    function handleNextQuestionRes(res) {
       if (res.result) {
         setIsLoading(true);
         setTimeOut(false);
@@ -50,7 +64,26 @@ const PlayerQuestionPage = () => {
       } else {
         navigate("/summary");
       }
-    });
+    }
+
+    socket.on("nextQuestionRes", handleNextQuestionRes);
+    // socket.on("nextQuestionRes", (res) => {
+    //   if (res.result) {
+    //     setIsLoading(true);
+    //     setTimeOut(false);
+    //     setIsAnswer(false);
+    //     setCurrentQuestion((old) => old + 1);
+    //   } else {
+    //     navigate("/summary");
+    //   }
+    // });
+
+    return () => {
+      socket.off("getQuestionRes", handleGetQuestionRes);
+      socket.off("updatePlayerInfo", handleUpdatePlayerRes);
+      socket.off("questionTimeOut", handleQuestionTimeOut);
+      socket.off("nextQuestionRes", handleNextQuestionRes);
+    };
   }, [currentQuestion]);
 
   const _handlePlayerAnswer = (choice) => {

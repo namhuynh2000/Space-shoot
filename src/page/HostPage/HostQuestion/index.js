@@ -5,7 +5,6 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 import socket from "../../../connections/socket";
 import {
-  checkObjectEmpty,
   generateImage,
   questionCountDownInit,
   questionLoading,
@@ -45,7 +44,7 @@ const HostQuestionPage = () => {
     socket.emit("getQuestion", questionLoading);
 
     // Listen to get question response
-    socket.on("getQuestionRes", async (res) => {
+    async function handleGetQuestionRes(res) {
       if (res.result) {
         setQuestion(res.questionData);
         await wait(questionLoading);
@@ -53,32 +52,52 @@ const HostQuestionPage = () => {
         let countDown = questionCountDownInit;
         setQuestionCountDown(countDown);
         interval = setInterval(() => {
-          if (countDown === 0) {
-            socket.emit("stopQuestion");
-            clearInterval(interval);
-          } else {
-            setQuestionCountDown(--countDown);
-          }
+          // if (countDown === 0) {
+
+          // } else {
+          setQuestionCountDown(--countDown);
+          // }
         }, 1000);
+        if (countDown === 0) {
+          clearInterval(interval);
+          interval = null;
+          socket.emit("stopQuestion");
+        }
       } else {
         alert("Get question failed");
         navigate("/");
       }
-    });
+    }
+
+    socket.on("getQuestionRes", handleGetQuestionRes);
 
     // Listen to player answer response
-    socket.on("playerAnswerRes", (playerAnswerList) => {
+
+    function handlePlayerAnswerRes(playerAnswerList) {
       setTotalAnswer(playerAnswerList);
-    });
+    }
+
+    socket.on("playerAnswerRes", handlePlayerAnswerRes);
+    // socket.on("playerAnswerRes", (playerAnswerList) => {
+    //   setTotalAnswer(playerAnswerList);
+    // });
 
     // Listen to time out response
-    socket.on("questionTimeOut", () => {
-      console.log("Time out");
+    function handleQuestionTimeOut() {
       setIsEnd(true);
-    });
+    }
+
+    socket.on("questionTimeOut", handleQuestionTimeOut);
+    // socket.on("questionTimeOut", () => {
+    //   console.log("Time out");
+    //   setIsEnd(true);
+    // });
 
     return () => {
       clearInterval(interval);
+      socket.off("getQuestionRes", handleGetQuestionRes);
+      socket.off("playerAnswerRes", handlePlayerAnswerRes);
+      socket.off("questionTimeOut", handleQuestionTimeOut);
     };
   }, [params, navigate]);
 

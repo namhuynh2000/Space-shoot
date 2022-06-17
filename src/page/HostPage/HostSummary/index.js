@@ -11,11 +11,17 @@ const HostSummaryPage = () => {
   useEffect(() => {
     socket.emit("getSummaryRankList", 4);
 
-    socket.on("getSummaryRankListRes", (res) => {
+    function handleGetSummaryRankListRes(res) {
       console.log(res);
       setFinalRankList(res.rankList);
       setGameName(res.gameName);
-    });
+    }
+    socket.on("getSummaryRankListRes", handleGetSummaryRankListRes);
+    // socket.on("getSummaryRankListRes", (res) => {});
+
+    return () => {
+      socket.off("getSummaryRankListRes", handleGetSummaryRankListRes);
+    };
   }, []);
 
   const _exitBtnClickHandle = () => {

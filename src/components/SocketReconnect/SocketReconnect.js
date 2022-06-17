@@ -5,7 +5,6 @@ const SocketReconnect = () => {
   const navigate = useNavigate();
   useEffect(() => {
     socket.on("disconnect", () => {
-      console.log("abc");
       socket.connect();
       navigate("/");
     });

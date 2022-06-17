@@ -13,15 +13,19 @@ const HostScoreboardPage = () => {
   useEffect(() => {
     socket.emit("getRankList");
 
-    socket.on("getRankListRes", (res) => {
+    function handleGetRankListRes(res) {
       if (res.result) {
         setRankList(res.rankList);
         return;
       }
       navigate("/");
-    });
+    }
+    socket.on("getRankListRes", handleGetRankListRes);
+    // socket.on("getRankListRes", (res) => {
 
-    socket.on("nextQuestionRes", (res) => {
+    // });
+
+    function handleNextQuestionRes(res) {
       if (res.result) {
         const quizId = params.get("quizId");
         const nextQuestionIndex = +params.get("question") + 1;
@@ -31,9 +35,14 @@ const HostScoreboardPage = () => {
       } else {
         navigate("/host/summary");
       }
-    });
+    }
+    socket.on("nextQuestionRes", handleNextQuestionRes);
+    // socket.on("nextQuestionRes", (res) => {});
 
-    return () => {};
+    return () => {
+      socket.off("getRankListRes", handleGetRankListRes);
+      socket.off("nextQuestionRes", handleNextQuestionRes);
+    };
   }, [navigate, params]);
 
   const _nextBtnClickHandle = () => {

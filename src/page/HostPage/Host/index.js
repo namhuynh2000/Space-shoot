@@ -7,12 +7,24 @@ export default function HostPage() {
 
   const navigate = useNavigate();
   useEffect(() => {
-    socket.emit("fetchQuizList");
+    if (socket.room) {
+      delete socket.room;
+      socket.disconnect();
+      return;
+    }
 
-    socket.on("fetchQuizListRes", (payload) => {
+    function handleFetchQuizListRes(payload) {
       console.log(payload);
       setQuizList(payload);
-    });
+    }
+
+    socket.emit("fetchQuizList");
+
+    socket.on("fetchQuizListRes", handleFetchQuizListRes);
+
+    return () => {
+      socket.off("fetchQuizListRes", handleFetchQuizListRes);
+    };
   }, []);
 
   const _handleClickToHostGame = (id) => {
