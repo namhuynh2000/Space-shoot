@@ -1,16 +1,23 @@
 const initState = {
   name: "",
-  questions: [
-    {
-      id: "1",
-      content: "",
-      choices: Array.from(Array(4).keys()).map(() => {
-        return { content: "" };
-      }),
-      correctAnswer: "",
-    },
-  ],
+  questions: [],
   userId: "",
+};
+
+export const initFunc = (state) => {
+  return {
+    ...state,
+    questions: [
+      {
+        id: "1",
+        content: "",
+        choices: Array.from(Array(4).keys()).map(() => {
+          return { content: "" };
+        }),
+        correctAnswer: "",
+      },
+    ],
+  };
 };
 
 const updateQuestionAnswers = (state, action) => {
@@ -55,6 +62,12 @@ const addQuestion = (state) => {
   return { ...state, questions: questions };
 };
 
+const deleteQuestion = (state, action) => {
+  const questions = [...state.questions];
+  questions.splice(action.payload, 1);
+  return { ...state, questions: questions };
+};
+
 const reducer = (state, action) => {
   switch (action.type) {
     case "init":
@@ -71,8 +84,27 @@ const reducer = (state, action) => {
       return updateQuestionCorrectAnswer(state, action);
     case "addQuestion":
       return addQuestion(state);
+
+    case "deleteQuestion":
+      return deleteQuestion(state, action);
+    case "resetState":
+      delete state.questions;
+      return {
+        name: "",
+        questions: [
+          {
+            id: "1",
+            content: "",
+            choices: Array.from(Array(4).keys()).map(() => {
+              return { content: "" };
+            }),
+            correctAnswer: "",
+          },
+        ],
+        userId: "",
+      };
     default:
-      throw new Error();
+      return state;
   }
 };
 

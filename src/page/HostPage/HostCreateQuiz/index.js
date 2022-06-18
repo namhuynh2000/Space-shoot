@@ -1,12 +1,14 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useCallback, useEffect, useReducer, useState } from "react";
 import "./index.scss";
-import { Link } from "react-router-dom";
-import { reducer, initState } from "../../../Reducer/createForm";
+import { Link, useNavigate } from "react-router-dom";
+import { reducer, initState, initFunc } from "../../../Reducer/createForm";
 
 // Components
 const HostCreateQuizPage = ({ quiz }) => {
-  const [state, dispatch] = useReducer(reducer, initState);
+  const [state, dispatch] = useReducer(reducer, initState, initFunc);
   const [questionIndex, setQuestionIndex] = useState(0);
+  const [disable, setDisable] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (quiz)
@@ -16,6 +18,38 @@ const HostCreateQuizPage = ({ quiz }) => {
       });
     return;
   }, [quiz]);
+
+  const validateForm = useCallback(() => {
+    if (!state.name) {
+      setDisable(true);
+      return;
+    }
+
+    for (let question of state.questions) {
+      if (!question.content) {
+        setDisable(true);
+        return;
+      }
+      let count = 0;
+      for (let choice of question.choices) {
+        if (choice.content) count++;
+      }
+      if (count < 2) {
+        setDisable(true);
+        return;
+      }
+
+      if (!question.correctAnswer) {
+        setDisable(true);
+        return;
+      }
+    }
+    setDisable(false);
+  }, [state]);
+
+  useEffect(() => {
+    validateForm();
+  }, [validateForm]);
 
   const _handleTitleInputOnChange = (e) => {
     dispatch({ type: "updateName", payload: e.target.value });
@@ -40,7 +74,6 @@ const HostCreateQuizPage = ({ quiz }) => {
   };
 
   const _handleCorrectAnswerInputOnChange = (e) => {
-    // console.log(e.target.value);
     dispatch({
       type: "updateQuestionCorrectAnswer",
       payload: {
@@ -58,10 +91,23 @@ const HostCreateQuizPage = ({ quiz }) => {
     dispatch({
       type: "addQuestion",
     });
+    setQuestionIndex((oldIndex) => oldIndex + 1);
   };
 
   const _handleSaveClick = () => {
     console.log(state);
+  };
+
+  // const _handleExitClick = () => {
+  //   navigate("/host");
+  // };
+
+  const _handleDeleteQuestionClick = () => {
+    dispatch({
+      type: "deleteQuestion",
+      payload: questionIndex,
+    });
+    setQuestionIndex((oldIndex) => oldIndex - 1);
   };
 
   return (
@@ -78,11 +124,17 @@ const HostCreateQuizPage = ({ quiz }) => {
           <div className="host-create__header-buttons">
             <Link
               to="/host"
+              // onClick={_handleExitClick}
               className="host-create__btn host-create__btn--no-bg"
             >
               Exit
             </Link>
-            <button className="host-create__btn" onClick={_handleSaveClick}>
+            <button
+              className={
+                !disable ? "host-create__btn" : "host-create__btn disable"
+              }
+              onClick={_handleSaveClick}
+            >
               Save
             </button>
           </div>
@@ -103,27 +155,33 @@ const HostCreateQuizPage = ({ quiz }) => {
 
           <form>
             <ul className="host-create__answers">
-              {state.questions[questionIndex].choices.map((ans, index) => (
-                <li key={index}>
-                  <input
-                    type="text"
-                    value={ans.content}
-                    placeholder={`Add answer ${index + 1}`}
-                    onChange={(e) => _handleAnswerInputOnChange(e, index)}
-                    className="host-create__answers-content"
-                  />
-
-                  <div className="host-create__answers-correct">
+              {state.questions[questionIndex].choices.map((ans, index) => {
+                return (
+                  <li key={index}>
                     <input
-                      type="radio"
-                      id={`correctAnswer${index}`}
-                      name="correctAnswer"
+                      type="text"
                       value={ans.content}
-                      onChange={_handleCorrectAnswerInputOnChange}
+                      placeholder={`Add answer ${index + 1}`}
+                      onChange={(e) => _handleAnswerInputOnChange(e, index)}
+                      className="host-create__answers-content"
                     />
-                  </div>
-                </li>
-              ))}
+
+                    <div className="host-create__answers-correct">
+                      <input
+                        type="radio"
+                        id={`correctAnswer${index}`}
+                        name="correctAnswer"
+                        value={ans.content}
+                        checked={
+                          state.questions[questionIndex].correctAnswer ===
+                          ans.content
+                        }
+                        onChange={_handleCorrectAnswerInputOnChange}
+                      />
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           </form>
         </div>
@@ -145,8 +203,22 @@ const HostCreateQuizPage = ({ quiz }) => {
             ))}
           </ul>
         </div>
-        <button className="host-create__btn" onClick={_handleAddQuestionClick}>
+        <button
+          className={!disable ? "host-create__btn" : "host-create__btn disable"}
+          onClick={_handleAddQuestionClick}
+        >
           Add question
+        </button>
+
+        <button
+          className={
+            questionIndex !== 0
+              ? "host-create__btn"
+              : "host-create__btn disable"
+          }
+          onClick={_handleDeleteQuestionClick}
+        >
+          Delete question
         </button>
       </div>
     </div>

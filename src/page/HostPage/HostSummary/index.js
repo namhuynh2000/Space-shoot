@@ -25,6 +25,7 @@ const HostSummaryPage = () => {
   }, []);
 
   const _exitBtnClickHandle = () => {
+    delete socket.room;
     socket.disconnect();
   };
 
