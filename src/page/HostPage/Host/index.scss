@@ -1,0 +1,107 @@
+.hostContainer{
+    background-image: url("../../../../public/images/LinearBackground.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding:1%;
+
+
+ 
+
+    .linkToCreate:hover
+    {
+        box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+        transition: box-shadow 0.3s ease-in-out;
+    }
+
+    .linkToCreate{
+        height: 25%;
+        width: 20%;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 2%;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+        border-radius: 4px;
+
+        .imgCreate{
+            height: 60%;
+            margin-bottom: 3%;
+            width: 80%;
+
+        }
+        .createButton:hover{
+            cursor: pointer;
+            opacity: 0.7;
+        }
+        .createButton{
+            border-radius:4px;
+            height:20%;
+            width:50%;
+            text-align:center;
+            line-height:4px;
+            font-size:20px;
+
+            background-color: green;
+            color:black;
+            font-weight:bolder;
+        }
+    }
+    .myList{
+        display: flex;
+        flex-direction: row;
+
+
+        
+        .myQuizList:hover
+        {
+            box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+            transition: box-shadow 0.3s ease-in-out;
+            cursor: pointer;
+        }
+    
+        .myQuizList
+        {
+            height: 25%;
+            width: 20%;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+            border-radius: 4px;
+    
+            .imgQuiz{
+                height: 50%;
+                margin-bottom: 3%;
+                width: 90%;
+            }
+    
+            .quizName{
+                border-radius:4px;
+                height:20%;
+                width:50%;
+                text-align:center;
+                margin: 5px;
+                padding-bottom: 5px;
+                line-height:4px;
+                font-size:20px;
+                color:black;
+                font-weight:bolder;
+            }
+        }
+        
+    }
+
+
+  
+}
