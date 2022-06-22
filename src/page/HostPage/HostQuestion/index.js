@@ -52,17 +52,19 @@ const HostQuestionPage = () => {
         let countDown = questionCountDownInit;
         setQuestionCountDown(countDown);
         interval = setInterval(() => {
+          if (countDown === 0) {
+            clearInterval(interval);
+            interval = null;
+            socket.emit("stopQuestion");
+          }
+          else 
           // if (countDown === 0) {
 
           // } else {
           setQuestionCountDown(--countDown);
           // }
         }, 1000);
-        if (countDown === 0) {
-          clearInterval(interval);
-          interval = null;
-          socket.emit("stopQuestion");
-        }
+       
       } else {
         alert("Get question failed");
         navigate("/");

@@ -34,34 +34,34 @@ export default function HostPage() {
 
   return (
     <div className="hostContainer">
-          
-          <Link className="linkToCreate" to={"/host/create"}> 
-          <img className="imgCreate" alt="quizgame Backgroud" src="https://previews.123rf.com/images/olegback/olegback2010/olegback201000068/157631503-.jpg"></img>
-          <button className="createButton" >Host game</button>
-        </Link>
-    
-      <div  className="myList">
-      {quizList && (
-        <ul >
-          {quizList.map((item) => (
-            <div>
-                          <li className="myQuizList" key={item._id} onClick={() => _handleClickToHostGame(item._id)}>
-              <img className="imgQuiz" src="https://cdn.wallpapersafari.com/94/39/wrGnD8.jpg" alt="background"></img>
-              <p className="quizName">{item.name}</p>
-              
-            </li>
 
-            </div>
+      <Link className="linkToCreate" to={"/host/create"}>
+        <img className="imgCreate" alt="quizgame Backgroud" src="https://previews.123rf.com/images/olegback/olegback2010/olegback201000068/157631503-.jpg"></img>
+        <button className="createButton" >Create game</button>
+      </Link>
 
-            
-            
-            
-          ))}
-        </ul>
-      )}
-      
+      <h2>Quiz list</h2>
 
-      </div>
+      <ul className="myList">
+        {quizList && 
+         
+            quizList.map((item) => (
+
+              <li className="myQuizList" key={item._id} onClick={() => _handleClickToHostGame(item._id)}>
+                <img className="imgQuiz" src="https://cdn.wallpapersafari.com/94/39/wrGnD8.jpg" alt="background"></img>
+                <p className="quizName">{item.name}</p>
+
+              </li>
+
+
+
+
+
+            )
+        )}
+
+
+      </ul>
 
 
 
