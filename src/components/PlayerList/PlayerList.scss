@@ -1,0 +1,61 @@
+.playerListContainer
+{
+    height: 690px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+
+
+
+    .topContainer{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        height: 50px;
+        margin-top: 40px;
+        margin-bottom: 30px;
+        color: cyan;
+        .playerNumber{
+            font-weight: bolder;
+        font-size: xx-large;
+
+        }
+        .roomID{
+            font-weight: bolder;
+        font-size: xx-large;
+
+        }
+
+        .proFile{
+            font-weight: bolder;
+        font-size: xx-large;
+
+        }
+
+    }
+
+    .playerWaitList{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        row-gap: 10px;
+
+        .playerInRoom{
+            height: 50px;
+            border-radius: 2px;
+            border-bottom: 3px;
+            padding: 3px;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            font-size: xx-large;
+            color: bisque;
+            font-weight: bolder;
+            background-color: midnightblue;
+            margin-right: 40px;
+        }
+    }
+
+}

@@ -4,6 +4,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 import PlayerList from "../../../components/PlayerList/PlayerList";
 import socket from "../../../connections/socket";
+import "./index.scss"
 
 export default function HostWaiting() {
   const [players, setPlayers] = useState([]);
@@ -56,9 +57,9 @@ export default function HostWaiting() {
   };
 
   return (
-    <div>
+    <div className="waitingRoomContainer" >
       <PlayerList players={players} room={room} />
-      <button
+      <button className="startGameButton"
         onClick={startBtn_click}
         disabled={players.length > 0 ? false : true}
       >

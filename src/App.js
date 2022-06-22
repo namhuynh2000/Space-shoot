@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import HostDisconnect from "./components/HostDisconnect/HostDisconnect";
 import {
+  LoginPage,
   HomePage,
   HostPage,
   HostQuestionPage,
@@ -26,6 +27,7 @@ function App() {
         <Routes>
           {/*Player route*/}
           <Route path="/" element={<HomePage />} />
+          <Route path="/loginpage" element={<LoginPage />} />
           <Route path="/waiting" element={<PlayerWaitingPage />} />
           <Route path="/question" element={<PlayerQuestionPage />} />
           <Route path="/summary" element={<PlayerSummaryPage />} />

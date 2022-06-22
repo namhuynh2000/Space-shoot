@@ -16,12 +16,12 @@
         border-radius: 4px;
     }
 
-    .submitButton:hover{
+    .loginButton:hover{
         opacity: 0.7;
         cursor: pointer;
     
     }
-    .submitButton{
+    .loginButton{
         border-radius:4px;
         height:45px;
         width:97%;
@@ -29,18 +29,18 @@
         margin: 5px;
         line-height:4px;
         font-size:15px;
-        background-color: black;
+        background-color: blue;
         color:white;
         font-weight:bolder;
     }
     
-    .createButton:hover{
+    .googleButton:hover{
         opacity: 0.7;
         cursor: pointer;
     
     }
-    .createButton{
-        background-color: blue;
+    .googleButton{
+        background-color: red;
         border-radius:4px;
         height:45px;
         width:97%;
