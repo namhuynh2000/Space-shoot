@@ -109,18 +109,24 @@ const PlayerQuestionPage = () => {
       {!isLoading && question && !isAnswer && !timeOut && (
         <div className="player-question__detail">
           <div className="player-question__detail-info">
-            <p>Question {question.questionData.id}</p>
+            <p>Question Name</p>
+            <p>30</p>
+            <p>Point: {player.score}</p>
           </div>
-
+          <p> Answer the question below</p>
+          <div className="player-question__detail__question">
+            <img></img>
+            <div className="player-question__detail__question__text">
+              <p>Question {question.id}/{question.length}</p>
+              <text>Guy Bailey, Roy Hackett and Paul Stephenson made history in 1963, as part of a protest against a bus company that refused to employ black and Asian drivers in which UK city?</text>
+            </div>
+          </div>
+          <p>Choose Answer</p>
           <AnswerChoices
             choices={question.questionData.choices}
             clickHandle={_handlePlayerAnswer}
             role={"player"}
           />
-          <div className="player-question__player-info">
-            <p>{player.name}</p>
-            <p>{player.score}</p>
-          </div>
         </div>
       )}
 

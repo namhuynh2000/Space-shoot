@@ -2,47 +2,73 @@
   height: 100vh;
   width: 100vw;
   .player-question__detail {
-    display: grid;
-    grid-template-rows: 5% 80% 5%;
-    grid-row-gap: 2%;
-    height: 100%;
-    .player-question__detail-info {
-      padding: 0 1.6rem;
-    }
-    // .questionChoices {
-    //   display: grid;
-    //   grid-template-columns: repeat(2, 1fr);
-    //   grid-gap: 1.2rem;
-    //   background-color: #dbdbdb;
-    //   padding: 0 1.2rem;
-    //   li {
-    //     color: #fff;
-    //     display: flex;
-    //     align-items: center;
-    //     justify-content: center;
-    //     font-size: 2rem;
-    //     cursor: pointer;
-    //     &:nth-child(1) {
-    //       background-color: red;
-    //     }
+    display: flex;
+    flex-direction: column;
+    padding-left: 3%;
+      padding-top: 1%;
+      padding-right: 5%;
 
-    //     &:nth-child(2) {
-    //       background-color: blue;
-    //     }
-
-    //     &:nth-child(3) {
-    //       background-color: orange;
-    //     }
-
-    //     &:nth-child(4) {
-    //       background-color: green;
-    //     }
-    //   }
-    // }
-    .player-question__player-info {
-      padding: 0 1.6rem;
+    .player-question__detail-info
+    {
       display: flex;
+      flex-direction: row;
       justify-content: space-between;
+      align-items: center;
+      
+      margin-bottom: 20px;
+      p{
+        color: rgb(105,111,121);
+        font-weight: bolder;
+        font-size: x-large;
+
+        &:nth-child(2) {
+          text-align: center;
+          font-size: xx-large;
+          padding: 1.6rem 2rem;
+          background-color: rebeccapurple;
+          color: #fff;
+          font-size: 4rem;
+          border-radius: 50%;
+        }
+      }
+
+    }
+    p{
+      color: rgb(105,111,121);
+        font-weight: bolder;
+        font-size: large;
+        margin-bottom: 20px;
+    }
+    .player-question__detail__question{
+      display: flex;
+      flex-direction: row;
+      height: 35vh;
+      margin-bottom: 20px;
+      img{
+        width: 50%;
+        background-image: url("https://cdn.images.express.co.uk/img/dynamic/1/590x/Paul-Stephenson-1293158.jpg?r=1591652582058");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        border-radius: 40px;
+      }
+      .player-question__detail__question__text
+      {
+        width: 45%;
+        padding-left: 2%;
+        display: flex;
+        flex-direction: column;
+        p{
+          color: rgb(105,111,121);
+        font-weight: bolder;
+        font-size: x-large;
+        }
+        text{
+          color: rgb(105,111,121);
+        font-weight: medium;
+        font-size:medium;
+        }
+      }
     }
   }
 }
