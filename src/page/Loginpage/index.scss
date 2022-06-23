@@ -1,57 +1,136 @@
 
-.homeContainer{
-    background-image: url("../../../public/images/background.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+.loginContainer{
+
     width: 100vw;
-    height: 105vh;
+    height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
 
-    .groupButton{
-        background-color: white;
-        padding: 10px;
-        border-radius: 4px;
-    }
+    .loginContainer__background{
+        width: 50%;
+        height: 100%;
+        background-image: url("https://static.vecteezy.com/system/resources/previews/003/206/208/original/quiz-time-neon-signs-style-text-free-vector.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        opacity: 0.9;
 
-    .loginButton:hover{
-        opacity: 0.7;
-        cursor: pointer;
-    
-    }
-    .loginButton{
-        border-radius:4px;
-        height:45px;
-        width:97%;
-        text-align:center;
-        margin: 5px;
-        line-height:4px;
-        font-size:15px;
-        background-color: blue;
-        color:white;
-        font-weight:bolder;
     }
     
-    .googleButton:hover{
-        opacity: 0.7;
-        cursor: pointer;
-    
-    }
-    .googleButton{
-        background-color: red;
-        border-radius:4px;
-        height:45px;
-        width:97%;
-        text-align:center;
-        margin: 5px;
-        line-height:4px;
-        font-size:15px;
-        color:white;
-        font-weight:bolder;
-    }
+    .loginContainer__form{
 
+        display: flex;
+        width: 50%;
+        justify-content: center;
+        flex-direction: column;
+        padding:10%;
+        background-color: whitesmoke;
+
+        .loginContainer__form__text1{
+            font-weight: bolder;
+            font-size: xx-large;
+        }
+        .loginContainer__form__text2{
+            color: rgb(134,146,166);
+            margin-bottom: 30px;
+        }
+
+        hr{
+            margin-bottom: 30px;
+            opacity: 0.1;
+        }
+
+        label{
+            color: rgb(134,146,166);
+            margin-bottom: 10px;
+            font-weight: bolder;
+        }
+
+        .loginContainer__form__emailInput:focus{
+            outline: none;
+        }
+        .loginContainer__form__emailInput{
+            border: white;
+            border-radius: 20px;
+            height:100px;
+            margin-bottom: 5px;
+            padding: 15px;
+            font-size:15px;
+            line-height: 4px;
+            margin-bottom: 20px;
+            background-color: white;
+            color:black;
+            font-weight:bolder;
+            filter: drop-shadow(1px 1px 2px black);
+
+        }
+
+        .loginContainer__form__passwordInput:focus{
+            outline: none;
+        }
+        .loginContainer__form__passwordInput{
+            border: white;
+            border-radius: 20px;
+            height:45px;
+            padding: 15px;
+            font-size:15px;
+            background-color: white;
+            color:black;
+            font-weight:bolder;
+            margin-bottom: 40px;
+            filter: drop-shadow(1px 1px 2px black);
+
+        }
+
+        .loginButton:hover{
+            opacity: 0.7;
+            cursor: pointer;
+        
+        }
+        .loginContainer__form__hr
+        {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            opacity: 0.2;
+            text-align: center;
+        }
+        .loginButton{
+            border: rgb(134,146,166);
+            border-radius: 20px;
+            height:45px;
+            text-align:center;
+            padding: 15px;
+            font-size:15px;
+            background-color: rgb(134,146,166);
+            color:white;
+            font-weight:bolder;
+        }
+        
+        .googleButton:hover{
+            opacity: 0.7;
+            cursor: pointer;
+        
+        }
+        .googleButton{
+            background: url("https://freesvg.org/img/1534129544.png") no-repeat left;
+            background-position: 20px;
+            background-size: 20px;
+            border: white;
+            border-radius: 20px;
+            height:45px;
+            text-align:center;
+            padding: 15px;
+            font-size:15px;
+            background-color: white;
+            color:black;
+            font-weight:bolder;
+            margin-bottom: 10px;
+            filter: drop-shadow(1px 1px 2px black);
+        }
+    
+
+    }
+   
 
 }
 
