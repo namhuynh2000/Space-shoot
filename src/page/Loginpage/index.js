@@ -22,7 +22,7 @@ export default function LoginPage() {
         <p className="loginContainer__form__hr">Or</p>
 
         <button className="googleButton" >Login with Google</button>
-        <div style={{textAlign:"right"}}>Not a member?    <Link style={{color:"black", fontWeight:"bolder"}} to={"/host"}>Register!</Link></div>
+        <div style={{textAlign:"right"}}>Not a member?    <Link style={{color:"red", fontWeight:"bolder"}} to={"/register"}>Register!</Link></div>
 
           
       </div>

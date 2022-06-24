@@ -8,8 +8,10 @@ import PlayerQuestionPage from "./PlayerPage/PlayerQuestion";
 import PlayerWaitingPage from "./PlayerPage/PlayerWaiting";
 import HostScoreboardPage from "./HostPage/HostScoreboard";
 import LoginPage from "./Loginpage"
+import RegisterPage from "./RegisterPage";
 export {
   LoginPage,
+  RegisterPage,
   HomePage,
   HostWaiting,
   PlayerWaitingPage,

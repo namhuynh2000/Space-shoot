@@ -1,12 +1,12 @@
 
-.loginContainer{
+.registerContainer{
 
     width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: row;
 
-    .loginContainer__background{
+    .registerContainer__background{
         width: 50%;
         height: 100%;
         background-image: url("https://static.vecteezy.com/system/resources/previews/003/206/208/original/quiz-time-neon-signs-style-text-free-vector.jpg");
@@ -17,7 +17,7 @@
 
     }
     
-    .loginContainer__form{
+    .registerContainer__form{
 
         display: flex;
         width: 50%;
@@ -26,11 +26,11 @@
         padding:10%;
         background-color: whitesmoke;
 
-        .loginContainer__form__text1{
+        .registerContainer__form__text1{
             font-weight: bolder;
             font-size: xx-large;
         }
-        .loginContainer__form__text2{
+        .registerContainer__form__text2{
             color: rgb(134,146,166);
             margin-bottom: 30px;
         }
@@ -46,13 +46,13 @@
             font-weight: bolder;
         }
 
-        .loginContainer__form__emailInput:focus{
+        .registerContainer__form__emailInput:focus{
             outline: none;
         }
-        .loginContainer__form__emailInput{
+        .registerContainer__form__emailInput{
             border: white;
             border-radius: 20px;
-            height:100px;
+            height:45px;
             margin-bottom: 5px;
             padding: 15px;
             font-size:15px;
@@ -65,10 +65,27 @@
 
         }
 
-        .loginContainer__form__passwordInput:focus{
+        .registerContainer__form__passwordInput:focus{
             outline: none;
         }
-        .loginContainer__form__passwordInput{
+        .registerContainer__form__passwordInput{
+            border: white;
+            border-radius: 20px;
+            height:45px;
+            padding: 15px;
+            font-size:15px;
+            background-color: white;
+            color:black;
+            font-weight:bolder;
+            margin-bottom: 20px;
+            filter: drop-shadow(1px 1px 2px black);
+
+        }
+
+        .registerContainer__form__repasswordInput:focus{
+            outline: none;
+        }
+        .registerContainer__form__repasswordInput{
             border: white;
             border-radius: 20px;
             height:45px;
@@ -82,52 +99,31 @@
 
         }
 
-        .loginButton:hover{
+        .registerButton:hover{
             opacity: 0.7;
             cursor: pointer;
         
         }
-        .loginContainer__form__hr
+        .registerContainer__form__hr
         {
             margin-top: 10px;
             margin-bottom: 10px;
             opacity: 0.2;
             text-align: center;
         }
-        .loginButton{
-            border: rgb(10, 75, 188);
+        .registerButton{
+            border: rgb(235,77,86);
             border-radius: 20px;
             height:45px;
             text-align:center;
             padding: 15px;
             font-size:15px;
-            background-color: rgb(10, 75, 188);
+            background-color: rgb(235,77,86, 100%);
             color:white;
             font-weight:bolder;
-            
-        }
-        
-        .googleButton:hover{
-            opacity: 0.7;
-            cursor: pointer;
-        
-        }
-        .googleButton{
-            background: url("https://freesvg.org/img/1534129544.png") no-repeat left;
-            background-position: 20px;
-            background-size: 20px;
-            border: white;
-            border-radius: 20px;
-            height:45px;
-            text-align:center;
-            padding: 15px;
-            font-size:15px;
-            background-color: white;
-            color:black;
-            font-weight:bolder;
-            margin-bottom: 10px;
             filter: drop-shadow(1px 1px 2px black);
         }
+    
     
 
     }
