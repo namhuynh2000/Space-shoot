@@ -2,11 +2,13 @@
   height: 100vh;
   width: 100vw;
   .player-question__detail {
-    display: flex;
-    flex-direction: column;
-    padding-left: 3%;
-      padding-top: 1%;
-      padding-right: 5%;
+
+    display: grid;
+    grid-template-rows: 10% repeat(2,1fr);
+    height: 100vh;
+    padding: 2rem;
+    gap: 2rem;
+
 
     .player-question__detail-info
     {
@@ -68,6 +70,16 @@
         font-weight: medium;
         font-size:medium;
         }
+      }
+    }
+
+    .player-question__detail-choices{
+      p{
+        height:10%;
+      }
+
+      ul{
+        height:90%;
       }
     }
   }
