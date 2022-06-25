@@ -60,7 +60,7 @@ export default function HomePage() {
       />
       <button className="submitButton" onClick={_handleSubmit}>Enter</button>
 
-      <Link to={"/loginpage"}> <button className="createButton" >Host game</button>
+      <Link to={"/LoginPage"}> <button className="createButton" >Host game</button>
     </Link>
         
       </div>
