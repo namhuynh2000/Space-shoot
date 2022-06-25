@@ -139,9 +139,8 @@ const HostQuestionPage = () => {
               question.questionLength
             }`}</h2>
             <h1>{question.questionData.content}</h1>
-          </div>
 
-          {!isEnd && (
+              {!isEnd && (
             <QuestionControlButton
               clickHandle={_skipBtnClickHandle}
               content={"skip"}
@@ -154,15 +153,24 @@ const HostQuestionPage = () => {
               content={"Next"}
             />
           )}
+          </div>
+
+        
 
           {!isEnd && (
             <div className="host-question__detail-info">
+              <div className="host-question__detail-info-countdown">
               <span>{questionCountDown}</span>
-              <img src={generateImage(question.questionData?.image)} alt="" />
-              <span>
+              </div>
+             <div className="host-question__detail-info-image">
+                <img src={generateImage(question.questionData.content)} alt="" />
+             </div>
+            <div className="host-question__detail-info-answer-count">
+                <span>
                 <p>{totalAnswer?.playerAnswers?.length ?? 0}</p>
                 <p>Answers</p>
               </span>
+            </div>
             </div>
           )}
 

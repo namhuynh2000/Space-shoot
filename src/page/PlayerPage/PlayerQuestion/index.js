@@ -113,20 +113,23 @@ const PlayerQuestionPage = () => {
             <p>30</p>
             <p>Point: {player.score}</p>
           </div>
-          <p> Answer the question below</p>
           <div className="player-question__detail__question">
             <img></img>
             <div className="player-question__detail__question__text">
               <p>Question {question.id}/{question.length}</p>
-              <text>Guy Bailey, Roy Hackett and Paul Stephenson made history in 1963, as part of a protest against a bus company that refused to employ black and Asian drivers in which UK city?</text>
+              <p>Guy Bailey, Roy Hackett and Paul Stephenson made history in 1963, as part of a protest against a bus company that refused to employ black and Asian drivers in which UK city?</p>
             </div>
           </div>
-          <p>Choose Answer</p>
+
+          <div className="player-question__detail-choices">
+<p>Choose Answer</p>
           <AnswerChoices
             choices={question.questionData.choices}
             clickHandle={_handlePlayerAnswer}
-            role={"player"}
+            role={"host"}
           />
+          </div>
+          
         </div>
       )}
 
