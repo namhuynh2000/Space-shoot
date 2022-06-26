@@ -7,7 +7,7 @@ import PlayerQuestionPage from "./PlayerPage/PlayerQuestion";
 // import PlayerStartPage from "./PlayerPage/PlayerStart";
 import PlayerWaitingPage from "./PlayerPage/PlayerWaiting";
 import HostScoreboardPage from "./HostPage/HostScoreboard";
-import LoginPage from "./LoginPage"
+import LoginPage from "./Loginpage"
 import RegisterPage from "./RegisterPage";
 export {
   LoginPage,

@@ -2,74 +2,96 @@ import { Link } from "react-router-dom";
 import "./index.scss";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import fire from "../../fire";
+import {auth} from "../../fire";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import {GoogleAuthProvider, signInWithPopup} from "firebase/auth";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 
 export default function LoginPage() {
-  const { user, setUser } = useState("");
-  const { email, setEmail } = useState("");
-  const { password, setPassword } = useState("");
-  const { emailError, setEmailError } = useState("");
-  const { passwordError, setPasswordError } = useState("");
-  const { hasAccount, setHasAccount } = useState("false");
 
-  const handleLogin = () => {
-    fire
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then((res) => console.log(res))
-      .catch((err) => {
-        switch (err.code) {
-          case "auth/invalid-email":
-          case "auth/user-disabled":
-          case "auth/user-not-found":
-            setEmailError(err.message);
-            break;
-          case "auth/wrong-password":
-            setPasswordError(err.message);
-            break;
-        }
-      })
-    
-  };
-  const authListener = () => {
-    fire.auth().onAuthStateChanged((user) => {
-      if (user) {
-        setUser(user);
-      }
-      else{
-        setUser(user);
-      }
+  const navigate = useNavigate();
+
+  const [loginEmail, setloginEmail] =useState("");
+  const [loginPassword, setloginPassword] = useState("");
+
+  const [user,setUser]= useState("");
+
+  const provider = new GoogleAuthProvider();
+
+  const signInWithGoogle=()=>{
+    signInWithPopup(auth,provider).then((result)=>{
+  
+      const name = result.user.displayName;
+      const userId = result.user.uid;
+      const email = result.user.email;
+      navigate("/host");
+  
+      localStorage.setItem("name", name);
+      localStorage.setItem("email", email);
+      localStorage.setItem("id", userId);
+    }).catch((error)=>{
+      console.error(error);
     });
-  };
+  }
+
+  const login = async ()=>{
+    try {
+      const user= await signInWithEmailAndPassword(
+        auth,
+        loginEmail,
+        loginPassword
+      );
+      console.log(user);
+      navigate("/host");
+
+    }
+    catch(error)
+    {
+      console.error(error.message);
+    }
+  }
+
+  onAuthStateChanged(auth,(currentUser)=>{
+    setUser(currentUser);
+
+  })
+
+
+
+
 
   return (
     <div className="loginContainer">
       <ToastContainer />
       <div className="loginContainer__background"></div>
       <div className="loginContainer__form">
-        <text className="loginContainer__form__text1">
+        <p className="loginContainer__form__text1">
           Login to your Account
-        </text>
-        <text className="loginContainer__form__text2">
+        </p>
+        <p className="loginContainer__form__text2">
           with your registered Email Address
-        </text>
+        </p>
         <hr color="gray"></hr>
         <label>Email address</label>
         <input
           className="loginContainer__form__emailInput"
           placeholder="Enter email address"
-          value={email}
-          onChange={e=>setEmail(e.target.value)}
+          onChange={(e)=>{
+            setloginEmail(e.target.value);
+          }}
         ></input>
         <label>Enter Password</label>
         <input
           className="loginContainer__form__passwordInput"
           placeholder="Password"
+          onChange={(e)=>{
+            setloginPassword(e.target.value);
+          }}
         ></input>
-        <button className="loginButton">Login</button>
+        <button className="loginButton" onClick={login}>Login</button>
         <p className="loginContainer__form__hr">Or</p>
-        <button className="googleButton">Login with Google</button>
+        <button className="googleButton" onClick={signInWithGoogle}>Login with Google</button>
         <div style={{ textAlign: "right" }}>
           Not a member?{" "}
           <Link style={{ color: "red", fontWeight: "bolder" }} to={"/host"}>
