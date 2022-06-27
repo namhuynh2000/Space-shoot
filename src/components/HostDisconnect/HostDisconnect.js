@@ -5,7 +5,6 @@ export default function HostDisconnect() {
   useEffect(() => {
     socket.on("hostDisconnect", () => {
       alert("Host has disconnected");
-      // socket.removeAllListeners();
       socket.disconnect();
     });
   }, []);

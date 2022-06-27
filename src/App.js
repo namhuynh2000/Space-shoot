@@ -26,8 +26,9 @@ function App() {
         <HostDisconnect />
         <SocketReconnect />
         <Routes>
-          {/*Player route*/}
           <Route path="/" element={<HomePage />} />
+
+          {/*Player route*/}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/waiting" element={<PlayerWaitingPage />} />

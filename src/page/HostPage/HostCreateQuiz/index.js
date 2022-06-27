@@ -173,8 +173,9 @@ const HostCreateQuizPage = ({ quiz }) => {
                         name="correctAnswer"
                         value={ans.content}
                         checked={
+                          state.questions[questionIndex].correctAnswer &&
                           state.questions[questionIndex].correctAnswer ===
-                          ans.content
+                            ans.content
                         }
                         onChange={_handleCorrectAnswerInputOnChange}
                       />

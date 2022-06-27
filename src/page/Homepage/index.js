@@ -6,9 +6,9 @@ import JoinInput from "../../components/JoinInput/JoinInput";
 import socket from "../../connections/socket";
 import { setReduxPlayer } from "../../redux/reducers/playerReducer";
 
-import "./index.scss"
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import "./index.scss";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function HomePage() {
   const [playerName, setPlayerName] = useState("");
@@ -39,32 +39,33 @@ export default function HomePage() {
         );
       } else {
         toast.error("Oop! Maybe the code is wrong!!!");
-
       }
     });
-  }, [dispatch,navigate]);
+  }, [dispatch, navigate]);
 
   return (
-    <div className="homeContainer" >
+    <div className="homeContainer">
       <ToastContainer />
-      <div className="groupButton" >
-      <JoinInput
-        label={"Player name"}
-        value={playerName}
-        onChangeHandle={_handlePlayerNameInput}
-      />
-      <JoinInput
-        label={"Room code"}
-        value={room}
-        onChangeHandle={_handleRoomInput}
-      />
-      <button className="submitButton" onClick={_handleSubmit}>Enter</button>
+      <div className="groupButton">
+        <JoinInput
+          label={"Player name"}
+          value={playerName}
+          onChangeHandle={_handlePlayerNameInput}
+        />
+        <JoinInput
+          label={"Room code"}
+          value={room}
+          onChangeHandle={_handleRoomInput}
+        />
+        <button className="submitButton" onClick={_handleSubmit}>
+          Enter
+        </button>
 
-      <Link to={"/loginpage"}> <button className="createButton" >Host game</button>
-    </Link>
-        
+        <Link to={"/host"}>
+          {" "}
+          <button className="createButton">Host game</button>
+        </Link>
       </div>
-
     </div>
   );
 }
