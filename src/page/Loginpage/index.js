@@ -15,12 +15,19 @@ export default function LoginPage() {
   const host = useSelector(selectHost);
   const [loginEmail, setloginEmail] = useState("");
   const [loginPassword, setloginPassword] = useState("");
+  const [typePassword, setTypePassword] = useState("password");
 
   const provider = new GoogleAuthProvider();
 
   useEffect(() => {
     if (host.id) navigate("/host");
   }, [host, navigate]);
+
+  const eyeHandle = () => {
+    if (typePassword === 'password')
+      setTypePassword("text");
+    else setTypePassword("password");
+  }
 
   const signInWithGoogle = () => {
     signInWithPopup(auth, provider)
@@ -66,7 +73,6 @@ export default function LoginPage() {
       else
         toast.error("Oop! Something wrong!!!")
       console.log(error.message);
-
     }
   };
 
@@ -90,14 +96,18 @@ export default function LoginPage() {
                 setloginEmail(e.target.value);
               }}
             ></input>
-            <input
-              className="loginContainer__form__passwordInput"
-              placeholder="Password"
-              type="password"
-              onChange={(e) => {
-                setloginPassword(e.target.value);
-              }}
-            ></input>
+            <div className="password__container">
+              <input
+                className="loginContainer__form__passwordInput"
+                placeholder="Password"
+                type={typePassword}
+                onChange={(e) => {
+                  setloginPassword(e.target.value);
+                }}
+              >
+              </input>
+              <img className="eyeIcon" src={typePassword === 'password' ? 'images/eye-close.png' : 'images/eye-open.png'} alt="" onClick={eyeHandle} />
+            </div>
             <Link to={"/forgot"}>
               <div className="forgot">Forgot password?</div>
             </Link>

@@ -102,21 +102,34 @@
             }
         }
 
-        .loginContainer__form__passwordInput {
-            border-radius: 50px;
-            height: 45px;
-            width: 97%;
-            text-align: left;
-            padding-left: 30px;
-            margin: 5px;
-            margin-top: 10px;
-            line-height: 4px;
-            font-size: 15px;
-            background-color: #fff;
-            border: none;
+        .password__container {
+            position: relative;
 
-            &:focus {
-                outline: none;
+            .loginContainer__form__passwordInput {
+                border-radius: 50px;
+                height: 45px;
+                width: 97%;
+                text-align: left;
+                padding-left: 30px;
+                margin: 5px;
+                margin-top: 10px;
+                line-height: 4px;
+                font-size: 15px;
+                background-color: #fff;
+                border: none;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            .eyeIcon {
+                position: absolute;
+                width: 20px;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 20px;
+                cursor: pointer;
             }
         }
 

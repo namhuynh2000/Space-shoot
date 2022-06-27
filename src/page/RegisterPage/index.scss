@@ -1,4 +1,4 @@
-.registerContainer{
+.registerContainer {
     background: url(../../../public/images/background-homepage.png) no-repeat center;
     background-size: cover;
     width: 100vw;
@@ -15,7 +15,7 @@
         top: 0;
     }
 
-    .registerForm{
+    .registerForm {
         background-color: #FF9E7D;
         border: #FE546F 15px solid;
         border-radius: 70px;
@@ -32,7 +32,7 @@
             right: -50px;
         }
 
-        .title{
+        .title {
             font-weight: bolder;
             font-size: 30px;
             color: #3E3264;
@@ -44,7 +44,7 @@
             color: #352A55;
         }
 
-        
+
         .registerContainer__form__emailInput {
             border-radius: 50px;
             height: 45px;
@@ -57,9 +57,14 @@
             font-size: 15px;
             background-color: #fff;
             border: none;
-            &:focus{
+
+            &:focus {
                 outline: none;
             }
+        }
+
+        .password__container {
+            position: relative;
         }
 
         .registerContainer__form__passwordInput {
@@ -74,10 +79,21 @@
             font-size: 15px;
             background-color: #fff;
             border: none;
-            &:focus{
+
+            &:focus {
                 outline: none;
             }
         }
+
+        .eyeIcon {
+            position: absolute;
+            width: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 20px;
+            cursor: pointer;
+        }
+
 
         .registerButton {
             border-radius: 50px;
@@ -94,6 +110,7 @@
             border: none;
             font-weight: 700;
             cursor: pointer;
+
             &:hover {
                 background-color: #3E3264;
             }

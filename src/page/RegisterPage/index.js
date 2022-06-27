@@ -18,7 +18,13 @@ export default function RegisterPage() {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [registerRePassword, setRegisterRePassword] = useState("");
+  const [typePassword, setTypePassword] = useState("password");
 
+  const eyeHandle = () => {
+    if (typePassword === 'password')
+      setTypePassword("text");
+    else setTypePassword("password");
+  }
 
   const register = async () => {
     if (registerPassword !== registerRePassword) {
@@ -44,7 +50,7 @@ export default function RegisterPage() {
         toast.error("Password too weak!");
         toast.warn("Password should be at least 6 characters!");
       }
-      else{
+      else {
         toast.error("Oop! Something wrong!!!");
       }
     }
@@ -74,15 +80,19 @@ export default function RegisterPage() {
             setRegisterEmail(e.target.value);
           }}
         ></input>
-        <input
-          className="registerContainer__form__passwordInput"
-          placeholder="Password"
-          type="password"
-          value={registerPassword}
-          onChange={(e) => {
-            setRegisterPassword(e.target.value);
-          }}
-        ></input>
+
+        <div className="password__container">
+          <input
+            className="registerContainer__form__passwordInput"
+            placeholder="Password"
+            type={typePassword}
+            value={registerPassword}
+            onChange={(e) => {
+              setRegisterPassword(e.target.value);
+            }}
+          ></input>
+          <img className="eyeIcon" src={typePassword === 'password' ? 'images/eye-close.png' : 'images/eye-open.png'} alt="" onClick={eyeHandle} />
+        </div>
         <input
           className="registerContainer__form__passwordInput"
           placeholder="Confirm password"
