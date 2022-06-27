@@ -2,42 +2,42 @@ import { Link } from "react-router-dom";
 import "./index.scss";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {auth} from "../../fire";
+import { auth } from "../../fire";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import {GoogleAuthProvider, signInWithPopup} from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 
 export default function LoginPage() {
 
   const navigate = useNavigate();
 
-  const [loginEmail, setloginEmail] =useState("");
+  const [loginEmail, setloginEmail] = useState("");
   const [loginPassword, setloginPassword] = useState("");
 
-  const [user,setUser]= useState("");
+  const [user, setUser] = useState("");
 
   const provider = new GoogleAuthProvider();
 
-  const signInWithGoogle=()=>{
-    signInWithPopup(auth,provider).then((result)=>{
-  
+  const signInWithGoogle = () => {
+    signInWithPopup(auth, provider).then((result) => {
+
       const name = result.user.displayName;
       const userId = result.user.uid;
       const email = result.user.email;
       navigate("/host");
-  
+
       localStorage.setItem("name", name);
       localStorage.setItem("email", email);
       localStorage.setItem("id", userId);
-    }).catch((error)=>{
+    }).catch((error) => {
       console.error(error);
     });
   }
 
-  const login = async ()=>{
+  const login = async () => {
     try {
-      const user= await signInWithEmailAndPassword(
+      const user = await signInWithEmailAndPassword(
         auth,
         loginEmail,
         loginPassword
@@ -46,46 +46,36 @@ export default function LoginPage() {
       navigate("/host");
 
     }
-    catch(error)
-    {
+    catch (error) {
       console.error(error.message);
     }
   }
 
-  onAuthStateChanged(auth,(currentUser)=>{
+  onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
 
   })
 
-
-
-
-
   return (
     <div className="loginContainer">
       <ToastContainer />
-      <div className="loginContainer__background"></div>
       <div className="loginContainer__form">
-        <p className="loginContainer__form__text1">
+        <p className="loginContainer__form__text">
           Login to your Account
         </p>
-        <p className="loginContainer__form__text2">
-          with your registered Email Address
-        </p>
-        <hr color="gray"></hr>
-        <label>Email address</label>
+
         <input
           className="loginContainer__form__emailInput"
-          placeholder="Enter email address"
-          onChange={(e)=>{
+          placeholder="Email address"
+          onChange={(e) => {
             setloginEmail(e.target.value);
           }}
         ></input>
-        <label>Enter Password</label>
+        <label htmlFor="">Forgot password?</label>
         <input
           className="loginContainer__form__passwordInput"
           placeholder="Password"
-          onChange={(e)=>{
+          onChange={(e) => {
             setloginPassword(e.target.value);
           }}
         ></input>
@@ -100,5 +90,7 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+
+
   );
 }

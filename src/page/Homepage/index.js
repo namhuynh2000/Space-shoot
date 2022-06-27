@@ -47,6 +47,8 @@ export default function HomePage() {
   return (
     <div className="homeContainer" >
       <ToastContainer />
+      <img className="planetIcon" src="images/planet.png" alt="planetImage" />
+      <img className="roverIcon" src="images/Rover.png" alt="roverImage" />
       <div className="groupButton" >
         <img className="cometIcon" src="images/Comet.png" alt="cometImage" />
         <div className="logo">

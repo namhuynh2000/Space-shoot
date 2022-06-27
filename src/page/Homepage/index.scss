@@ -1,13 +1,27 @@
 .homeContainer {
     background: url("../../../public/images/background-homepage.png") no-repeat center;
-    background-size: contain;
+    background-size: cover;
     width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    
+    .planetIcon {
+        position: absolute;
+        width: 300px;
+        height: auto;
+        right: 0;
+        top: 0;
+    }
+
+    .roverIcon {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        bottom: 10px;
+        left: 20px;
+    }
 
     .groupButton {
         position: relative;
@@ -18,20 +32,22 @@
         border-style: solid;
         padding: 40px;
         padding-top: 10px;
+
         .logo {
             font-family: 'Jolly Lodger', cursive;
             font-size: 100px;
             color: #352A55;
         }
 
-        .cometIcon{
+        .cometIcon {
             width: 150px;
             height: 150px;
             position: absolute;
             top: -50px;
             left: -100px;
         }
-        .starIcon{
+
+        .starIcon {
             width: 120px;
             height: 120px;
             position: absolute;
@@ -53,11 +69,12 @@
             font-weight: bolder;
             border: none;
             cursor: pointer;
-            &:hover{
+
+            &:hover {
                 background-color: #3E3264;
             }
         }
-    
+
         .createButton {
             border: none;
             background-color: #352A55;
@@ -72,13 +89,14 @@
             color: white;
             font-weight: bolder;
             cursor: pointer;
-            &:hover{
+
+            &:hover {
                 background-color: #3E3264;
             }
         }
     }
 
-    
+
 
 
 }

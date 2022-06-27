@@ -1,21 +1,13 @@
 
 .loginContainer{
-
     width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: row;
-
-    .loginContainer__background{
-        width: 50%;
-        height: 100%;
-        background-image: url("https://static.vecteezy.com/system/resources/previews/003/206/208/original/quiz-time-neon-signs-style-text-free-vector.jpg");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        opacity: 0.9;
-
-    }
+    background-image: url("../../../public/images/background-homepage.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
     
     .loginContainer__form{
 
