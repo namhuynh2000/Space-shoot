@@ -17,17 +17,8 @@ export default function RegisterPage() {
   const host = useSelector(selectHost);
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
-  const [registerRePassword, setReRegisterPassword] = useState("");
+  const [registerRePassword, setRegisterRePassword] = useState("");
 
-
-  const ClearInputs = ()=>{
-    registerEmail='';
-    setReRegisterPassword("");
-    setRegisterPassword("");
-
-  
-
-  }
 
   const register = async () => {
     if (registerPassword === registerRePassword) {
@@ -49,45 +40,58 @@ export default function RegisterPage() {
     ClearInputs();
   };
 
+  const ClearInputs = () => {
+    setRegisterEmail("");
+    setRegisterPassword("");
+    setRegisterRePassword("");
+  }
+
   return (
     <div className="registerContainer">
       <ToastContainer />
-      <div className="registerContainer__background"></div>
-      <div className="registerContainer__form">
-        <p className="registerContainer__form__text1">Create new Account</p>
-        <p className="registerContainer__form__text2">
-          with your Email Address
-        </p>
-        <hr color="gray"></hr>
-        <label>Email address</label>
+      <img className="planetIcon" src="images/planet.png" alt="planetImage" />
+      <div className="registerForm">
+        <img className="starIcon" src="images/Star2.png" alt="starImage" />
+
+        <div className="logo">SpaceShoot!</div>
+        <div className="title">Signup to create Account</div>
         <input
           className="registerContainer__form__emailInput"
-          placeholder="Enter email address"
+          placeholder="Email address"
+          value={registerEmail}
           onChange={(e) => {
             setRegisterEmail(e.target.value);
           }}
         ></input>
-        <label>Enter Password</label>
         <input
           className="registerContainer__form__passwordInput"
           placeholder="Password"
           type="password"
+          value={registerPassword}
           onChange={(e) => {
             setRegisterPassword(e.target.value);
           }}
         ></input>
-        <label>Confirm Password</label>
         <input
-          className="registerContainer__form__repasswordInput"
-          placeholder="Password"
+          className="registerContainer__form__passwordInput"
+          placeholder="Confirm password"
           type="password"
+          value={registerRePassword}
           onChange={(e) => {
-            setReRegisterPassword(e.target.value);
+            setRegisterRePassword(e.target.value);
           }}
         ></input>
+
         <button className="registerButton" onClick={register}>
-          Confirm
+          Signup
         </button>
+
+        <div>
+          Already have an account?{" "}
+          <Link style={{ color: "red", fontWeight: "700" }} to={"/login"}>
+            Login!
+          </Link>
+        </div>
       </div>
     </div>
   );

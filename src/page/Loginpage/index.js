@@ -96,8 +96,8 @@ export default function LoginPage() {
             </button>
             <p className="loginContainer__form__hr">Or</p>
             <img className="googleButton" onClick={signInWithGoogle} src="images/icons8-google-500 1.png" alt="" />
-            <div style={{ textAlign: "right", marginRight: "25px" }}>
-              Not a member?{"   "}
+            <div>
+              Not a member?{" "}
               <Link style={{ color: "red", fontWeight: "700" }} to={"/register"}>
                 Register!
               </Link>

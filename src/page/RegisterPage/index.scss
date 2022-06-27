@@ -1,134 +1,102 @@
-
 .registerContainer{
-
+    background: url(../../../public/images/background-homepage.png) no-repeat center;
+    background-size: cover;
     width: 100vw;
     height: 100vh;
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 
-    .registerContainer__background{
-        width: 50%;
-        height: 100%;
-        background-image: url("https://static.vecteezy.com/system/resources/previews/003/206/208/original/quiz-time-neon-signs-style-text-free-vector.jpg");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        opacity: 0.9;
-
+    .planetIcon {
+        position: absolute;
+        width: 300px;
+        height: auto;
+        right: 0;
+        top: 0;
     }
-    
-    .registerContainer__form{
 
-        display: flex;
-        width: 50%;
-        justify-content: center;
-        flex-direction: column;
-        padding:10%;
-        background-color: whitesmoke;
+    .registerForm{
+        background-color: #FF9E7D;
+        border: #FE546F 15px solid;
+        border-radius: 70px;
+        padding: 40px;
+        padding-top: 10px;
+        text-align: center;
+        position: relative;
 
-        .registerContainer__form__text1{
+        .starIcon {
+            width: 120px;
+            height: 120px;
+            position: absolute;
+            bottom: -20px;
+            right: -50px;
+        }
+
+        .title{
             font-weight: bolder;
-            font-size: xx-large;
-        }
-        .registerContainer__form__text2{
-            color: rgb(134,146,166);
-            margin-bottom: 30px;
+            font-size: 30px;
+            color: #3E3264;
         }
 
-        hr{
-            margin-bottom: 30px;
-            opacity: 0.1;
+        .logo {
+            font-family: 'Jolly Lodger', cursive;
+            font-size: 100px;
+            color: #352A55;
         }
 
-        label{
-            color: rgb(134,146,166);
-            margin-bottom: 10px;
-            font-weight: bolder;
-        }
-
-        .registerContainer__form__emailInput:focus{
-            outline: none;
-        }
-        .registerContainer__form__emailInput{
-            border: white;
-            border-radius: 20px;
-            height:45px;
-            margin-bottom: 5px;
-            padding: 15px;
-            font-size:15px;
-            line-height: 4px;
-            margin-bottom: 20px;
-            background-color: white;
-            color:black;
-            font-weight:bolder;
-            filter: drop-shadow(1px 1px 2px black);
-
-        }
-
-        .registerContainer__form__passwordInput:focus{
-            outline: none;
-        }
-        .registerContainer__form__passwordInput{
-            border: white;
-            border-radius: 20px;
-            height:45px;
-            padding: 15px;
-            font-size:15px;
-            background-color: white;
-            color:black;
-            font-weight:bolder;
-            margin-bottom: 20px;
-            filter: drop-shadow(1px 1px 2px black);
-
-        }
-
-        .registerContainer__form__repasswordInput:focus{
-            outline: none;
-        }
-        .registerContainer__form__repasswordInput{
-
-            border: white;
-            border-radius: 20px;
-            height:45px;
-            padding: 15px;
-            font-size:15px;
-            background-color: white;
-            color:black;
-            font-weight:bolder;
-            margin-bottom: 40px;
-            filter: drop-shadow(1px 1px 2px black);
-
-        }
-
-        .registerButton:hover{
-            opacity: 0.7;
-            cursor: pointer;
         
+        .registerContainer__form__emailInput {
+            border-radius: 50px;
+            height: 45px;
+            width: 97%;
+            text-align: left;
+            padding-left: 30px;
+            margin: 5px;
+            margin-top: 25px;
+            line-height: 4px;
+            font-size: 15px;
+            background-color: #fff;
+            border: none;
+            &:focus{
+                outline: none;
+            }
         }
-        .registerContainer__form__hr
-        {
+
+        .registerContainer__form__passwordInput {
+            border-radius: 50px;
+            height: 45px;
+            width: 97%;
+            text-align: left;
+            padding-left: 30px;
+            margin: 5px;
             margin-top: 10px;
-            margin-bottom: 10px;
-            opacity: 0.2;
+            line-height: 4px;
+            font-size: 15px;
+            background-color: #fff;
+            border: none;
+            &:focus{
+                outline: none;
+            }
+        }
+
+        .registerButton {
+            border-radius: 50px;
+            height: 45px;
+            width: 97%;
             text-align: center;
+            margin: 5px;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            line-height: 4px;
+            font-size: 15px;
+            background-color: #352A55;
+            color: #fff;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            &:hover {
+                background-color: #3E3264;
+            }
         }
-        .registerButton{
-            border: rgb(235,77,86);
-            border-radius: 20px;
-            height:45px;
-            text-align:center;
-            padding: 15px;
-            font-size:15px;
-            background-color: rgb(235,77,86, 100%);
-            color:white;
-            font-weight:bolder;
-            filter: drop-shadow(1px 1px 2px black);
-        }
-    
-    
-
     }
-   
-
 }
-

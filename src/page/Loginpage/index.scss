@@ -5,6 +5,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+
     .planetIcon {
         position: absolute;
         width: 300px;
@@ -12,6 +13,7 @@
         right: 0;
         top: 0;
     }
+
     .loginContainer__form {
         position: absolute;
         top: 50%;
@@ -27,7 +29,7 @@
         border-color: #FE546F;
         border-style: solid;
 
-        
+
 
         .starIcon {
             width: 120px;
@@ -52,13 +54,15 @@
                 width: 350px;
                 height: 350px;
             }
-            .forgot{
+
+            .forgot {
                 text-align: end;
                 margin: 10px;
                 color: #3E3264;
                 cursor: pointer;
             }
-            .loginContent{
+
+            .loginContent {
                 margin-top: 20px;
             }
         }
@@ -67,11 +71,6 @@
             font-weight: bolder;
             font-size: 30px;
             color: #3E3264;
-        }
-
-        .loginContainer__form__text2 {
-            color: rgb(134, 146, 166);
-            margin-bottom: 30px;
         }
 
         hr {
@@ -97,7 +96,8 @@
             font-size: 15px;
             background-color: #fff;
             border: none;
-            &:focus{
+
+            &:focus {
                 outline: none;
             }
         }
@@ -114,7 +114,8 @@
             font-size: 15px;
             background-color: #fff;
             border: none;
-            &:focus{
+
+            &:focus {
                 outline: none;
             }
         }
@@ -141,8 +142,9 @@
             border: none;
             font-weight: 700;
             cursor: pointer;
-            &:focus{
-                outline: none;
+
+            &:hover {
+                background-color: #3E3264;
             }
         }
 
