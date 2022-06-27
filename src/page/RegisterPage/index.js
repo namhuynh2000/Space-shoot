@@ -21,23 +21,34 @@ export default function RegisterPage() {
 
 
   const register = async () => {
-    if (registerPassword === registerRePassword) {
-      try {
-        const user = await createUserWithEmailAndPassword(
-          auth,
-          registerEmail,
-          registerPassword
-        );
-        toast.success("Đăng ký tài khoản thành công!");
-        console.log(user);
-      } catch (error) {
-        console.log(error.message);
-        toast.error("Đăng ký không thành công!");
-      }
-    } else {
-      toast.error("Đăng ký không thành công");
+    if (registerPassword !== registerRePassword) {
+      toast.error("Password incorrect!");
+      return;
     }
-    ClearInputs();
+    try {
+      const user = await createUserWithEmailAndPassword(
+        auth,
+        registerEmail,
+        registerPassword
+      );
+      toast.success("Register success!");
+      ClearInputs();
+    } catch (error) {
+      console.log(error)
+      if (error.code === 'auth/email-already-in-use')
+        toast.error("Email already exist!");
+      else if (error.code === 'auth/invalid-email') {
+        toast.error("Invalid email!");
+      }
+      else if (error.code === 'auth/weak-password') {
+        toast.error("Password too weak!");
+        toast.warn("Password should be at least 6 characters!");
+      }
+      else{
+        toast.error("Oop! Something wrong!!!");
+      }
+    }
+
   };
 
   const ClearInputs = () => {

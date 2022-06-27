@@ -38,27 +38,27 @@ function ForgotPassword() {
     //     }
     // };
     const sendResetPass = async () => {
-        if (email != '') {
+
             try {
                 const code = await sendPasswordResetEmail(
                     auth,
                     email,
                     null
                 );
-                toast.success("Send link to email success");
+                toast.success("Send link to email success!");
             }
             catch (error) {
+                console.log(error)
                 if (error.code === 'auth/user-not-found')
                     // console.log(error.code);
-                    toast.error("Email does not exist");
+                    toast.error("Email does not exist!");
                 else if (error.code === 'auth/invalid-email')
-                    toast.error("Invalid email");
+                    toast.error("Invalid email!");
                 else
                     toast.error("Oop! Maybe the email is wrong!!!")
             }
             // sendPasswordResetEmail
 
-        }
     }
 
     return (
