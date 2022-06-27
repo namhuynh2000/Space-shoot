@@ -4,13 +4,18 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { auth } from "../../fire";
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 import { useState } from "react";
+=======
+import { useEffect, useState } from "react";
+>>>>>>> e66d68c1557c6869c1404823809d5355c97a02fe
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
-
+import { useDispatch, useSelector } from "react-redux";
+import { selectHost, setReduxHost } from "../../redux/reducers/hostReducer";
 export default function LoginPage() {
-
   const navigate = useNavigate();
+<<<<<<< HEAD
 
   const [loginEmail, setloginEmail] = useState("");
   const [loginPassword, setloginPassword] = useState("");
@@ -35,6 +40,37 @@ export default function LoginPage() {
     });
   }
 
+=======
+  const dispatch = useDispatch();
+  const host = useSelector(selectHost);
+  const [loginEmail, setloginEmail] = useState("");
+  const [loginPassword, setloginPassword] = useState("");
+
+  const provider = new GoogleAuthProvider();
+
+  useEffect(() => {
+    if (host.id) navigate("/host");
+  }, [host, navigate]);
+
+  const signInWithGoogle = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const host = {
+          name: result.user.displayName,
+          email: result.user.email,
+          id: result.user.uid,
+          photoURL: result.user.photoURL,
+        };
+        dispatch(setReduxHost(host));
+
+        navigate("/host");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+>>>>>>> e66d68c1557c6869c1404823809d5355c97a02fe
   const login = async () => {
     try {
       const user = await signInWithEmailAndPassword(
@@ -44,6 +80,7 @@ export default function LoginPage() {
       );
       console.log(user);
       navigate("/host");
+<<<<<<< HEAD
 
     }
     catch (error) {
@@ -55,11 +92,18 @@ export default function LoginPage() {
     setUser(currentUser);
 
   })
+=======
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+>>>>>>> e66d68c1557c6869c1404823809d5355c97a02fe
 
   return (
     <div className="loginContainer">
       <ToastContainer />
       <div className="loginContainer__form">
+<<<<<<< HEAD
         <p className="loginContainer__form__text">
           Login to your Account
         </p>
@@ -67,6 +111,17 @@ export default function LoginPage() {
         <input
           className="loginContainer__form__emailInput"
           placeholder="Email address"
+=======
+        <p className="loginContainer__form__text1">Login to your Account</p>
+        <p className="loginContainer__form__text2">
+          with your registered Email Address
+        </p>
+        <hr color="gray"></hr>
+        <label>Email address</label>
+        <input
+          className="loginContainer__form__emailInput"
+          placeholder="Enter email address"
+>>>>>>> e66d68c1557c6869c1404823809d5355c97a02fe
           onChange={(e) => {
             setloginEmail(e.target.value);
           }}
@@ -79,9 +134,13 @@ export default function LoginPage() {
             setloginPassword(e.target.value);
           }}
         ></input>
-        <button className="loginButton" onClick={login}>Login</button>
+        <button className="loginButton" onClick={login}>
+          Login
+        </button>
         <p className="loginContainer__form__hr">Or</p>
-        <button className="googleButton" onClick={signInWithGoogle}>Login with Google</button>
+        <button className="googleButton" onClick={signInWithGoogle}>
+          Login with Google
+        </button>
         <div style={{ textAlign: "right" }}>
           Not a member?{" "}
           <Link style={{ color: "red", fontWeight: "bolder" }} to={"/host"}>

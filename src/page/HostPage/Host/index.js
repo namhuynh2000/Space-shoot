@@ -2,11 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import socket from "../../../connections/socket";
 import { Link } from "react-router-dom";
-import "./index.scss"
+import "./index.scss";
+import { selectHost } from "../../../redux/reducers/hostReducer";
+import { useSelector } from "react-redux";
+
 export default function HostPage() {
   const [quizList, setQuizList] = useState([]);
-
+  const host = useSelector(selectHost);
   const navigate = useNavigate();
+
   useEffect(() => {
     if (socket.room) {
       delete socket.room;
@@ -19,7 +23,7 @@ export default function HostPage() {
       setQuizList(payload);
     }
 
-    socket.emit("fetchQuizList");
+    socket.emit("fetchQuizList", host.id);
 
     socket.on("fetchQuizListRes", handleFetchQuizListRes);
 
@@ -34,37 +38,34 @@ export default function HostPage() {
 
   return (
     <div className="hostContainer">
-
       <Link className="linkToCreate" to={"/host/create"}>
-        <img className="imgCreate" alt="quizgame Backgroud" src="https://previews.123rf.com/images/olegback/olegback2010/olegback201000068/157631503-.jpg"></img>
-        <button className="createButton" >Create game</button>
+        <img
+          className="imgCreate"
+          alt="quizgame Backgroud"
+          src="https://previews.123rf.com/images/olegback/olegback2010/olegback201000068/157631503-.jpg"
+        ></img>
+        <button className="createButton">Create game</button>
       </Link>
 
       <h2>Quiz list</h2>
 
       <ul className="myList">
-        {quizList && 
-         
-            quizList.map((item) => (
-
-              <li className="myQuizList" key={item._id} onClick={() => _handleClickToHostGame(item._id)}>
-                <img className="imgQuiz" src="https://cdn.wallpapersafari.com/94/39/wrGnD8.jpg" alt="background"></img>
-                <p className="quizName">{item.name}</p>
-
-              </li>
-
-
-
-
-
-            )
-        )}
-
-
+        {quizList &&
+          quizList.map((item) => (
+            <li
+              className="myQuizList"
+              key={item._id}
+              onClick={() => _handleClickToHostGame(item._id)}
+            >
+              <img
+                className="imgQuiz"
+                src="https://cdn.wallpapersafari.com/94/39/wrGnD8.jpg"
+                alt="background"
+              ></img>
+              <p className="quizName">{item.name}</p>
+            </li>
+          ))}
       </ul>
-
-
-
     </div>
   );
 }
