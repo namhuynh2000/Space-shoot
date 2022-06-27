@@ -14,6 +14,7 @@ import {
   HostWaiting,
   PlayerQuestionPage,
   PlayerWaitingPage,
+  ForgotPassword
 } from "./page";
 import PlayerSummaryPage from "./page/PlayerPage/PlayerSummary";
 import HostSummaryPage from "./page/HostPage/HostSummary";
@@ -27,15 +28,15 @@ import { auth } from "./fire";
 import { onAuthStateChanged } from "firebase/auth";
 function App() {
   const dispatch = useDispatch();
-  onAuthStateChanged(auth, (currentUser) => {
-    const host = {
-      name: currentUser.displayName,
-      email: currentUser.email,
-      id: currentUser.uid,
-      photoURL: currentUser.photoURL,
-    };
-    dispatch(setReduxHost(host));
-  });
+  // onAuthStateChanged(auth, (currentUser) => {
+  //   const host = {
+  //     name: currentUser.displayName,
+  //     email: currentUser.email,
+  //     id: currentUser.uid,
+  //     photoURL: currentUser.photoURL,
+  //   };
+  //   dispatch(setReduxHost(host));
+  // });
 
   return (
     <div className="App">
@@ -51,6 +52,7 @@ function App() {
           <Route path="/waiting" element={<PlayerWaitingPage />} />
           <Route path="/question" element={<PlayerQuestionPage />} />
           <Route path="/summary" element={<PlayerSummaryPage />} />
+          <Route path="/forgot" element={<ForgotPassword />} />
 
           {/*Host route*/}
 
@@ -62,6 +64,7 @@ function App() {
               </RequireAuth>
             }
           />
+
           <Route
             path="/host/lobby"
             element={

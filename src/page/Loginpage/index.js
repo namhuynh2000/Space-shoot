@@ -32,7 +32,6 @@ export default function LoginPage() {
           photoURL: result.user.photoURL,
         };
         dispatch(setReduxHost(host));
-
         navigate("/host");
       })
       .catch((error) => {
@@ -81,14 +80,14 @@ export default function LoginPage() {
                 setloginPassword(e.target.value);
               }}
             ></input>
+            <Link to={"/forgot"}>
             <div className="forgot">Forgot password?</div>
+            </Link>
             <button className="loginButton" onClick={login}>
               Login
             </button>
             <p className="loginContainer__form__hr">Or</p>
             <img className="googleButton" onClick={signInWithGoogle} src="images/icons8-google-500 1.png" alt="" />
-
-
             <div style={{ textAlign: "right", marginRight: "25px" }}>
               Not a member?{" "}
               <Link style={{ color: "red", fontWeight: "700" }} to={"/host"}>

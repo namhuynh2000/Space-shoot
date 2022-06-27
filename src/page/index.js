@@ -9,6 +9,7 @@ import PlayerWaitingPage from "./PlayerPage/PlayerWaiting";
 import HostScoreboardPage from "./HostPage/HostScoreboard";
 import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
+import ForgotPassword from "./ForgotPasswordPage";
 export {
   LoginPage,
   RegisterPage,
@@ -21,4 +22,5 @@ export {
   HostQuestionPage,
   PlayerQuestionPage,
   HostScoreboardPage,
+  ForgotPassword
 };
