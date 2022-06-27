@@ -47,6 +47,8 @@ export default function HomePage() {
     <div className="homeContainer">
       <ToastContainer />
       <div className="groupButton">
+        <img className="cometIcon" src="images/Comet.png" alt="cometImage" />
+        <div className="logo">SpaceShoot!</div>
         <JoinInput
           label={"Player name"}
           value={playerName}
@@ -65,6 +67,7 @@ export default function HomePage() {
           {" "}
           <button className="createButton">Host game</button>
         </Link>
+        <img className="starIcon" src="images/Star2.png" alt="starImage" />
       </div>
     </div>
   );
