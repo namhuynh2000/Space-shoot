@@ -42,27 +42,32 @@ export default function HomePage() {
 
       }
     });
-  }, [dispatch,navigate]);
+  }, [dispatch, navigate]);
 
   return (
     <div className="homeContainer" >
       <ToastContainer />
       <div className="groupButton" >
-      <JoinInput
-        label={"Player name"}
-        value={playerName}
-        onChangeHandle={_handlePlayerNameInput}
-      />
-      <JoinInput
-        label={"Room code"}
-        value={room}
-        onChangeHandle={_handleRoomInput}
-      />
-      <button className="submitButton" onClick={_handleSubmit}>Enter</button>
+        <img className="cometIcon" src="images/Comet.png" alt="cometImage" />
+        <div className="logo">
+          SpaceShoot!
+        </div>
+        <JoinInput
+          label={"Player name"}
+          value={playerName}
+          onChangeHandle={_handlePlayerNameInput}
+        />
+        <JoinInput
+          label={"Room code"}
+          value={room}
+          onChangeHandle={_handleRoomInput}
+        />
+        <button className="submitButton" onClick={_handleSubmit}>Enter</button>
 
-      <Link to={"/login"}> <button className="createButton" >Host game</button>
-    </Link>
-        
+        <Link to={"/login"}> <button className="createButton" >Host game</button>
+        </Link>
+        <img className="starIcon" src="images/Star2.png" alt="starImage" />
+
       </div>
 
     </div>

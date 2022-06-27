@@ -1,0 +1,22 @@
+// .formInput{
+//   background-color: #FF9E7D;
+//   border-radius: 70px;
+//   border-width: 15px;
+//   border-color: #FE546F;
+// }
+
+input {
+  display: block;
+  border: none;
+  border-radius: 64px;
+  height: 45px;
+  width: 100%;
+  text-align: center;
+  // margin: 5px;
+  margin-bottom: 10px;
+  // line-height: 4px;
+  font-size: 15px;
+  font-weight: 400;
+  // color: #000
+  outline: none;
+}

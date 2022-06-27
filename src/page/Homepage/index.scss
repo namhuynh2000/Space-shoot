@@ -1,57 +1,84 @@
-
-.homeContainer{
-    background-image: url("../../../public/images/background.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+.homeContainer {
+    background: url("../../../public/images/background-homepage.png") no-repeat center;
+    background-size: contain;
     width: 100vw;
-    height: 105vh;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    .groupButton{
-        background-color: white;
-        padding: 10px;
-        border-radius: 4px;
+    
+
+    .groupButton {
+        position: relative;
+        background-color: #FF9E7D;
+        border-radius: 70px;
+        border-width: 15px;
+        border-color: #FE546F;
+        border-style: solid;
+        padding: 40px;
+        padding-top: 10px;
+        .logo {
+            font-family: 'Jolly Lodger', cursive;
+            font-size: 100px;
+            color: #352A55;
+        }
+
+        .cometIcon{
+            width: 150px;
+            height: 150px;
+            position: absolute;
+            top: -50px;
+            left: -100px;
+        }
+        .starIcon{
+            width: 120px;
+            height: 120px;
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+        }
+
+        .submitButton {
+            border-radius: 50px;
+            height: 45px;
+            width: 97%;
+            text-align: center;
+            margin: 5px;
+            margin-top: 25px;
+            line-height: 4px;
+            font-size: 15px;
+            background-color: #352A55;
+            color: white;
+            font-weight: bolder;
+            border: none;
+            cursor: pointer;
+            &:hover{
+                background-color: #3E3264;
+            }
+        }
+    
+        .createButton {
+            border: none;
+            background-color: #352A55;
+            border-radius: 50px;
+            height: 45px;
+            width: 97%;
+            text-align: center;
+            margin: 5px;
+            margin-bottom: 0;
+            line-height: 4px;
+            font-size: 15px;
+            color: white;
+            font-weight: bolder;
+            cursor: pointer;
+            &:hover{
+                background-color: #3E3264;
+            }
+        }
     }
 
-    .submitButton:hover{
-        opacity: 0.7;
-        cursor: pointer;
     
-    }
-    .submitButton{
-        border-radius:4px;
-        height:45px;
-        width:97%;
-        text-align:center;
-        margin: 5px;
-        line-height:4px;
-        font-size:15px;
-        background-color: black;
-        color:white;
-        font-weight:bolder;
-    }
-    
-    .createButton:hover{
-        opacity: 0.7;
-        cursor: pointer;
-    
-    }
-    .createButton{
-        background-color: blue;
-        border-radius:4px;
-        height:45px;
-        width:97%;
-        text-align:center;
-        margin: 5px;
-        line-height:4px;
-        font-size:15px;
-        color:white;
-        font-weight:bolder;
-    }
 
 
 }
-
