@@ -1,129 +1,155 @@
-
-.loginContainer{
+.loginContainer {
     width: 100vw;
     height: 100vh;
-    display: flex;
-    flex-direction: row;
     background-image: url("../../../public/images/background-homepage.png");
     background-repeat: no-repeat;
     background-position: center;
-    background-size: contain;
-    
-    .loginContainer__form{
+    background-size: cover;
+    .planetIcon {
+        position: absolute;
+        width: 300px;
+        height: auto;
+        right: 0;
+        top: 0;
+    }
+    .loginContainer__form {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        padding: 40px;
+        padding-top: 10px;
+        display: inline-block;
+        background-color: #FF9E7D;
+        border-radius: 80px;
+        border-width: 15px;
+        border-color: #FE546F;
+        border-style: solid;
 
-        display: flex;
-        width: 50%;
-        justify-content: center;
-        flex-direction: column;
-        padding:10%;
-        background-color: whitesmoke;
+        
 
-        .loginContainer__form__text1{
-            font-weight: bolder;
-            font-size: xx-large;
+        .starIcon {
+            width: 120px;
+            height: 120px;
+            position: absolute;
+            bottom: -20px;
+            right: -50px;
         }
-        .loginContainer__form__text2{
-            color: rgb(134,146,166);
+
+        .logo {
+            font-family: 'Jolly Lodger', cursive;
+            font-size: 100px;
+            color: #352A55;
+        }
+
+        .loginContentWrap {
+            display: flex;
+
+            .telescopeIcon {
+                margin-top: 100px;
+                margin-left: -50px;
+                width: 350px;
+                height: 350px;
+            }
+            .forgot{
+                text-align: end;
+                margin: 10px;
+                color: #3E3264;
+            }
+            .loginContent{
+                margin-top: 20px;
+            }
+        }
+
+        .loginContainer__form__text {
+            font-weight: bolder;
+            font-size: 30px;
+            color: #3E3264;
+        }
+
+        .loginContainer__form__text2 {
+            color: rgb(134, 146, 166);
             margin-bottom: 30px;
         }
 
-        hr{
+        hr {
             margin-bottom: 30px;
             opacity: 0.1;
         }
 
-        label{
-            color: rgb(134,146,166);
+        label {
+            color: rgb(134, 146, 166);
             margin-bottom: 10px;
             font-weight: bolder;
         }
 
-        .loginContainer__form__emailInput:focus{
-            outline: none;
-        }
-        .loginContainer__form__emailInput{
-            border: white;
-            border-radius: 20px;
-            height:100px;
-            margin-bottom: 5px;
-            padding: 15px;
-            font-size:15px;
-            line-height: 4px;
-            margin-bottom: 20px;
-            background-color: white;
-            color:black;
-            font-weight:bolder;
-            filter: drop-shadow(1px 1px 2px black);
-
-        }
-
-        .loginContainer__form__passwordInput:focus{
-            outline: none;
-        }
-        .loginContainer__form__passwordInput{
-            border: white;
-            border-radius: 20px;
-            height:45px;
-            padding: 15px;
-            font-size:15px;
-            background-color: white;
-            color:black;
-            font-weight:bolder;
-            margin-bottom: 40px;
-            filter: drop-shadow(1px 1px 2px black);
-
-        }
-
-        .loginButton:hover{
-            opacity: 0.7;
-            cursor: pointer;
-        
-        }
-        .loginContainer__form__hr
-        {
-            margin-top: 10px;
-            margin-bottom: 10px;
-            opacity: 0.2;
+        .loginContainer__form__emailInput {
+            border-radius: 50px;
+            height: 45px;
+            width: 97%;
             text-align: center;
+            margin: 5px;
+            margin-top: 25px;
+            line-height: 4px;
+            font-size: 15px;
+            background-color: #fff;
+            border: none;
+            &:focus{
+                outline: none;
+            }
         }
-        .loginButton{
-            border: rgb(10, 75, 188);
-            border-radius: 20px;
-            height:45px;
-            text-align:center;
-            padding: 15px;
-            font-size:15px;
-            background-color: rgb(10, 75, 188);
-            color:white;
-            font-weight:bolder;
-            
+
+        .loginContainer__form__passwordInput {
+            border-radius: 50px;
+            height: 45px;
+            width: 97%;
+            text-align: center;
+            margin: 5px;
+            margin-top: 10px;
+            line-height: 4px;
+            font-size: 15px;
+            background-color: #fff;
+            border: none;
+            &:focus{
+                outline: none;
+            }
         }
-        
-        .googleButton:hover{
-            opacity: 0.7;
+
+        .loginContainer__form__hr {
+            margin-top: 10px;
+            margin-bottom: 5px;
+            // opacity: 0.2;
+            text-align: center;
+            // font-weight: 700;
+            font-size: 15px;
+        }
+
+        .loginButton {
+            border-radius: 50px;
+            height: 45px;
+            width: 97%;
+            text-align: center;
+            margin: 5px;
+            line-height: 4px;
+            font-size: 15px;
+            background-color: #352A55;
+            color: #fff;
+            border: none;
+            font-weight: 700;
             cursor: pointer;
-        
+            &:focus{
+                outline: none;
+            }
         }
-        .googleButton{
-            background: url("https://freesvg.org/img/1534129544.png") no-repeat left;
-            background-position: 20px;
-            background-size: 20px;
-            border: white;
-            border-radius: 20px;
-            height:45px;
-            text-align:center;
-            padding: 15px;
-            font-size:15px;
-            background-color: white;
-            color:black;
-            font-weight:bolder;
-            margin-bottom: 10px;
-            filter: drop-shadow(1px 1px 2px black);
+
+        .googleButton {
+            width: 80px;
+            cursor: pointer;
         }
-    
+
 
     }
-   
+
 
 }
-

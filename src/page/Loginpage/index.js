@@ -57,41 +57,48 @@ export default function LoginPage() {
   return (
     <div className="loginContainer">
       <ToastContainer />
+      <img className="planetIcon" src="images/planet.png" alt="planetImage" />
       <div className="loginContainer__form">
-        <p className="loginContainer__form__text1">Login to your Account</p>
-        <p className="loginContainer__form__text2">
-          with your registered Email Address
-        </p>
-        <hr color="gray"></hr>
-        <label>Email address</label>
-        <input
-          className="loginContainer__form__emailInput"
-          placeholder="Enter email address"
-          onChange={(e) => {
-            setloginEmail(e.target.value);
-          }}
-        ></input>
-        <label htmlFor="">Forgot password?</label>
-        <input
-          className="loginContainer__form__passwordInput"
-          placeholder="Password"
-          onChange={(e) => {
-            setloginPassword(e.target.value);
-          }}
-        ></input>
-        <button className="loginButton" onClick={login}>
-          Login
-        </button>
-        <p className="loginContainer__form__hr">Or</p>
-        <button className="googleButton" onClick={signInWithGoogle}>
-          Login with Google
-        </button>
-        <div style={{ textAlign: "right" }}>
-          Not a member?{" "}
-          <Link style={{ color: "red", fontWeight: "bolder" }} to={"/host"}>
-            Register!
-          </Link>
+        <img className="starIcon" src="images/Star2.png" alt="starImage" />
+        <div className="logo">SpaceShoot!</div>
+        <div className="loginContentWrap">
+          <img className="telescopeIcon" src="images/Telescope.png" alt="telescopeImage" />
+          <div className="loginContent">
+            <p className="loginContainer__form__text">
+              Login to your Account
+            </p>
+            <input
+              className="loginContainer__form__emailInput"
+              placeholder="Email address"
+              onChange={(e) => {
+                setloginEmail(e.target.value);
+              }}
+            ></input>
+            <input
+              className="loginContainer__form__passwordInput"
+              placeholder="Password"
+              onChange={(e) => {
+                setloginPassword(e.target.value);
+              }}
+            ></input>
+            <div className="forgot">Forgot password?</div>
+            <button className="loginButton" onClick={login}>
+              Login
+            </button>
+            <p className="loginContainer__form__hr">Or</p>
+            <img className="googleButton" onClick={signInWithGoogle} src="images/icons8-google-500 1.png" alt="" />
+
+
+            <div style={{ textAlign: "right", marginRight: "25px" }}>
+              Not a member?{" "}
+              <Link style={{ color: "red", fontWeight: "700" }} to={"/host"}>
+                Register!
+              </Link>
+            </div>
+          </div>
         </div>
+
+
       </div>
     </div>
 
