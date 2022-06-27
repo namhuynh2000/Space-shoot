@@ -4,43 +4,13 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { auth } from "../../fire";
 import { useNavigate } from "react-router-dom";
-<<<<<<< HEAD
-import { useState } from "react";
-=======
 import { useEffect, useState } from "react";
->>>>>>> e66d68c1557c6869c1404823809d5355c97a02fe
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { selectHost, setReduxHost } from "../../redux/reducers/hostReducer";
 export default function LoginPage() {
   const navigate = useNavigate();
-<<<<<<< HEAD
-
-  const [loginEmail, setloginEmail] = useState("");
-  const [loginPassword, setloginPassword] = useState("");
-
-  const [user, setUser] = useState("");
-
-  const provider = new GoogleAuthProvider();
-
-  const signInWithGoogle = () => {
-    signInWithPopup(auth, provider).then((result) => {
-
-      const name = result.user.displayName;
-      const userId = result.user.uid;
-      const email = result.user.email;
-      navigate("/host");
-
-      localStorage.setItem("name", name);
-      localStorage.setItem("email", email);
-      localStorage.setItem("id", userId);
-    }).catch((error) => {
-      console.error(error);
-    });
-  }
-
-=======
   const dispatch = useDispatch();
   const host = useSelector(selectHost);
   const [loginEmail, setloginEmail] = useState("");
@@ -70,7 +40,6 @@ export default function LoginPage() {
       });
   };
 
->>>>>>> e66d68c1557c6869c1404823809d5355c97a02fe
   const login = async () => {
     try {
       const user = await signInWithEmailAndPassword(
@@ -80,38 +49,15 @@ export default function LoginPage() {
       );
       console.log(user);
       navigate("/host");
-<<<<<<< HEAD
-
-    }
-    catch (error) {
-      console.error(error.message);
-    }
-  }
-
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-
-  })
-=======
     } catch (error) {
       console.error(error.message);
     }
   };
->>>>>>> e66d68c1557c6869c1404823809d5355c97a02fe
 
   return (
     <div className="loginContainer">
       <ToastContainer />
       <div className="loginContainer__form">
-<<<<<<< HEAD
-        <p className="loginContainer__form__text">
-          Login to your Account
-        </p>
-
-        <input
-          className="loginContainer__form__emailInput"
-          placeholder="Email address"
-=======
         <p className="loginContainer__form__text1">Login to your Account</p>
         <p className="loginContainer__form__text2">
           with your registered Email Address
@@ -121,7 +67,6 @@ export default function LoginPage() {
         <input
           className="loginContainer__form__emailInput"
           placeholder="Enter email address"
->>>>>>> e66d68c1557c6869c1404823809d5355c97a02fe
           onChange={(e) => {
             setloginEmail(e.target.value);
           }}
