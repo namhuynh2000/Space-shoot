@@ -77,6 +77,7 @@ export default function LoginPage() {
             <input
               className="loginContainer__form__passwordInput"
               placeholder="Password"
+              type="password"
               onChange={(e) => {
                 setloginPassword(e.target.value);
               }}
@@ -90,8 +91,8 @@ export default function LoginPage() {
 
 
             <div style={{ textAlign: "right", marginRight: "25px" }}>
-              Not a member?{" "}
-              <Link style={{ color: "red", fontWeight: "700" }} to={"/host"}>
+              Not a member?{"   "}
+              <Link style={{ color: "red", fontWeight: "700" }} to={"/register"}>
                 Register!
               </Link>
             </div>
