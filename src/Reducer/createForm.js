@@ -2,6 +2,7 @@ const initState = {
   name: "",
   questions: [],
   userId: "",
+  imgPath: "",
 };
 
 export const initFunc = (state) => {
@@ -15,6 +16,7 @@ export const initFunc = (state) => {
           return { content: "" };
         }),
         correctAnswer: "",
+        imgPath: "",
       },
     ],
   };
@@ -99,9 +101,16 @@ const reducer = (state, action) => {
               return { content: "" };
             }),
             correctAnswer: "",
+            imgPath: "",
           },
         ],
         userId: "",
+      };
+
+    case "setUserId":
+      return {
+        ...state,
+        userId: action.payload.userId,
       };
     default:
       return state;

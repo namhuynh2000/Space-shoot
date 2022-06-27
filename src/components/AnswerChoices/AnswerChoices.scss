@@ -1,8 +1,7 @@
 .choices {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 1.2rem;
-  background-color: #dbdbdb;
+  grid-gap: 5rem;
   padding: 1rem 1.2rem;
 
   li {
@@ -15,19 +14,19 @@
     cursor: pointer;
 
     &:nth-child(1) {
-      background-color: red;
+      background-color: #bbd22a;
     }
 
     &:nth-child(2) {
-      background-color: blue;
+      background-color: #e51a1a;
     }
 
     &:nth-child(3) {
-      background-color: orange;
+      background-color: #08a5fd;
     }
 
     &:nth-child(4) {
-      background-color: green;
+      background-color: #08f14a;
     }
   }
 }

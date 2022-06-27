@@ -2,13 +2,41 @@ import React, { useCallback, useEffect, useReducer, useState } from "react";
 import "./index.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { reducer, initState, initFunc } from "../../../Reducer/createForm";
+import { useSelector } from "react-redux";
+import { selectHost } from "../../../redux/reducers/hostReducer";
+import socket from "../../../connections/socket";
 
 // Components
 const HostCreateQuizPage = ({ quiz }) => {
   const [state, dispatch] = useReducer(reducer, initState, initFunc);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [disable, setDisable] = useState(false);
+  const host = useSelector(selectHost);
   const navigate = useNavigate();
+  useEffect(() => {
+    const handleCreateGameResult = ({ message }) => {
+      if (message === "success") {
+        alert("Game created successfully");
+        navigate("/host");
+      } else {
+        alert("Game created failed");
+      }
+    };
+
+    socket.on("createGameResult", handleCreateGameResult);
+
+    return () => {
+      socket.off("createGameResult", handleCreateGameResult);
+    };
+  }, [navigate]);
+
+  useEffect(() => {
+    console.log(host);
+    dispatch({
+      type: "setUserId",
+      payload: { userId: host.id },
+    });
+  }, [host]);
 
   useEffect(() => {
     if (quiz)
@@ -95,12 +123,8 @@ const HostCreateQuizPage = ({ quiz }) => {
   };
 
   const _handleSaveClick = () => {
-    console.log(state);
+    socket.emit("createGame", state);
   };
-
-  // const _handleExitClick = () => {
-  //   navigate("/host");
-  // };
 
   const _handleDeleteQuestionClick = () => {
     dispatch({

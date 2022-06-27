@@ -61,7 +61,7 @@ export default function HomePage() {
           Enter
         </button>
 
-        <Link to={"/host"}>
+        <Link to={"/login"}>
           {" "}
           <button className="createButton">Host game</button>
         </Link>
