@@ -41,12 +41,19 @@ export default function LoginPage() {
 
   const login = async () => {
     try {
-      const user = await signInWithEmailAndPassword(
+      const result = await signInWithEmailAndPassword(
         auth,
         loginEmail,
         loginPassword
       );
-      console.log(user);
+      const host = {
+        name: result.user.displayName,
+        email: result.user.email,
+        id: result.user.uid,
+        photoURL: result.user.photoURL,
+      };
+      dispatch(setReduxHost(host));
+      // console.log(user);
       navigate("/host");
     } catch (error) {
       console.error(error.message);
