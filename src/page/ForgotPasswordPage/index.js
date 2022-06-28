@@ -39,25 +39,25 @@ function ForgotPassword() {
     // };
     const sendResetPass = async () => {
 
-            try {
-                const code = await sendPasswordResetEmail(
-                    auth,
-                    email,
-                    null
-                );
-                toast.success("Send link to email success!");
-            }
-            catch (error) {
-                console.log(error)
-                if (error.code === 'auth/user-not-found')
-                    // console.log(error.code);
-                    toast.error("Email does not exist!");
-                else if (error.code === 'auth/invalid-email')
-                    toast.error("Invalid email!");
-                else
-                    toast.error("Oop! Maybe the email is wrong!!!")
-            }
-            // sendPasswordResetEmail
+        try {
+            const code = await sendPasswordResetEmail(
+                auth,
+                email,
+                null
+            );
+            toast.success("Send link to email success!");
+        }
+        catch (error) {
+            console.log(error)
+            if (error.code === 'auth/user-not-found')
+                // console.log(error.code);
+                toast.error("Email does not exist!");
+            else if (error.code === 'auth/invalid-email')
+                toast.error("Invalid email!");
+            else
+                toast.error("Oop! Maybe the email is wrong!!!")
+        }
+        // sendPasswordResetEmail
 
     }
 
@@ -67,8 +67,9 @@ function ForgotPassword() {
             <img className="planetIcon" src="images/planet.png" alt="planetImage" />
             <div className="forgotForm">
                 <img className="starIcon" src="images/Star2.png" alt="starImage" />
-
-                <div className="logo">SpaceShoot!</div>
+                <Link to="/">
+                    <div className="logo">SpaceShoot!</div>
+                </Link>
                 <div className="title">Forgot password?</div>
                 <div className="prompt">Don't worry! Enter your email we will send the link to Reset password via email</div>
                 <input
@@ -79,7 +80,6 @@ function ForgotPassword() {
                         setEmail(e.target.value);
                     }}
                 ></input>
-
 
                 <button className="loginButton" onClick={sendResetPass}>
                     Send

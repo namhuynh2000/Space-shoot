@@ -6,6 +6,9 @@ import "./index.scss";
 import { selectHost } from "../../../redux/reducers/hostReducer";
 import { useSelector } from "react-redux";
 import User from "../../../components/User/User";
+import { BiAddToQueue } from 'react-icons/bi';
+import { HiOutlinePlay } from 'react-icons/hi';
+import { TiDeleteOutline } from 'react-icons/ti'
 
 
 export default function HostPage() {
@@ -38,47 +41,50 @@ export default function HostPage() {
     navigate(`/host/lobby/?quizId=${id}`);
   };
 
+  console.log(quizList);
+
 
   return (
     <div className="hostContainer">
       <div className="logoSlave">SpaceShoot!</div>
-      <User className="user"/>
-      {/* <div className="user">
-        <div className="user-avt">
-          <img src={host.photoURL} alt="avatar" />
+      <User className="user" />
+      <div className="listQuizWrap">
+        <div className="header">
+          <div className="numberQuiz">Total Quizs <span>{quizList.length}</span></div>
+          <div className="title">List Quizs</div>
+          <Link to={"/host/create"}>
+            <button className="createButton">
+              <BiAddToQueue />
+              Create Quiz</button>
+          </Link>
         </div>
-        <div className="user-name">
-          {host.name}
+        <div className="listQuiz">
+          <ul className="myList">
+            {quizList &&
+              quizList.map((item) => (
+                <li
+                  className="quizDetail"
+                  key={item._id}
+                >
+                  <img
+                    className="imgQuiz"
+                    src={item.imgPath}
+                    alt="background"
+                  ></img>
+                  <div className="contentQuiz">
+                    <Link to="/host/edit">
+                      <div className="quizName">{item.name}</div>
+                    </Link>
+                    <div className="quizButton">
+                      <div className="playBtn" onClick={() => _handleClickToHostGame(item._id)}><HiOutlinePlay />Play</div>
+                      <div className="deleteBtn"><TiDeleteOutline />Delete</div>
+                    </div>
+                  </div>
+                </li>
+              ))}
+          </ul>
         </div>
-      </div> */}
-      <Link className="linkToCreate" to={"/host/create"}>
-        <img
-          className="imgCreate"
-          alt="quizgame Backgroud"
-          src="https://previews.123rf.com/images/olegback/olegback2010/olegback201000068/157631503-.jpg"
-        ></img>
-        <button className="createButton">Create game</button>
-      </Link>
-
-      <h2>Quiz list</h2>
-
-      <ul className="myList">
-        {quizList &&
-          quizList.map((item) => (
-            <li
-              className="myQuizList"
-              key={item._id}
-              onClick={() => _handleClickToHostGame(item._id)}
-            >
-              <img
-                className="imgQuiz"
-                src="https://cdn.wallpapersafari.com/94/39/wrGnD8.jpg"
-                alt="background"
-              ></img>
-              <p className="quizName">{item.name}</p>
-            </li>
-          ))}
-      </ul>
+      </div>
     </div>
   );
 }

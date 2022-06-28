@@ -85,7 +85,9 @@ export default function LoginPage() {
       <img className="planetIcon" src="images/planet.png" alt="planetImage" />
       <div className="loginContainer__form">
         <img className="starIcon" src="images/Star2.png" alt="starImage" />
-        <div className="logo">SpaceShoot!</div>
+        <Link to='/'>
+          <div className="logo">SpaceShoot!</div>
+        </Link>
         <div className="loginContentWrap">
           <img className="telescopeIcon" src="images/Telescope.png" alt="telescopeImage" />
           <div className="loginContent">

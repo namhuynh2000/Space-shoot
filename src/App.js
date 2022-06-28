@@ -107,6 +107,14 @@ function App() {
               </RequireAuth>
             }
           />
+          <Route
+            path="/host/edit"
+            element={
+              <RequireAuth>
+                <HostCreateQuizPage />
+              </RequireAuth>
+            }
+          />
         </Routes>
       </Router>
     </div>

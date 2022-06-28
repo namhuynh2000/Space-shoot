@@ -69,8 +69,10 @@ export default function RegisterPage() {
       <img className="planetIcon" src="images/planet.png" alt="planetImage" />
       <div className="registerForm">
         <img className="starIcon" src="images/Star2.png" alt="starImage" />
+        <Link to="/">
+          <div className="logo">SpaceShoot!</div>
 
-        <div className="logo">SpaceShoot!</div>
+        </Link>
         <div className="title">Signup to create Account</div>
         <input
           className="registerContainer__form__emailInput"
