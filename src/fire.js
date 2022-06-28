@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getStorage } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 
 
@@ -17,6 +18,8 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const fire = initializeApp(firebaseConfig);
+
+export const storage=getStorage(fire);
 
 export const auth = getAuth(fire);
 
