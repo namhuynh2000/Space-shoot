@@ -49,6 +49,8 @@ export default function HostPage() {
       <div className="logoSlave">SpaceShoot!</div>
       <User className="user" />
       <div className="listQuizWrap">
+        <img className="planetIcon" src="images/Planet-1.png" alt="planetIcon" />
+        <img className="starIcon" src="images/Star2.png" alt="starIcon" />
         <div className="header">
           <div className="numberQuiz">Total Quizs <span>{quizList.length}</span></div>
           <div className="title">List Quizs</div>
