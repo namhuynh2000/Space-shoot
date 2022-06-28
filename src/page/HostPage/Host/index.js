@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import "./index.scss";
 import { selectHost } from "../../../redux/reducers/hostReducer";
 import { useSelector } from "react-redux";
+import User from "../../../components/User/User";
+
 
 export default function HostPage() {
   const [quizList, setQuizList] = useState([]);
@@ -36,8 +38,19 @@ export default function HostPage() {
     navigate(`/host/lobby/?quizId=${id}`);
   };
 
+
   return (
     <div className="hostContainer">
+      <div className="logoSlave">SpaceShoot!</div>
+      <User className="user"/>
+      {/* <div className="user">
+        <div className="user-avt">
+          <img src={host.photoURL} alt="avatar" />
+        </div>
+        <div className="user-name">
+          {host.name}
+        </div>
+      </div> */}
       <Link className="linkToCreate" to={"/host/create"}>
         <img
           className="imgCreate"

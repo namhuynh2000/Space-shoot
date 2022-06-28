@@ -3,8 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   host: {
     id: "",
-    imagePath: "",
+    photoURL: "",
     name: "",
+    email: "",
   },
 };
 
@@ -15,11 +16,21 @@ export const hostSlice = createSlice({
     setReduxHost: (state, action) => {
       state.host = action.payload;
     },
+    clearHost: (state, action) => {
+      state.host = {
+        id: "",
+        photoURL: "",
+        name: "",
+        email: "",
+      };
+    }
   },
 });
 
+
+
 // Action creators are generated for each case reducer function
-export const { setReduxHost } = hostSlice.actions;
+export const { setReduxHost, clearHost } = hostSlice.actions;
 
 export const selectHost = (state) => state.host.host;
 export default hostSlice.reducer;

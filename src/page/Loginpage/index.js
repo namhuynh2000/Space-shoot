@@ -106,7 +106,7 @@ export default function LoginPage() {
                 }}
               >
               </input>
-              <img className="eyeIcon" src={typePassword === 'password' ? 'images/eye-close.png' : 'images/eye-open.png'} alt="" onClick={eyeHandle} />
+              <img className="eyeIcon" src={typePassword === 'password' ? 'images/eye-close.png' : 'images/eye-open.png'} alt="eyeIcon" onClick={eyeHandle} />
             </div>
             <Link to={"/forgot"}>
               <div className="forgot">Forgot password?</div>

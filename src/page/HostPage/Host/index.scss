@@ -1,5 +1,5 @@
 .hostContainer{
-    // background-image: url("../../../../public/images/LinearBackground.png");
+    background-image: url("../../../../public/images/background-homepage.png");
     background-color: #ccc;
     background-repeat: no-repeat;
     background-position: center;
@@ -7,15 +7,21 @@
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    padding:1%;
 
-
-    h2{
-        text-align: center;
-        font-size: 2.4rem;
-        color:#000;
-        margin-top:2rem;
+    .logoSlave {
+        display: inline-block;
+        font-family: 'Jolly Lodger', cursive;
+        font-size: 100px;
+        color: #0188A5;
+        margin-left: 40px;
     }
+
+    .user{
+        float: right;
+        margin: 20px;
+        margin-right: 50px;
+    }
+
     .linkToCreate:hover
     {
         box-shadow: 0 1px 2px rgba(0,0,0,0.15);

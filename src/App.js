@@ -28,15 +28,15 @@ import { auth } from "./fire";
 import { onAuthStateChanged } from "firebase/auth";
 function App() {
   const dispatch = useDispatch();
-  // onAuthStateChanged(auth, (currentUser) => {
-  //   const host = {
-  //     name: currentUser.displayName,
-  //     email: currentUser.email,
-  //     id: currentUser.uid,
-  //     photoURL: currentUser.photoURL,
-  //   };
-  //   dispatch(setReduxHost(host));
-  // });
+  onAuthStateChanged(auth, (currentUser) => {
+    const host = {
+      name: currentUser.displayName,
+      email: currentUser.email,
+      id: currentUser.uid,
+      photoURL: currentUser.photoURL,
+    };
+    dispatch(setReduxHost(host));
+  });
 
   return (
     <div className="App">

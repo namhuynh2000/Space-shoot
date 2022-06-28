@@ -91,7 +91,7 @@ export default function RegisterPage() {
               setRegisterPassword(e.target.value);
             }}
           ></input>
-          <img className="eyeIcon" src={typePassword === 'password' ? 'images/eye-close.png' : 'images/eye-open.png'} alt="" onClick={eyeHandle} />
+          <img className="eyeIcon" src={typePassword === 'password' ? 'images/eye-close.png' : 'images/eye-open.png'} alt="eyeIcon" onClick={eyeHandle} />
         </div>
         <input
           className="registerContainer__form__passwordInput"
