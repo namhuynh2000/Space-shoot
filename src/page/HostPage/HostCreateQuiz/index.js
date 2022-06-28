@@ -19,6 +19,12 @@ import { ReactComponent as Polygon } from "../../../Icons/Polygon.svg";
 import { ReactComponent as Rectangle } from "../../../Icons/Rectangle.svg";
 import { ReactComponent as Rectangle2 } from "../../../Icons/Rectangle2.svg";
 import { ReactComponent as Ellipse } from "../../../Icons/Ellipse.svg";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { TiDeleteOutline } from "react-icons/ti";
+import { ReactComponent as PlusIcon } from "../../../Icons/plus-circle.svg";
+import { ReactComponent as DeleteIcon } from "../../../Icons/x-circle.svg"
+
+
 // Components
 const HostCreateQuizPage = ({ quiz }) => {
   const [state, dispatch] = useReducer(reducer, initState, initFunc);
@@ -31,6 +37,8 @@ const HostCreateQuizPage = ({ quiz }) => {
   const imgRef = useRef(null);
 
   const inputFileRef = useRef(null);
+
+  const storage = getStorage();
 
   useEffect(() => {
     const handleCreateGameResult = ({ message }) => {
@@ -166,11 +174,17 @@ const HostCreateQuizPage = ({ quiz }) => {
       console.log([inputFileRef.current]);
       const file = inputFileRef.current.files[0];
       const url = URL.createObjectURL(file);
-      console.log(url);
+      const storageRef = ref(storage, `newfolder/${file.name}`);
+      console.log(file)
+      uploadBytes(storageRef, file).then((snapshot) => {
+        console.log('Uploaded a blob or file!');
+        console.log(snapshot);
+      });
       dispatch({
         type: "updateQuestionImg",
         payload: { questionIndex, imgPath: url },
       });
+      // URL.revokeObjectURL(url);
     }
 
     console.log("Importerrrrrr");
@@ -212,7 +226,7 @@ const HostCreateQuizPage = ({ quiz }) => {
 
         <div className="host-create__body">
           <div className="host-create__body__header">
-            <div className="host-create__bottom">
+            {/* <div className="host-create__bottom">
               <ul className="host-create__questions-list">
                 {state.questions.map((ques, index) => (
                   <li
@@ -228,6 +242,27 @@ const HostCreateQuizPage = ({ quiz }) => {
                   </li>
                 ))}
               </ul>
+            </div> */}
+            <div className="numberQuestion">
+              Question <span>{questionIndex + 1} / {state.questions.length}</span>
+
+
+                <ul className="anotherQuestion">
+                  {state.questions.map((ques, index) => (
+                    <li
+                      key={index}
+                      onClick={() => _handleQuestionItemClick(index)}
+                      className={
+                        index === questionIndex
+                          ? "numberAnotherQuestion numberAnotherQuestion--active"
+                          : "numberAnotherQuestion"
+                      }
+                    >
+                      {index + 1}
+                    </li>
+                  ))}
+                </ul>
+
             </div>
             <input
               type="text"
@@ -246,6 +281,8 @@ const HostCreateQuizPage = ({ quiz }) => {
                 }
                 onClick={_handleAddQuestionClick}
               >
+                <PlusIcon />
+
                 Add
               </button>
 
@@ -257,6 +294,7 @@ const HostCreateQuizPage = ({ quiz }) => {
                 }
                 onClick={_handleDeleteQuestionClick}
               >
+                <DeleteIcon />
                 Delete
               </button>
             </div>
@@ -269,7 +307,7 @@ const HostCreateQuizPage = ({ quiz }) => {
                   ? state.questions[questionIndex].imgPath
                   : "/images/importImage.png"
               }
-              alt="hinhf ne"
+              alt="imageQuestion"
               ref={imgRef}
               onClick={_handleImgImport}
             />
@@ -281,7 +319,7 @@ const HostCreateQuizPage = ({ quiz }) => {
               {state.questions[questionIndex].choices.map((ans, index) => {
                 return (
                   <li key={index}>
-                    <div>
+                    <div className="logo">
                       {index === 0 && <Polygon></Polygon>}
                       {index === 1 && <Rectangle2></Rectangle2>}
                       {index === 2 && <Rectangle></Rectangle>}
@@ -304,7 +342,7 @@ const HostCreateQuizPage = ({ quiz }) => {
                         checked={
                           state.questions[questionIndex].correctAnswer &&
                           state.questions[questionIndex].correctAnswer ===
-                            ans.content
+                          ans.content
                         }
                         onChange={_handleCorrectAnswerInputOnChange}
                       />

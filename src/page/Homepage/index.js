@@ -52,6 +52,7 @@ export default function HomePage() {
         <img className="cometIcon" src="images/Comet.png" alt="cometImage" />
         <div className="logo">SpaceShoot!</div>
         <JoinInput
+          className="playerName"
           label={"Player name"}
           value={playerName}
           onChangeHandle={_handlePlayerNameInput}
