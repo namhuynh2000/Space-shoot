@@ -31,6 +31,7 @@ const HostCreateQuizPage = ({ quiz }) => {
   const [disable, setDisable] = useState(false);
   const [imgUpload, setImgUpload] = useState([]);
   const [imgUrl, setImgUrl] = useState([]);
+  const [localUrl, setLocalUrl] = useState();
   const host = useSelector(selectHost);
   const navigate = useNavigate();
 
@@ -286,7 +287,7 @@ const HostCreateQuizPage = ({ quiz }) => {
             <img
               src={
                 state.questions[questionIndex].imgPath
-                  ? state.questions[questionIndex].imgPath
+                  ? {localUrl}
                   : "/images/importImage.png"
               }
               alt="hinhf ne"
