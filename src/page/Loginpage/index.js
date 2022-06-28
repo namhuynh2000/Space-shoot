@@ -18,6 +18,9 @@ export default function LoginPage() {
   const [typePassword, setTypePassword] = useState("password");
 
   const provider = new GoogleAuthProvider();
+  provider.setCustomParameters({
+    prompt: 'select_account'
+  });
 
   useEffect(() => {
     if (host.id) navigate("/host");
