@@ -1,43 +1,172 @@
 .host-create {
-  background-color: #f2f2f1;
+  width: 100vw;
   height: 100vh;
-  .host-create__header-buttons {
-    display: flex;
-    gap: 1.2rem;
-  }
-  .host-create__btn {
-    background-color: #1260be;
-    color: #fff;
-    border: none;
-    padding: 1.2rem 1.6rem;
-    font-size: 1.6rem;
-    display: block;
-    cursor: pointer;
-  }
+  background-image: url("../../../../public/images/background-homepage.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+
+
+  
 
   .disable{
     pointer-events: none;
     opacity: 0.5;
     
   }
-  .host-create__container {
+
+
+  .logoSlave {
+    display: inline-block;
+    font-family: 'Jolly Lodger', cursive;
+    font-size: 100px;
+    color: #0188A5;
+    margin-left: 40px;
+}
+
+.user {
+    float: right;
+    margin: 20px;
+    margin-right: 50px;
+}
+  // .host-create__container {
+  //   position: absolute;
+  //   top: 50%;
+  //   width: 85vw;
+  //   height: 80vh;
+  //   left: 53%;
+  //   transform: translate(-50%, -50%);
+  //   text-align: center;
+  //   padding: 40px;
+  //   padding-top: 10px;
+  //   display: inline-block;
+  //   background-color: #FF9E7D;
+  //   border-radius: 80px;
+  //   border-width: 15px;
+  //   border-color: #FE546F;
+  //   border-style: solid;
+
     .host-create__header {
-      padding: 1.2rem;
+      padding: 2rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
       display: flex;
+      height: 8rem;
       align-items: center;
-      justify-content: space-between;
+      justify-content: space-around;
+
       .host-create__quiz-name {
+        width: 50%;
         padding: 0.8rem 1.6rem;
         font-size: 1.6rem;
         outline: #1260be;
       }
+
+      .host-create__header-buttons {
+        display: flex;
+
+        gap: 1.2rem;
+        
+        .host-create__btn{
+          color: #fff;
+          background-color: #01CBCF;
+          border-radius: 0.5rem;
+          padding: 0.5rem;
+          width: 10rem;
+          display: flex;
+          gap: 1rem;
+          justify-content: center;
+
+        }
+
+        .host-exit__btn{
+          color: #fff;
+          background-color: #DF0772;
+          border-radius: 0.5rem;
+          padding: 0.5rem;
+          width: 9rem;
+          display: flex;
+          gap: 1rem;
+          justify-content: center;
+        }
+      }
     }
 
     .host-create__body {
-      padding: 2rem 0;
+      background-color: #FFD080;
+      padding: 1rem;
+      .host-create__body__header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .host-create__bottom {  
+          background-color: #fff;
+          padding: 2rem 1.2rem;
+    
+          .host-create__questions-list {
+            display: flex;
+            gap: 2rem;
+            li {
+              padding: 1.2rem 1.4rem;
+              background-color: #dbdbdd;
+              cursor: pointer;
+              color: #000;
+            }
+    
+            .host-create__questions-item--active {
+              box-shadow: 0px 0px 0px 3px #1260be;
+            }
+          }
+        }
+        .host-create__header-buttons {
+          display: flex;
+          gap: 1.2rem;
+          
+          .exitButton{
+            color: red;
+          }
+
+        }
+        .host-create__btn {
+          background-color: #1260be;
+          color: #fff;
+          border: none;
+          padding: 1.2rem 1.6rem;
+          font-size: 1.6rem;
+          display: block;
+          cursor: pointer;
+        }
+
+      }
+      .host-create__image
+      {
+        margin-bottom: 1rem;
+        position: relative;
+    
+        img{
+          display: block;
+          margin: auto;
+          height: 20rem;
+          width: 30rem;
+          object-fit: cover;
+          cursor: pointer;
+        }
+        input{
+          position: absolute;
+          visibility:hidden;
+          top:0%;
+          left:50%;
+          transform: translate(-50%);
+          z-index: 99;
+          height: 20rem;
+          width: 30rem;
+        }
+      }
       .host-create__question-name {
         display: block;
-        width: 100%;
+        width: 50%;
         border: none;
         outline: none;
         background-color: #fff;
@@ -47,10 +176,45 @@
         box-shadow: 1px 3px 5px 2px #dbdbdd;
       }
 
+      .host-create__question-button{
+        display: flex;
+        gap: 1.2rem;
+        .host-create__btn-add{
+          border: none;
+          color: #fff;
+          background-color: #01CBCF;
+          border-radius: 0.5rem;
+          padding: 0.5rem;
+          display: flex;
+          gap: 1rem;
+          width: 6rem;
+          justify-content: center;
+          cursor: pointer;
+
+        }
+        .host-create__btn-delete{
+          border: none;
+          color: #fff;
+          background-color: #DF0772;
+          border-radius: 0.5rem;
+          padding: 0.5rem;
+          width: 7rem;
+          display: flex;
+          gap: 1rem;
+          justify-content: center;
+          cursor: pointer;
+
+        }
+      }
+
       .host-create__answers {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 1.4rem;
+
+        li>div{
+          cursor: pointer;
+        }
 
         li {
           display: flex;
@@ -58,6 +222,7 @@
           align-items: center;
           justify-content: space-between;
           color: #fff;
+
 
           .host-create__answers-content {
             color: #fff;
@@ -90,42 +255,28 @@
             }
           }
           &:nth-child(1) {
-            background-color: red;
+            background-color: #F4323C;
+            border-radius: 1rem;
           }
 
           &:nth-child(2) {
-            background-color: blue;
+            background-color: #0B65D2;
+            border-radius: 1rem;
           }
 
           &:nth-child(3) {
-            background-color: orange;
+            background-color: #DE9B00;
+            border-radius: 1rem;
           }
 
           &:nth-child(4) {
-            background-color: green;
+            background-color: #237D09;
+            border-radius: 1rem;
           }
         }
       }
     }
 
-    .host-create__bottom {
-      background-color: #fff;
-      padding: 2rem 1.2rem;
-
-      .host-create__questions-list {
-        display: flex;
-        gap: 2rem;
-        li {
-          padding: 1.2rem 1.4rem;
-          background-color: #dbdbdd;
-          cursor: pointer;
-          color: #000;
-        }
-
-        .host-create__questions-item--active {
-          box-shadow: 0px 0px 0px 3px #1260be;
-        }
-      }
-    }
-  }
+    
+  
 }

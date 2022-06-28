@@ -70,6 +70,13 @@ const deleteQuestion = (state, action) => {
   return { ...state, questions: questions };
 };
 
+const updateQuestionImg=(state, action) => {
+  const questions = [...state.questions];
+  questions[action.payload.questionIndex].imgPath = action.payload.imgPath;
+  console.log(questions);
+  return { ...state, questions: questions };
+}
+
 const reducer = (state, action) => {
   switch (action.type) {
     case "init":
@@ -107,6 +114,9 @@ const reducer = (state, action) => {
         userId: "",
       };
 
+      case "updateQuestionImg":
+        return updateQuestionImg(state, action);
+
     case "setUserId":
       return {
         ...state,
@@ -114,6 +124,7 @@ const reducer = (state, action) => {
       };
     default:
       return state;
+
   }
 };
 
