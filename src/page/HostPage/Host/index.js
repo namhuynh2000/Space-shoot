@@ -8,7 +8,8 @@ import { useSelector } from "react-redux";
 import User from "../../../components/User/User";
 import { BiAddToQueue } from 'react-icons/bi';
 import { HiOutlinePlay } from 'react-icons/hi';
-import { TiDeleteOutline } from 'react-icons/ti'
+import { TiDeleteOutline } from 'react-icons/ti';
+import FrameHost from "../../../components/FrameHost/FrameHost";
 
 
 export default function HostPage() {
@@ -41,14 +42,48 @@ export default function HostPage() {
     navigate(`/host/lobby/?quizId=${id}`);
   };
 
-  console.log(quizList);
-
-
   return (
     <div className="hostContainer">
       <div className="logoSlave">SpaceShoot!</div>
       <User className="user" />
-      <div className="listQuizWrap">
+      <FrameHost>
+        <div className="header">
+          <div className="numberQuiz">Total Quizs <span>{quizList.length}</span></div>
+          <div className="title">List Quizs</div>
+          <Link to={"/host/create"}>
+            <button className="createButton">
+              <BiAddToQueue />
+              Create Quiz</button>
+          </Link>
+        </div>
+        <div className="listQuiz">
+          <ul className="myList">
+            {quizList &&
+              quizList.map((item) => (
+                <li
+                  className="quizDetail"
+                  key={item._id}
+                >
+                  <img
+                    className="imgQuiz"
+                    src={item.imgPath}
+                    alt="background"
+                  ></img>
+                  <div className="contentQuiz">
+                    <Link to="/host/edit">
+                      <div className="quizName">{item.name}</div>
+                    </Link>
+                    <div className="quizButton">
+                      <div className="playBtn" onClick={() => _handleClickToHostGame(item._id)}><HiOutlinePlay />Play</div>
+                      <div className="deleteBtn"><TiDeleteOutline />Delete</div>
+                    </div>
+                  </div>
+                </li>
+              ))}
+          </ul>
+        </div>
+      </FrameHost>
+      {/* <div className="listQuizWrap">
         <img className="planetIcon" src="images/Planet-1.png" alt="planetIcon" />
         <img className="starIcon" src="images/Star2.png" alt="starIcon" />
         <div className="header">
@@ -86,7 +121,7 @@ export default function HostPage() {
               ))}
           </ul>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
