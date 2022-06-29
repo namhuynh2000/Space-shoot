@@ -62,7 +62,7 @@ export default function PlayerWaitingPage() {
       <div className="title">SpaceShoot!</div>
       <div className="niceText">See your name on the screen?</div>
       <div className="niceText">Waiting for other player!</div>
-      <RingLoader color="#FFD080" size="10rem"></RingLoader>
+      <RingLoader className="animationImg" color="#FFD080" size="10rem"></RingLoader>
       <img className="planetIcon" src="/images/planet.png" alt="planetImage" />
       <img className="roverIcon" src="/images/Rover.png" alt="roverImage" />
     </div>

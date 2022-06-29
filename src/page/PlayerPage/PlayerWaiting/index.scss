@@ -19,6 +19,18 @@
         left:5%;
     }
 
+    .animationImg{
+        span{
+            &:nth-of-type(1){
+                border-color: #FE546F!important;
+            }
+            &:nth-of-type(2){
+                border-color: #01CBCF!important;
+            }
+        }
+
+    }
+
     .niceText{
         font-family: 'Jolly Lodger', cursive;
         font-size: 60px;
