@@ -9,7 +9,9 @@ import {
   setReduxPlayerName,
   setReduxPlayerRoom,
 } from "../../../redux/reducers/playerReducer";
-import { ToastContainer, toast } from "react-toastify";
+import "./index.scss"
+import RingLoader from "react-spinners/RingLoader"
+
 
 export default function PlayerWaitingPage() {
   const [searchParams] = useSearchParams();
@@ -57,9 +59,12 @@ export default function PlayerWaitingPage() {
   }, []);
   return (
     <div className="homeContainer">
-      <div>Wating...</div>
-      <img className="planetIcon" src="images/planet.png" alt="planetImage" />
-      <img className="roverIcon" src="images/Rover.png" alt="roverImage" />
+      <div className="title">SpaceShoot!</div>
+      <div className="niceText">See your name on the screen?</div>
+      <div className="niceText">Waiting for other player!</div>
+      <RingLoader color="#FFD080" size="10rem"></RingLoader>
+      <img className="planetIcon" src="/images/planet.png" alt="planetImage" />
+      <img className="roverIcon" src="/images/Rover.png" alt="roverImage" />
     </div>
   );
 }

@@ -1,0 +1,169 @@
+.hostContainer {
+  background-image: url("../../../../public/images/background-homepage.png");
+  background-color: #ccc;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+
+  .logoSlave {
+      display: inline-block;
+      font-family: 'Jolly Lodger', cursive;
+      font-size: 100px;
+      color: #0188A5;
+      margin-left: 40px;
+  }
+
+  .user {
+      float: right;
+      margin: 20px;
+      margin-right: 50px;
+  }
+
+  .questionDetail{
+    .frameWrap{
+      flex-direction: row;
+      gap:5%;
+    }
+
+    .detailInfo{
+      display: flex;
+      flex-direction: column;
+      width: 30%;
+
+      .detailInfo__image{
+        height: 25rem;
+        margin-bottom: 1rem;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        border-radius: 2rem;
+
+
+      }
+
+      p{
+        font-weight: bolder;
+        color: #3E3264;
+        font-family: 'Poppins';
+
+      }
+
+      .detailInfo__buttons{
+
+        margin-top: 3rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 2rem;
+
+
+        .playButton:hover{
+          cursor: pointer;
+          opacity: 70%;
+        }
+
+        .playButton {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 5px;
+          background-color: #01CBCF;
+          padding: 5px 10px;
+          border-radius: 5px;
+          cursor: pointer;
+
+          svg {
+              font-size: 25px;
+          }
+        }
+
+        .deleteButton:hover{
+          cursor: pointer;
+          opacity: 70%;
+        }
+
+        .deleteButton {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 5px;
+          background-color: #DF0772;
+          padding: 5px 10px;
+          border-radius: 5px;
+
+          svg {
+              font-size: 25px;
+          }
+        }
+      }
+    }
+
+    .listQuestion{
+      display: flex;
+      flex-direction: column;
+      width: 65%;
+      background-color: #FFD080;
+      border-radius: 1.5rem;
+      height: 100%;
+      padding: 2rem;
+      gap: 1rem;
+
+      .listQuestion__header{
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        gap: 3rem;
+
+        p{
+          color: #3E3264;
+          font-weight: bolder;
+          font-family: 'Poppins';
+          font-size: 2.5rem;
+
+        }
+        .listQuestion__header__addIcon{
+          cursor: pointer;
+          color: #DF0772;
+        }
+      }
+      .listQuestion__list
+      {
+        display: flex;
+        flex-direction: column;
+        overflow-y:auto;
+
+        gap: 1rem;
+        .listQuestion__list__item{
+          display: flex;
+          flex-direction: row;
+          height: 8rem;
+          background-color: #D9D9D9;
+          align-items: center;
+          border-radius: 0.5rem;
+          padding-left: 1rem;
+          padding-right: 1rem;
+          gap: 1rem;
+
+          img{
+            height: 100%;
+            width: 12rem;
+          }
+          p{
+            font-family: "Poppins";
+          }
+
+          .listQuestion__list__item__deleteIcon:hover{
+            cursor: pointer;
+            opacity: 70%;
+          }
+
+          .listQuestion__list__item__deleteIcon{
+            margin-left: auto;
+          }
+        }
+      }
+    }
+  }
+}

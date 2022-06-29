@@ -10,6 +10,7 @@ import {
   HomePage,
   HostPage,
   HostQuestionPage,
+  HostQuestionDetailPage,
   HostScoreboardPage,
   HostWaiting,
   PlayerQuestionPage,
@@ -80,6 +81,14 @@ function App() {
               <RequireAuth>
                 <HostQuestionPage />
               </RequireAuth>
+            }
+          />
+
+          <Route
+            path="/questionDetail"
+            element={ 
+            <HostQuestionDetailPage />
+
             }
           />
 

@@ -1,24 +1,30 @@
 .homeContainer {
-    background: url("../../../public/images/background-homepage.png") no-repeat center;
+    background: url("../../../../public/images/background-homepage.png") no-repeat center;
     background-size: cover;
     width: 100vw;
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
 
-    .tittle{
-        color: red;
-
-    }
-
-    .logoSlave {
-        display: inline-block;
+    .title {
         font-family: 'Jolly Lodger', cursive;
         font-size: 100px;
         color: #0188A5;
-        margin-left: 40px;
+        margin-bottom: 3rem;
+        position:absolute;
+        top:0;
+        left:5%;
     }
+
+    .niceText{
+        font-family: 'Jolly Lodger', cursive;
+        font-size: 60px;
+        color: #fff;
+    }
+
     
     .planetIcon {
         position: absolute;
