@@ -1,0 +1,44 @@
+.homeContainer {
+    background: url("../../../public/images/background-homepage.png") no-repeat center;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .tittle{
+        color: red;
+
+    }
+
+    .logoSlave {
+        display: inline-block;
+        font-family: 'Jolly Lodger', cursive;
+        font-size: 100px;
+        color: #0188A5;
+        margin-left: 40px;
+    }
+    
+    .planetIcon {
+        position: absolute;
+        width: 300px;
+        height: auto;
+        right: 0;
+        top: 0;
+    }
+
+    .roverIcon {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        bottom: 10px;
+        left: 20px;
+    }
+
+
+
+
+
+
+}
