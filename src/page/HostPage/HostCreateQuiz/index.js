@@ -19,9 +19,12 @@ import { ReactComponent as Polygon } from "../../../Icons/Polygon.svg";
 import { ReactComponent as Rectangle } from "../../../Icons/Rectangle.svg";
 import { ReactComponent as Rectangle2 } from "../../../Icons/Rectangle2.svg";
 import { ReactComponent as Ellipse } from "../../../Icons/Ellipse.svg";
+import { TiDeleteOutline } from "react-icons/ti";
+import { ReactComponent as PlusIcon } from "../../../Icons/plus-circle.svg";
+import { ReactComponent as DeleteIcon } from "../../../Icons/x-circle.svg"
 import { storage } from "../../../fire";
-import {ref, uploadBytes} from "firebase/storage"
-import {v4} from "uuid"
+import { ref, uploadBytes } from "firebase/storage"
+import { v4 } from "uuid"
 import { toast } from "react-toastify";
 
 // Components
@@ -56,7 +59,7 @@ const HostCreateQuizPage = ({ quiz }) => {
   }, [navigate]);
 
   useEffect(() => {
-    console.log(host,1);
+    console.log(host, 1);
     dispatch({
       type: "setUserId",
       payload: { userId: host.id },
@@ -149,10 +152,9 @@ const HostCreateQuizPage = ({ quiz }) => {
 
   const _handleSaveClick = () => {
     console.log(imgUpload);
-    for (var i=0;i<imgUpload.length;i++)
-    {    
+    for (var i = 0; i < imgUpload.length; i++) {
       const imageRef = ref(storage, imgUrl[i]);
-      uploadBytes( imageRef, imgUpload[i]).then(()=>{
+      uploadBytes(imageRef, imgUpload[i]).then(() => {
         alert("image uploaded");
       });
     }
@@ -183,12 +185,12 @@ const HostCreateQuizPage = ({ quiz }) => {
 
   const _handleLoadImg = () => {
     if (inputFileRef.current) {
-      
+
       console.log([inputFileRef.current.files[0]]);
-      
-      const imageUrl= 'images/'+inputFileRef.current.files[0].name+v4();
-      setImgUpload(imgUpload =>[...imgUpload,inputFileRef.current.files[0]]);   
-      setImgUrl(imgUrl => [...imgUrl,imageUrl]);
+
+      const imageUrl = 'images/' + inputFileRef.current.files[0].name + v4();
+      setImgUpload(imgUpload => [...imgUpload, inputFileRef.current.files[0]]);
+      setImgUrl(imgUrl => [...imgUrl, imageUrl]);
       dispatch({
         type: "updateQuestionImg",
         payload: { questionIndex, imgPath: imageUrl },
@@ -232,7 +234,28 @@ const HostCreateQuizPage = ({ quiz }) => {
 
         <div className="host-create__body">
           <div className="host-create__body__header">
-            <div className="host-create__bottom">
+            <div className="numberQuestion">
+              Question <span>{questionIndex + 1} / {state.questions.length}</span>
+
+
+              <ul className="anotherQuestion">
+                {state.questions.map((ques, index) => (
+                  <li
+                    key={index}
+                    onClick={() => _handleQuestionItemClick(index)}
+                    className={
+                      index === questionIndex
+                        ? "numberAnotherQuestion numberAnotherQuestion--active"
+                        : "numberAnotherQuestion"
+                    }
+                  >
+                    {index + 1}
+                  </li>
+                ))}
+              </ul>
+
+            </div>
+            {/* <div className="host-create__bottom">
               <ul className="host-create__questions-list">
                 {state.questions.map((ques, index) => (
                   <li
@@ -248,7 +271,7 @@ const HostCreateQuizPage = ({ quiz }) => {
                   </li>
                 ))}
               </ul>
-            </div>
+            </div> */}
             <input
               type="text"
               className="host-create__question-name"
@@ -266,6 +289,7 @@ const HostCreateQuizPage = ({ quiz }) => {
                 }
                 onClick={_handleAddQuestionClick}
               >
+                <PlusIcon />
                 Add
               </button>
 
@@ -277,9 +301,11 @@ const HostCreateQuizPage = ({ quiz }) => {
                 }
                 onClick={_handleDeleteQuestionClick}
               >
+                <DeleteIcon />
                 Delete
               </button>
             </div>
+
           </div>
 
           <div className="host-create__image">
@@ -289,7 +315,7 @@ const HostCreateQuizPage = ({ quiz }) => {
                   ? state.questions[questionIndex].imgPath
                   : "/images/importImage.png"
               }
-              alt="hinhf ne"
+              alt="imagesQuestion"
               ref={imgRef}
               onClick={_handleImgImport}
             />
@@ -301,7 +327,7 @@ const HostCreateQuizPage = ({ quiz }) => {
               {state.questions[questionIndex].choices.map((ans, index) => {
                 return (
                   <li key={index}>
-                    <div>
+                    <div className="logo">
                       {index === 0 && <Polygon></Polygon>}
                       {index === 1 && <Rectangle2></Rectangle2>}
                       {index === 2 && <Rectangle></Rectangle>}
@@ -324,7 +350,7 @@ const HostCreateQuizPage = ({ quiz }) => {
                         checked={
                           state.questions[questionIndex].correctAnswer &&
                           state.questions[questionIndex].correctAnswer ===
-                            ans.content
+                          ans.content
                         }
                         onChange={_handleCorrectAnswerInputOnChange}
                       />
