@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useReducer, useState, useRef } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useReducer,
+  useState,
+  useRef,
+} from "react";
 import "./index.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { reducer, initState, initFunc } from "../../../Reducer/createForm";
@@ -7,12 +13,12 @@ import { selectHost } from "../../../redux/reducers/hostReducer";
 import socket from "../../../connections/socket";
 import FrameHost from "../../../components/FrameHost/FrameHost";
 import User from "../../../components/User/User";
-import {ReactComponent as ExitLogo} from "../../../Icons/exitIcon.svg";
-import {ReactComponent as SaveLogo} from "../../../Icons/saveIcon.svg";
-import {ReactComponent as Polygon} from   "../../../Icons/Polygon.svg";
-import {ReactComponent as Rectangle} from   "../../../Icons/Rectangle.svg";
-import {ReactComponent as Rectangle2} from   "../../../Icons/Rectangle2.svg";
-import {ReactComponent as Ellipse} from   "../../../Icons/Ellipse.svg";
+import { ReactComponent as ExitLogo } from "../../../Icons/exitIcon.svg";
+import { ReactComponent as SaveLogo } from "../../../Icons/saveIcon.svg";
+import { ReactComponent as Polygon } from "../../../Icons/Polygon.svg";
+import { ReactComponent as Rectangle } from "../../../Icons/Rectangle.svg";
+import { ReactComponent as Rectangle2 } from "../../../Icons/Rectangle2.svg";
+import { ReactComponent as Ellipse } from "../../../Icons/Ellipse.svg";
 // Components
 const HostCreateQuizPage = ({ quiz }) => {
   const [state, dispatch] = useReducer(reducer, initState, initFunc);
@@ -153,27 +159,28 @@ const HostCreateQuizPage = ({ quiz }) => {
     }
 
     console.log("Importerrrrrr");
-
-  }
+  };
 
   const _handleLoadImg = () => {
     if (inputFileRef.current) {
-        console.log([inputFileRef.current]);
-        const file = inputFileRef.current.files[0];
-        const url = URL.createObjectURL(file);
-        console.log(url);
-        dispatch({type: 'updateQuestionImg',payload:{questionIndex,imgPath: url}});
+      console.log([inputFileRef.current]);
+      const file = inputFileRef.current.files[0];
+      const url = URL.createObjectURL(file);
+      console.log(url);
+      dispatch({
+        type: "updateQuestionImg",
+        payload: { questionIndex, imgPath: url },
+      });
     }
 
     console.log("Importerrrrrr");
-
-  }
+  };
 
   return (
     <div className="host-create">
       <div className="logoSlave">SpaceShoot!</div>
       <User className="user" />
-        <FrameHost>
+      <FrameHost>
         <div className="host-create__header">
           <input
             type="text"
@@ -183,13 +190,15 @@ const HostCreateQuizPage = ({ quiz }) => {
             onChange={_handleTitleInputOnChange}
           />
           <div className="host-create__header-buttons">
-    
-            <div  className={
+            <div
+              className={
                 !disable ? "host-create__btn" : "host-create__btn disable"
               }
-              onClick={_handleSaveClick}>
-                <SaveLogo></SaveLogo>
-                <p>Save</p></div>
+              onClick={_handleSaveClick}
+            >
+              <SaveLogo></SaveLogo>
+              <p>Save</p>
+            </div>
             <Link
               to="/host"
               // onClick={_handleExitClick}
@@ -198,29 +207,28 @@ const HostCreateQuizPage = ({ quiz }) => {
               <ExitLogo></ExitLogo>
               <p>Exit</p>
             </Link>
-           
           </div>
         </div>
 
         <div className="host-create__body">
           <div className="host-create__body__header">
             <div className="host-create__bottom">
-            <ul className="host-create__questions-list">
-              {state.questions.map((ques, index) => (
-                <li
-                  key={index}
-                  onClick={() => _handleQuestionItemClick(index)}
-                  className={
-                    index === questionIndex
-                      ? "host-create__questions-item--active"
-                      : ""
-                  }
-                >
-                  Question {index + 1}
-                </li>
-              ))}
-            </ul>
-          </div>
+              <ul className="host-create__questions-list">
+                {state.questions.map((ques, index) => (
+                  <li
+                    key={index}
+                    onClick={() => _handleQuestionItemClick(index)}
+                    className={
+                      index === questionIndex
+                        ? "host-create__questions-item--active"
+                        : ""
+                    }
+                  >
+                    Question {index + 1}
+                  </li>
+                ))}
+              </ul>
+            </div>
             <input
               type="text"
               className="host-create__question-name"
@@ -230,31 +238,42 @@ const HostCreateQuizPage = ({ quiz }) => {
             />
 
             <div className="host-create__question-button">
-            <button
-            className={!disable ? "host-create__btn-add" : "host-create__btn-add disable"}
-            onClick={_handleAddQuestionClick}
-          >
-            Add
-          </button>
+              <button
+                className={
+                  !disable
+                    ? "host-create__btn-add"
+                    : "host-create__btn-add disable"
+                }
+                onClick={_handleAddQuestionClick}
+              >
+                Add
+              </button>
 
-          <button
-            className={
-              questionIndex !== 0
-                ? "host-create__btn-delete"
-                : "host-create__btn-delete disable"
-            }
-            onClick={_handleDeleteQuestionClick}
-          >
-            Delete
-          </button>
+              <button
+                className={
+                  questionIndex !== 0
+                    ? "host-create__btn-delete"
+                    : "host-create__btn-delete disable"
+                }
+                onClick={_handleDeleteQuestionClick}
+              >
+                Delete
+              </button>
             </div>
-            
           </div>
-       
 
           <div className="host-create__image">
-            <img src={state.questions[questionIndex].imgPath?state.questions[questionIndex].imgPath:"/images/importImage.png"} alt="hinhf ne" ref={imgRef} onClick={_handleImgImport}/>
-            <input type="file" ref={inputFileRef} onChange={_handleLoadImg}/>
+            <img
+              src={
+                state.questions[questionIndex].imgPath
+                  ? state.questions[questionIndex].imgPath
+                  : "/images/importImage.png"
+              }
+              alt="hinhf ne"
+              ref={imgRef}
+              onClick={_handleImgImport}
+            />
+            <input type="file" ref={inputFileRef} onChange={_handleLoadImg} />
           </div>
 
           <form>
@@ -263,10 +282,10 @@ const HostCreateQuizPage = ({ quiz }) => {
                 return (
                   <li key={index}>
                     <div>
-                      {index === 0 &&<Polygon></Polygon>}
-                      {index === 1 &&<Rectangle2></Rectangle2>}
-                      {index === 2 &&<Rectangle></Rectangle>}
-                      {index === 3 &&<Ellipse></Ellipse>}
+                      {index === 0 && <Polygon></Polygon>}
+                      {index === 1 && <Rectangle2></Rectangle2>}
+                      {index === 2 && <Rectangle></Rectangle>}
+                      {index === 3 && <Ellipse></Ellipse>}
                     </div>
                     <input
                       type="text"
@@ -276,7 +295,7 @@ const HostCreateQuizPage = ({ quiz }) => {
                       className="host-create__answers-content"
                     />
 
-                    {/* <div className="host-create__answers-correct">
+                    <div className="host-create__answers-correct">
                       <input
                         type="radio"
                         id={`correctAnswer${index}`}
@@ -289,15 +308,14 @@ const HostCreateQuizPage = ({ quiz }) => {
                         }
                         onChange={_handleCorrectAnswerInputOnChange}
                       />
-                    </div> */}
+                    </div>
                   </li>
                 );
               })}
             </ul>
           </form>
         </div>
-        </FrameHost>
-        
+      </FrameHost>
     </div>
   );
 };

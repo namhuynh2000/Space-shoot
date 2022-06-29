@@ -6,11 +6,10 @@ import "./index.scss";
 import { selectHost } from "../../../redux/reducers/hostReducer";
 import { useSelector } from "react-redux";
 import User from "../../../components/User/User";
-import { BiAddToQueue } from 'react-icons/bi';
-import { HiOutlinePlay } from 'react-icons/hi';
-import { TiDeleteOutline } from 'react-icons/ti';
+import { BiAddToQueue } from "react-icons/bi";
+import { HiOutlinePlay } from "react-icons/hi";
+import { TiDeleteOutline } from "react-icons/ti";
 import FrameHost from "../../../components/FrameHost/FrameHost";
-
 
 export default function HostPage() {
   const [quizList, setQuizList] = useState([]);
@@ -29,17 +28,33 @@ export default function HostPage() {
       setQuizList(payload);
     }
 
+    function handleDeleteQuizResult(payload) {
+      if (payload.message === "success") {
+        alert("Delete successfully");
+        socket.emit("fetchQuizList", host.id);
+      } else {
+        alert("Delete failed");
+      }
+    }
+
     socket.emit("fetchQuizList", host.id);
 
     socket.on("fetchQuizListRes", handleFetchQuizListRes);
 
+    socket.on("deleteQuizResult", handleDeleteQuizResult);
+
     return () => {
       socket.off("fetchQuizListRes", handleFetchQuizListRes);
+      socket.off("deleteQuizResult", handleDeleteQuizResult);
     };
   }, []);
 
   const _handleClickToHostGame = (id) => {
     navigate(`/host/lobby/?quizId=${id}`);
+  };
+
+  const _handleDeleteQuiz = (id) => {
+    socket.emit("deleteQuiz", id);
   };
 
   return (
@@ -48,22 +63,22 @@ export default function HostPage() {
       <User className="user" />
       <FrameHost>
         <div className="header">
-          <div className="numberQuiz">Total Quizs <span>{quizList.length}</span></div>
+          <div className="numberQuiz">
+            Total Quizs <span>{quizList.length}</span>
+          </div>
           <div className="title">List Quizs</div>
           <Link to={"/host/create"}>
             <button className="createButton">
               <BiAddToQueue />
-              Create Quiz</button>
+              Create Quiz
+            </button>
           </Link>
         </div>
         <div className="listQuiz">
           <ul className="myList">
             {quizList &&
               quizList.map((item) => (
-                <li
-                  className="quizDetail"
-                  key={item._id}
-                >
+                <li className="quizDetail" key={item._id}>
                   <img
                     className="imgQuiz"
                     src={item.imgPath}
@@ -74,8 +89,20 @@ export default function HostPage() {
                       <div className="quizName">{item.name}</div>
                     </Link>
                     <div className="quizButton">
-                      <div className="playBtn" onClick={() => _handleClickToHostGame(item._id)}><HiOutlinePlay />Play</div>
-                      <div className="deleteBtn"><TiDeleteOutline />Delete</div>
+                      <div
+                        className="playBtn"
+                        onClick={() => _handleClickToHostGame(item._id)}
+                      >
+                        <HiOutlinePlay />
+                        Play
+                      </div>
+                      <div
+                        className="deleteBtn"
+                        onClick={() => _handleDeleteQuiz(item._id)}
+                      >
+                        <TiDeleteOutline />
+                        Delete
+                      </div>
                     </div>
                   </div>
                 </li>
