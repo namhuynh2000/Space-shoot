@@ -96,6 +96,11 @@
     border-radius: 1.5rem;
     background-color: #FFD080;
     padding: 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    // align-items: center;
 
     .host-create__body__header {
       display: flex;
@@ -127,34 +132,44 @@
           background-color: #DF0772;
           // line-height: 40px;
           // font-size: 2rem;
-        }
+          position: relative;
 
+          
+          &:hover {
+            .anotherQuestion {
+              padding: 1rem;
+              display: flex;
+              flex-direction: column;
+              // flex-wrap: wrap;
+              gap: 1rem;
+              background-color: #3E3264;
+              overflow-y: auto;
+              position: absolute;
+              top: 100%;
+              max-height: 180px;
 
+              // width: auto;
 
-        .anotherQuestion {
-          padding: 2rem 1rem 1rem 1rem;
-          display: flex;
-          flex-wrap: wrap;
-          gap: 1rem;
-          background-color: #3E3264;
-          clip-path: polygon(57% 15%, 75% 0, 83% 15%, 100% 15%, 100% 99%, 0 100%, 0% 80%, 0 15%);
-          // overflow-x: auto;
-          position: absolute;
-          bottom: -5rem;
-          right: 0;
-          width: auto;
-          max-width: 100%;
+              .numberAnotherQuestion {}
 
-          // height: 10rem;
+              .numberAnotherQuestion--active {
+                // display: inline-block;
+                color: #DF0772;
+              }
 
-          .numberAnotherQuestion {}
-
-          .numberAnotherQuestion--active {
-            // display: inline-block;
-            color: #DF0772;
+            }
           }
 
+          .anotherQuestion {
+            display: none;
+          }
+
+
         }
+
+
+
+
       }
 
       .host-create__bottom {
@@ -289,7 +304,7 @@
       // li>div {
       //   cursor: pointer;
       // }
-      .logo{
+      .logo {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -330,8 +345,8 @@
 
 
           input[type="radio"] {
-          width: 20px;
-          height: 20px;
+            width: 20px;
+            height: 20px;
             cursor: pointer;
           }
         }
