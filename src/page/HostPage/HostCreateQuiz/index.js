@@ -32,7 +32,7 @@ const HostCreateQuizPage = ({ quiz }) => {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [disable, setDisable] = useState(false);
   const [imgUpload, setImgUpload] = useState({});
-
+  const [isSuccess, setIsSuccess] = useState(false);
   const host = useSelector(selectHost);
   const navigate = useNavigate();
 
@@ -43,8 +43,12 @@ const HostCreateQuizPage = ({ quiz }) => {
   useEffect(() => {
     const handleCreateGameResult = ({ message }) => {
       if (message === "success") {
-        navigate("/host");
-        toast.success("Game created successfully");
+        setIsSuccess(true);
+        toast.success("Game created successfully", {
+          onClose: () => {
+            navigate("/host");
+          },
+        });
       } else {
         toast.error("Game created failed");
       }
@@ -200,6 +204,10 @@ const HostCreateQuizPage = ({ quiz }) => {
 
   return (
     <div className="host-create">
+      {isSuccess && (
+        <div className="layout" onClick={() => navigate("/host")}></div>
+      )}
+      <ToastContainer />
       <div className="logoSlave">SpaceShoot!</div>
       <User className="user" />
       <FrameHost>
