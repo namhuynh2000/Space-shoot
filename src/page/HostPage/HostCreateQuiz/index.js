@@ -19,10 +19,12 @@ import { ReactComponent as Polygon } from "../../../Icons/Polygon.svg";
 import { ReactComponent as Rectangle } from "../../../Icons/Rectangle.svg";
 import { ReactComponent as Rectangle2 } from "../../../Icons/Rectangle2.svg";
 import { ReactComponent as Ellipse } from "../../../Icons/Ellipse.svg";
+import { TiDeleteOutline } from "react-icons/ti";
+import { ReactComponent as PlusIcon } from "../../../Icons/plus-circle.svg";
+import { ReactComponent as DeleteIcon } from "../../../Icons/x-circle.svg";
 import { storage } from "../../../fire";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { v4 } from "uuid";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 // Components
 const HostCreateQuizPage = ({ quiz }) => {
@@ -41,10 +43,10 @@ const HostCreateQuizPage = ({ quiz }) => {
   useEffect(() => {
     const handleCreateGameResult = ({ message }) => {
       if (message === "success") {
-        alert("Game created successfully");
         navigate("/host");
+        toast.success("Game created successfully");
       } else {
-        alert("Game created failed");
+        toast.error("Game created failed");
       }
     };
 
@@ -161,7 +163,6 @@ const HostCreateQuizPage = ({ quiz }) => {
     }
 
     socket.emit("createGame", sendData);
-    console.log("im handle now");
   };
 
   const _handleDeleteQuestionClick = () => {
@@ -233,7 +234,28 @@ const HostCreateQuizPage = ({ quiz }) => {
 
         <div className="host-create__body">
           <div className="host-create__body__header">
-            <div className="host-create__bottom">
+            <div className="numberQuestion">
+              Question{" "}
+              <span>
+                {questionIndex + 1} / {state.questions.length}
+              </span>
+              <ul className="anotherQuestion">
+                {state.questions.map((ques, index) => (
+                  <li
+                    key={index}
+                    onClick={() => _handleQuestionItemClick(index)}
+                    className={
+                      index === questionIndex
+                        ? "numberAnotherQuestion numberAnotherQuestion--active"
+                        : "numberAnotherQuestion"
+                    }
+                  >
+                    {index + 1}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {/* <div className="host-create__bottom">
               <ul className="host-create__questions-list">
                 {state.questions.map((ques, index) => (
                   <li
@@ -249,7 +271,7 @@ const HostCreateQuizPage = ({ quiz }) => {
                   </li>
                 ))}
               </ul>
-            </div>
+            </div> */}
             <input
               type="text"
               className="host-create__question-name"
@@ -267,6 +289,7 @@ const HostCreateQuizPage = ({ quiz }) => {
                 }
                 onClick={_handleAddQuestionClick}
               >
+                <PlusIcon />
                 Add
               </button>
 
@@ -278,6 +301,7 @@ const HostCreateQuizPage = ({ quiz }) => {
                 }
                 onClick={_handleDeleteQuestionClick}
               >
+                <DeleteIcon />
                 Delete
               </button>
             </div>
@@ -290,7 +314,7 @@ const HostCreateQuizPage = ({ quiz }) => {
                   ? state.questions[questionIndex].imgPath
                   : "/images/importImage.png"
               }
-              alt="hinhf ne"
+              alt="imagesQuestion"
               ref={imgRef}
               onClick={_handleImgImport}
             />
@@ -302,7 +326,7 @@ const HostCreateQuizPage = ({ quiz }) => {
               {state.questions[questionIndex].choices.map((ans, index) => {
                 return (
                   <li key={index}>
-                    <div>
+                    <div className="logo">
                       {index === 0 && <Polygon></Polygon>}
                       {index === 1 && <Rectangle2></Rectangle2>}
                       {index === 2 && <Rectangle></Rectangle>}

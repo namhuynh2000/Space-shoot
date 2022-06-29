@@ -10,9 +10,8 @@ import { BiAddToQueue } from "react-icons/bi";
 import { HiOutlinePlay } from "react-icons/hi";
 import { TiDeleteOutline } from "react-icons/ti";
 import FrameHost from "../../../components/FrameHost/FrameHost";
-import { storage } from "../../../fire";
-import { ref, getDownloadURL } from "firebase/storage";
 
+import { ToastContainer } from "react-toastify";
 export default function HostPage() {
   const [quizList, setQuizList] = useState([]);
   const host = useSelector(selectHost);
@@ -62,6 +61,7 @@ export default function HostPage() {
 
   return (
     <div className="hostContainer">
+      <ToastContainer />
       <div className="logoSlave">SpaceShoot!</div>
       <User className="user" />
       <FrameHost>
