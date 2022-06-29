@@ -358,21 +358,7 @@ const HostCreateQuizPage = ({ quiz }) => {
                       onChange={(e) => _handleAnswerInputOnChange(e, index)}
                       className="host-create__answers-content"
                     />
-
-                    {/* <div className="host-create__answers-correct">
-                      <input
-                        type="radio"
-                        id={`correctAnswer${index}`}
-                        name="correctAnswer"
-                        value={ans.content}
-                        checked={
-                          state.questions[questionIndex].correctAnswer &&
-                          state.questions[questionIndex].correctAnswer ===
-                            ans.content
-                        }
-                        onChange={_handleCorrectAnswerInputOnChange}
-                      />
-                    </div> */}
+                    
                   </li>
                 );
               })}
