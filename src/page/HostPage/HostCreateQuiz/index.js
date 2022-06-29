@@ -211,7 +211,7 @@ const HostCreateQuizPage = ({ quiz }) => {
       )}
       <ToastContainer />
       <div className="logoSlave">SpaceShoot!</div>
-      <User className="user" />
+      <User/>
       <FrameHost>
         <div className="host-create__header">
           <input

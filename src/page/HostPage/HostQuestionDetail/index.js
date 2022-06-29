@@ -26,7 +26,7 @@ export default function HostQuestionDetail() {
     <div className="hostContainer">
       <ToastContainer />
       <div className="logoSlave">SpaceShoot!</div>
-      <User className="user" />
+      <User/>
       <div className="questionDetail">
       <FrameHost>
         <div className="detailInfo">

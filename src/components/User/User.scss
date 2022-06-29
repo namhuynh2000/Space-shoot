@@ -1,17 +1,21 @@
-.user{
+.user {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
+    float: right;
+    margin: 20px;
+    margin-right: 50px;
 
-    .user-avt img{
+    .user-avt img {
         border-radius: 100px;
         width: 40px;
     }
 
-    .user-avt{
+    .user-avt {
         position: relative;
-        &:hover{
+
+        &:hover {
             .logOut {
                 display: flex;
                 // justify-content: center;
@@ -25,14 +29,14 @@
                 color: #fff;
             }
         }
-        
+
     }
 
     .logOut {
         display: none;
     }
 
-    .user-name{
+    .user-name {
         font-size: 16px;
         color: #fff;
         font-weight: bolder;

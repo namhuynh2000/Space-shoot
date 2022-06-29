@@ -63,7 +63,7 @@ export default function HostPage() {
     <div className="hostContainer">
       <ToastContainer />
       <div className="logoSlave">SpaceShoot!</div>
-      <User className="user" />
+      <User/>
       <FrameHost>
         <div className="header">
           <div className="numberQuiz">

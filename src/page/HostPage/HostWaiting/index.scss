@@ -1,38 +1,130 @@
-.waitingRoomContainer{
-    background-image: url("../../../../public/images/quiz.jpg");
+.waitingRoomContainer {
+    background-image: url("../../../../public/images/background-homepage.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     width: 100vw;
     height: 100vh;
     display: flex;
-    justify-content: left;
     flex-direction: column;
-    align-items: center;
 
-
-    .startGameButton:hover{
-        opacity: 0.7;
-        cursor: pointer;
-    
-    }
-    .startGameButton{
-        background-color: blue;
-        justify-content: right;
-        border-radius:4px;
-        height:45px;
-        width:90%;
-        text-align:center;
-        margin: 5px;
-        line-height:4px;
-        font-size:15px;
-        color:white;
-        font-weight:bolder;
-
+    .logoSlave {
+        display: inline-block;
+        font-family: 'Jolly Lodger', cursive;
+        font-size: 100px;
+        color: #0188A5;
+        margin-left: 40px;
     }
 
+    .bodyContainer {
+        flex: 1;
+        li {
+            display: inline-block;
+            margin: 2rem;
+            border-radius: 5rem;
+            padding: 1rem 1rem;
+            background-color: rgba(50, 88, 160, 0.5);
+            color: #fff;
+            font-weight: bolder;
+            font-size: 1.6rem;
+            // position: fixed;
+        }
+    }
 
+    .quizWrap {
+        margin: auto;
+        width: 400px;
+        background-color: #FF9E7D;
+        border: #FE546F solid 15px;
+        padding: 2rem;
+        border-radius: 1.5rem;
+        color: #fff;
+        font-weight: bolder;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
 
+        .startBtn {
+            width: 100%;
+            background-color: #D9D9D9;
+            border-radius: 5px;
+            height: 5rem;
+            margin-top: 1rem;
+            font-size: 1.6rem;
+            text-align: center;
+            line-height: 5rem;
+            cursor: not-allowed;
+        }
 
+        .startBtn--active {
+            width: 100%;
+            background-color: #01CBCF;
+            border-radius: 5px;
+            height: 5rem;
+            margin-top: 1rem;
+            font-size: 1.6rem;
+            text-align: center;
+            line-height: 5rem;
+            cursor: pointer;
+        }
 
+        .roomID {
+            width: 100%;
+            background-color: #DF0772;
+            border-radius: 5px;
+            height: 5rem;
+            font-size: 1.6rem;
+            text-align: center;
+            line-height: 5rem;
+        }
+
+        .nameQuiz {
+            margin: 1rem 0;
+            width: 100%;
+            background-color: #3E3264;
+            border-radius: 5px;
+            height: 5rem;
+            font-size: 1.6rem;
+            text-align: center;
+            line-height: 5rem;
+        }
+
+        .avt-playerNumber {
+            display: flex;
+            gap: 1rem;
+
+            .imgQuiz {
+
+                width: 60%;
+                height: 150px;
+                object-fit: cover;
+
+            }
+
+            .numberPlayerWrap {
+                text-align: center;
+                // padding: 1rem;
+                flex: 1;
+                background-color: #3E3264;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                align-items: center;
+                border-radius: 0.5rem;
+
+                .numberPlayer {
+                    border-radius: 1.5rem;
+
+                    display: inline-block;
+                    background-color: #DF0772;
+                    font-size: 6rem;
+                    line-height: 6rem;
+                    width: 80%;
+                    padding: 2rem 0rem;
+                }
+            }
+        }
+    }
 }
