@@ -20,8 +20,8 @@ import { ReactComponent as Rectangle } from "../../../Icons/Rectangle.svg";
 import { ReactComponent as Rectangle2 } from "../../../Icons/Rectangle2.svg";
 import { ReactComponent as Ellipse } from "../../../Icons/Ellipse.svg";
 import { storage } from "../../../fire";
-import {ref, uploadBytes} from "firebase/storage"
-import {v4} from "uuid"
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { v4 } from "uuid";
 import { toast } from "react-toastify";
 
 // Components
@@ -29,8 +29,8 @@ const HostCreateQuizPage = ({ quiz }) => {
   const [state, dispatch] = useReducer(reducer, initState, initFunc);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [disable, setDisable] = useState(false);
-  const [imgUpload, setImgUpload] = useState([]);
-  const [imgUrl, setImgUrl] = useState([]);
+  const [imgUpload, setImgUpload] = useState({});
+
   const host = useSelector(selectHost);
   const navigate = useNavigate();
 
@@ -56,7 +56,7 @@ const HostCreateQuizPage = ({ quiz }) => {
   }, [navigate]);
 
   useEffect(() => {
-    console.log(host,1);
+    console.log(host, 1);
     dispatch({
       type: "setUserId",
       payload: { userId: host.id },
@@ -147,18 +147,20 @@ const HostCreateQuizPage = ({ quiz }) => {
     setQuestionIndex((oldIndex) => oldIndex + 1);
   };
 
-  const _handleSaveClick = () => {
-    console.log(imgUpload);
-    for (var i=0;i<imgUpload.length;i++)
-    {    
-      const imageRef = ref(storage, imgUrl[i]);
-      uploadBytes( imageRef, imgUpload[i]).then(()=>{
-        alert("image uploaded");
-      });
+  const _handleSaveClick = async () => {
+    const sendData = { ...state };
+    for (let i = 0; i < sendData.questions.length; i++) {
+      if (sendData.questions[i].imgPath) {
+        console.log(imgUpload[i]);
+        const imgRef = ref(storage, `images/${imgUpload[i].name}`);
+        const snapshot = await uploadBytes(imgRef, imgUpload[i]);
+        console.log(snapshot);
+        const url = await getDownloadURL(snapshot.ref);
+        sendData.questions[i].imgPath = url;
+      }
     }
 
-
-    socket.emit("createGame", state);
+    socket.emit("createGame", sendData);
     console.log("im handle now");
   };
 
@@ -178,17 +180,16 @@ const HostCreateQuizPage = ({ quiz }) => {
     console.log("Importerrrrrr");
   };
 
-  const upLoadImage = () => {
-  }
-
   const _handleLoadImg = () => {
     if (inputFileRef.current) {
-      
-      console.log([inputFileRef.current.files[0]]);
-      
-      const imageUrl= 'images/'+inputFileRef.current.files[0].name+v4();
-      setImgUpload(imgUpload =>[...imgUpload,inputFileRef.current.files[0]]);   
-      setImgUrl(imgUrl => [...imgUrl,imageUrl]);
+      const imageUrl = URL.createObjectURL(inputFileRef.current.files[0]);
+
+      setImgUpload((imgUpload) => {
+        return {
+          ...imgUpload,
+          [questionIndex]: inputFileRef.current.files[0],
+        };
+      });
       dispatch({
         type: "updateQuestionImg",
         payload: { questionIndex, imgPath: imageUrl },
