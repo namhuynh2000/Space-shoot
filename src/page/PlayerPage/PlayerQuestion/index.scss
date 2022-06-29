@@ -2,24 +2,20 @@
   height: 100vh;
   width: 100vw;
   .player-question__detail {
-
     display: grid;
-    grid-template-rows: 10% repeat(2,1fr);
+    grid-template-rows: 15% 60% 25%;
     height: 100vh;
     padding: 2rem;
-    gap: 2rem;
 
-
-    .player-question__detail-info
-    {
+    .player-question__detail-info {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      
+
       margin-bottom: 20px;
-      p{
-        color: rgb(105,111,121);
+      p {
+        color: rgb(105, 111, 121);
         font-weight: bolder;
         font-size: x-large;
 
@@ -33,54 +29,50 @@
           border-radius: 50%;
         }
       }
-
     }
-    p{
-      color: rgb(105,111,121);
-        font-weight: bolder;
-        font-size: large;
-        margin-bottom: 20px;
+    p {
+      color: rgb(105, 111, 121);
+      font-weight: bolder;
+      font-size: large;
+      margin-bottom: 20px;
     }
-    .player-question__detail__question{
+    .player-question__detail__question {
       display: flex;
       flex-direction: row;
-      height: 35vh;
       margin-bottom: 20px;
-      img{
+      overflow: hidden;
+      img {
+        display: block;
+        height: 100%;
         width: 50%;
-        background-image: url("https://cdn.images.express.co.uk/img/dynamic/1/590x/Paul-Stephenson-1293158.jpg?r=1591652582058");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        border-radius: 40px;
+        object-fit: cover;
       }
-      .player-question__detail__question__text
-      {
+      .player-question__detail__question__text {
         width: 45%;
         padding-left: 2%;
         display: flex;
         flex-direction: column;
-        p{
-          color: rgb(105,111,121);
-        font-weight: bolder;
-        font-size: x-large;
+        p {
+          color: rgb(105, 111, 121);
+          font-weight: bolder;
+          font-size: x-large;
         }
-        text{
-          color: rgb(105,111,121);
-        font-weight: medium;
-        font-size:medium;
+        text {
+          color: rgb(105, 111, 121);
+          font-weight: medium;
+          font-size: medium;
         }
       }
     }
 
-    .player-question__detail-choices{
-      p{
-        height:10%;
+    .player-question__detail-choices {
+      p {
+        height: 10%;
       }
 
-      ul{
-        height:90%;
-      }
+      // ul {
+      //   height: 90%;
+      // }
     }
   }
 }

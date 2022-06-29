@@ -25,6 +25,7 @@ const PlayerQuestionPage = () => {
   useEffect(() => {
     function handleGetQuestionRes(res) {
       if (res.result) {
+        console.log(res.questionData);
         setQuestion(res.questionData);
         setIsLoading(false);
       } else {
@@ -109,27 +110,35 @@ const PlayerQuestionPage = () => {
       {!isLoading && question && !isAnswer && !timeOut && (
         <div className="player-question__detail">
           <div className="player-question__detail-info">
-            <p>Question Name</p>
+            <p>{question.quizName}</p>
             <p>30</p>
             <p>Point: {player.score}</p>
           </div>
           <div className="player-question__detail__question">
-            <img></img>
+            <img
+              src={
+                question.questionData.imgPath
+                  ? question.questionData.imgPath
+                  : "/images/noImage.png"
+              }
+              alt={"test"}
+            ></img>
             <div className="player-question__detail__question__text">
-              <p>Question {question.id}/{question.length}</p>
-              <p>Guy Bailey, Roy Hackett and Paul Stephenson made history in 1963, as part of a protest against a bus company that refused to employ black and Asian drivers in which UK city?</p>
+              <p>
+                Question {question.questionIndex + 1}/{question.questionLength}
+              </p>
+              <p>{question.questionData.content}</p>
             </div>
           </div>
 
           <div className="player-question__detail-choices">
-<p>Choose Answer</p>
-          <AnswerChoices
-            choices={question.questionData.choices}
-            clickHandle={_handlePlayerAnswer}
-            role={"host"}
-          />
+            <p>Choose Answer</p>
+            <AnswerChoices
+              choices={question.questionData.choices}
+              clickHandle={_handlePlayerAnswer}
+              role={"host"}
+            />
           </div>
-          
         </div>
       )}
 

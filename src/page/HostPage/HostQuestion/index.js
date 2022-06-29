@@ -174,17 +174,21 @@ const HostQuestionPage = () => {
           )}
 
           {isEnd && (
-            <AnswerChar
-              choices={question.questionData.choices}
-              playerAnswers={totalAnswer.playerAnswers}
-              correctAnswer={question.questionData.correctAnswer}
-            />
+            <div className="host-question__result">
+              <AnswerChar
+                choices={question.questionData.choices}
+                playerAnswers={totalAnswer.playerAnswers}
+                correctAnswer={question.questionData.correctAnswer}
+              />
+            </div>
           )}
 
-          <AnswerChoices
-            choices={question.questionData.choices}
-            disabled={isEnd}
-          />
+          <div>
+            <AnswerChoices
+              choices={question.questionData.choices}
+              disabled={isEnd}
+            />
+          </div>
         </div>
       )}
     </div>

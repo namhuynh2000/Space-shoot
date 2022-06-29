@@ -4,6 +4,7 @@
   margin: 0 auto;
   grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
   grid-column-gap: 2rem;
+  height: 100%;
 
   li {
     padding: 0 2rem;
