@@ -2,6 +2,10 @@
   padding: 1.2rem 3rem;
   height: 100vh;
 
+  .host-question__result {
+    margin: 4rem auto;
+  }
+
   .host-question__progress {
     height: 20px;
     background-color: grey;
@@ -12,7 +16,7 @@
   .host-question__detail {
     height: 100%;
     display: grid;
-    grid-template-rows: 10% repeat(2, 1fr);
+    grid-template-rows: 10% 70% 20%;
     position: relative;
 
     h1 {

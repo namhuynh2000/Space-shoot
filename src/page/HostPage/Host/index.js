@@ -10,9 +10,8 @@ import { BiAddToQueue } from "react-icons/bi";
 import { HiOutlinePlay } from "react-icons/hi";
 import { TiDeleteOutline } from "react-icons/ti";
 import FrameHost from "../../../components/FrameHost/FrameHost";
-import { storage } from "../../../fire";
-import {ref, getDownloadURL} from "firebase/storage"
 
+import { ToastContainer } from "react-toastify";
 export default function HostPage() {
   const [quizList, setQuizList] = useState([]);
   const host = useSelector(selectHost);
@@ -26,18 +25,6 @@ export default function HostPage() {
     }
 
     async function handleFetchQuizListRes(payload) {
-      console.log(payload);
-      var tempUrl="";
-      for (var i=0;i<payload.length;i++) {
-        console.log(getDownloadURL(ref(storage,payload[i].imgPath)))
-        await getDownloadURL(ref(storage,payload[i].imgPath)).then((url)=>{
-          console.log(payload[0].imgPath);
-          tempUrl=url;
-        })
-        payload[i].imgPath=tempUrl;
-        
-      }
-      console.log(payload)
       setQuizList(payload);
     }
 
@@ -70,13 +57,11 @@ export default function HostPage() {
     socket.emit("deleteQuiz", id);
   };
 
-  useEffect(() =>{
-
-
-  })
+  useEffect(() => {});
 
   return (
     <div className="hostContainer">
+      <ToastContainer />
       <div className="logoSlave">SpaceShoot!</div>
       <User className="user" />
       <FrameHost>

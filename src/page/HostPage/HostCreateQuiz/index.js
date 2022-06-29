@@ -21,19 +21,18 @@ import { ReactComponent as Rectangle2 } from "../../../Icons/Rectangle2.svg";
 import { ReactComponent as Ellipse } from "../../../Icons/Ellipse.svg";
 import { TiDeleteOutline } from "react-icons/ti";
 import { ReactComponent as PlusIcon } from "../../../Icons/plus-circle.svg";
-import { ReactComponent as DeleteIcon } from "../../../Icons/x-circle.svg"
+import { ReactComponent as DeleteIcon } from "../../../Icons/x-circle.svg";
 import { storage } from "../../../fire";
-import { ref, uploadBytes } from "firebase/storage"
-import { v4 } from "uuid"
-import { toast } from "react-toastify";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { toast, ToastContainer } from "react-toastify";
 
 // Components
 const HostCreateQuizPage = ({ quiz }) => {
   const [state, dispatch] = useReducer(reducer, initState, initFunc);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [disable, setDisable] = useState(false);
-  const [imgUpload, setImgUpload] = useState([]);
-  const [imgUrl, setImgUrl] = useState([]);
+  const [imgUpload, setImgUpload] = useState({});
+  const [isSuccess, setIsSuccess] = useState(false);
   const host = useSelector(selectHost);
   const navigate = useNavigate();
 
@@ -44,10 +43,14 @@ const HostCreateQuizPage = ({ quiz }) => {
   useEffect(() => {
     const handleCreateGameResult = ({ message }) => {
       if (message === "success") {
-        alert("Game created successfully");
-        navigate("/host");
+        setIsSuccess(true);
+        toast.success("Game created successfully", {
+          onClose: () => {
+            navigate("/host");
+          },
+        });
       } else {
-        alert("Game created failed");
+        toast.error("Game created failed");
       }
     };
 
@@ -150,18 +153,20 @@ const HostCreateQuizPage = ({ quiz }) => {
     setQuestionIndex((oldIndex) => oldIndex + 1);
   };
 
-  const _handleSaveClick = () => {
-    console.log(imgUpload);
-    for (var i = 0; i < imgUpload.length; i++) {
-      const imageRef = ref(storage, imgUrl[i]);
-      uploadBytes(imageRef, imgUpload[i]).then(() => {
-        alert("image uploaded");
-      });
+  const _handleSaveClick = async () => {
+    const sendData = { ...state };
+    for (let i = 0; i < sendData.questions.length; i++) {
+      if (sendData.questions[i].imgPath) {
+        console.log(imgUpload[i]);
+        const imgRef = ref(storage, `images/${imgUpload[i].name}`);
+        const snapshot = await uploadBytes(imgRef, imgUpload[i]);
+        console.log(snapshot);
+        const url = await getDownloadURL(snapshot.ref);
+        sendData.questions[i].imgPath = url;
+      }
     }
 
-
-    socket.emit("createGame", state);
-    console.log("im handle now");
+    socket.emit("createGame", sendData);
   };
 
   const _handleDeleteQuestionClick = () => {
@@ -180,17 +185,16 @@ const HostCreateQuizPage = ({ quiz }) => {
     console.log("Importerrrrrr");
   };
 
-  const upLoadImage = () => {
-  }
-
   const _handleLoadImg = () => {
     if (inputFileRef.current) {
+      const imageUrl = URL.createObjectURL(inputFileRef.current.files[0]);
 
-      console.log([inputFileRef.current.files[0]]);
-
-      const imageUrl = 'images/' + inputFileRef.current.files[0].name + v4();
-      setImgUpload(imgUpload => [...imgUpload, inputFileRef.current.files[0]]);
-      setImgUrl(imgUrl => [...imgUrl, imageUrl]);
+      setImgUpload((imgUpload) => {
+        return {
+          ...imgUpload,
+          [questionIndex]: inputFileRef.current.files[0],
+        };
+      });
       dispatch({
         type: "updateQuestionImg",
         payload: { questionIndex, imgPath: imageUrl },
@@ -200,6 +204,10 @@ const HostCreateQuizPage = ({ quiz }) => {
 
   return (
     <div className="host-create">
+      {isSuccess && (
+        <div className="layout" onClick={() => navigate("/host")}></div>
+      )}
+      <ToastContainer />
       <div className="logoSlave">SpaceShoot!</div>
       <User className="user" />
       <FrameHost>
@@ -305,7 +313,6 @@ const HostCreateQuizPage = ({ quiz }) => {
                 Delete
               </button>
             </div>
-
           </div>
 
           <div className="host-create__image">
@@ -350,7 +357,7 @@ const HostCreateQuizPage = ({ quiz }) => {
                         checked={
                           state.questions[questionIndex].correctAnswer &&
                           state.questions[questionIndex].correctAnswer ===
-                          ans.content
+                            ans.content
                         }
                         onChange={_handleCorrectAnswerInputOnChange}
                       />

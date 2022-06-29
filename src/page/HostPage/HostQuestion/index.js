@@ -57,14 +57,12 @@ const HostQuestionPage = () => {
             interval = null;
             socket.emit("stopQuestion");
           }
-          else 
           // if (countDown === 0) {
 
           // } else {
-          setQuestionCountDown(--countDown);
+          else setQuestionCountDown(--countDown);
           // }
         }, 1000);
-       
       } else {
         alert("Get question failed");
         navigate("/");
@@ -140,52 +138,57 @@ const HostQuestionPage = () => {
             }`}</h2>
             <h1>{question.questionData.content}</h1>
 
-              {!isEnd && (
-            <QuestionControlButton
-              clickHandle={_skipBtnClickHandle}
-              content={"skip"}
-            />
-          )}
+            {!isEnd && (
+              <QuestionControlButton
+                clickHandle={_skipBtnClickHandle}
+                content={"skip"}
+              />
+            )}
 
-          {isEnd && (
-            <QuestionControlButton
-              clickHandle={_nextBtnClickHandle}
-              content={"Next"}
-            />
-          )}
+            {isEnd && (
+              <QuestionControlButton
+                clickHandle={_nextBtnClickHandle}
+                content={"Next"}
+              />
+            )}
           </div>
-
-        
 
           {!isEnd && (
             <div className="host-question__detail-info">
               <div className="host-question__detail-info-countdown">
-              <span>{questionCountDown}</span>
+                <span>{questionCountDown}</span>
               </div>
-             <div className="host-question__detail-info-image">
-                <img src={generateImage(question.questionData.content)} alt="" />
-             </div>
-            <div className="host-question__detail-info-answer-count">
+              <div className="host-question__detail-info-image">
+                <img
+                  src={generateImage(question.questionData.imgPath)}
+                  alt=""
+                />
+              </div>
+              <div className="host-question__detail-info-answer-count">
                 <span>
-                <p>{totalAnswer?.playerAnswers?.length ?? 0}</p>
-                <p>Answers</p>
-              </span>
-            </div>
+                  <p>{totalAnswer?.playerAnswers?.length ?? 0}</p>
+                  <p>Answers</p>
+                </span>
+              </div>
             </div>
           )}
 
           {isEnd && (
-            <AnswerChar
-              choices={question.questionData.choices}
-              playerAnswers={totalAnswer.playerAnswers}
-              correctAnswer={question.questionData.correctAnswer}
-            />
+            <div className="host-question__result">
+              <AnswerChar
+                choices={question.questionData.choices}
+                playerAnswers={totalAnswer.playerAnswers}
+                correctAnswer={question.questionData.correctAnswer}
+              />
+            </div>
           )}
 
-          <AnswerChoices
-            choices={question.questionData.choices}
-            disabled={isEnd}
-          />
+          <div>
+            <AnswerChoices
+              choices={question.questionData.choices}
+              disabled={isEnd}
+            />
+          </div>
         </div>
       )}
     </div>

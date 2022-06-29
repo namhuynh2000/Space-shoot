@@ -8,16 +8,21 @@ const AnswerChoices = ({ choices, clickHandle, disabled, role }) => {
   };
   return (
     <ul className={disabled ? "choices choices--disabled" : "choices"}>
-      {choices.map((choice, index) => (
-        <li
-          key={index}
-          onClick={() => {
-            _choiceClickHandle(choice);
-          }}
-        >
-          {role !== "player" ? `${choice.content}` : ""}
-        </li>
-      ))}
+      {choices.map((choice, index) => {
+        if (choice.content)
+          return (
+            <li
+              key={index}
+              onClick={() => {
+                _choiceClickHandle(choice);
+              }}
+            >
+              {role !== "player" ? `${choice.content}` : ""}
+            </li>
+          );
+
+        return "";
+      })}
     </ul>
   );
 };
