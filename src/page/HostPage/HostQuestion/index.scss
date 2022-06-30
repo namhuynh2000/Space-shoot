@@ -3,6 +3,7 @@
   height: 100vh;
   background: url("../../../../public/images/background-homepage.png") no-repeat center;
   background-size: cover;
+  overflow: hidden;
 
   .logoSlave {
     display: inline-block;
@@ -13,7 +14,16 @@
 }
 
   .host-question__result {
+    width: 100%;
     margin: 4rem auto;
+    position: relative;
+    .host-question__result__buttonNext{
+      position:  absolute;
+      top:50%;
+      transform: translateY(-50%);
+      right: 0;
+
+    }
   }
 
   .host-question__progress {
@@ -26,14 +36,14 @@
   
 
   .host-question__detail {
-    display: flex;
-    flex-direction: column;
-    gap:1rem;
+    display: grid;
+    height: 90vh;
+    grid-template-rows: 10% 45% 40%;
+    grid-gap: 2%;
     padding-left: 15%;
     padding-right: 15%;
 
     .player-question__detail__info {
-      padding-left: 2%;
       display: flex;
       flex-direction: row;
       justify-content: left;

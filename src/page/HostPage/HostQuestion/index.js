@@ -178,13 +178,6 @@ const HostQuestionPage = () => {
                 content={"skip"}
               />
             )}
-
-            {isEnd && (
-              <QuestionControlButton
-                clickHandle={_nextBtnClickHandle}
-                content={"Next"}
-              />
-            )}
             </div>
           )}
 
@@ -195,6 +188,14 @@ const HostQuestionPage = () => {
                 playerAnswers={totalAnswer.playerAnswers}
                 correctAnswer={question.questionData.correctAnswer}
               />
+              {isEnd && (
+                <div className="host-question__result__buttonNext">
+                  <QuestionControlButton
+                  clickHandle={_nextBtnClickHandle}
+                  content={"Next"}
+                /></div>
+              
+            )}
             </div>
           )}
 

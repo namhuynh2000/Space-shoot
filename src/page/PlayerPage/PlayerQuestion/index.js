@@ -9,6 +9,7 @@ import {
   selectPlayer,
   setReduxPlayer,
 } from "../../../redux/reducers/playerReducer";
+import RingLoader from "react-spinners/RingLoader"
 import PlayerQuestionResult from "../../../components/PlayerQuestionResult/PlayerQuestionResult";
 
 const PlayerQuestionPage = () => {
@@ -103,7 +104,7 @@ const PlayerQuestionPage = () => {
     <div className="player-question">
       {isLoading && (
         <div>
-          <p>Loading...</p>
+          <RingLoader className="animationImg" color="#FFD080" size="10rem"></RingLoader>
         </div>
       )}
 
@@ -150,7 +151,7 @@ const PlayerQuestionPage = () => {
       )}
 
       {!isLoading && isAnswer && !timeOut && (
-        <div>Your answer has been submitted</div>
+        <div className="answerDone">Your answer has been submitted</div>
       )}
 
       {!isLoading && isAnswer && timeOut && (
@@ -164,7 +165,7 @@ const PlayerQuestionPage = () => {
       )}
 
       {!isLoading && timeOut && !isAnswer && (
-        <div>You have not answered the question</div>
+        <div className="answerDone">You have not answered the question</div>
       )}
     </div>
   );
