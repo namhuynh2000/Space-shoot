@@ -13,6 +13,7 @@ import AnswerChoices from "../../../components/AnswerChoices/AnswerChoices";
 import AnswerChar from "../../../components/AnswerChart/AnswerChar";
 import QuestionControlButton from "../../../components/QuestionControlButton/QuestionControlButton";
 import { QuestionLoading } from "../../../components/QuestionLoading/QuestionLoading";
+import User from "../../../components/User/User";
 const HostQuestionPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [question, setQuestion] = useState("");
@@ -133,14 +134,45 @@ const HostQuestionPage = () => {
       )}
 
       {!isLoading && question && (
-        <div className="host-question__detail">
-          <div className="host-question__detail-top">
-            <h2>{`${question.questionIndex + 1}/${
-              question.questionLength
-            }`}</h2>
-            <h1>{question.questionData.content}</h1>
+        <div >
+          <div className="logoSlave">SpaceShoot!</div>
+          <User/>
+          <div className="host-question__detail">
+          <div className="player-question__detail__info">
+              <div className="player-question__detail__info__number">
+                <div className="player-question__detail__info__number_text">Question </div>
+                <div className="player-question__detail__info__number_number"> {question.questionIndex + 1}/{question.questionLength}</div>
+              </div>
+              <div>{question.questionData.content}</div>
+            </div>
+          
+            
 
-            {!isEnd && (
+
+          {!isEnd && (
+            <div className="host-question__detail-info">
+              <div className="host-question__detail-info__2">
+                <div className="host-question__detail-info-countdown">
+                  <span>{questionCountDown}</span>
+                </div>
+                <div className="host-question__detail-info-answer-count">
+                  <div className="player-question__detail__info__number">
+                  <div className="player-question__detail__info__number_text">Answers </div>
+                  <div className="player-question__detail__info__number_number"> {totalAnswer?.playerAnswers?.length ?? 0}</div>
+                </div>
+                  {/* <span>
+                    <p>{totalAnswer?.playerAnswers?.length ?? 0}</p>
+                    <p>Answers</p>
+                  </span> */}
+                </div>
+              </div>
+              <div className="host-question__detail-info-image">
+                <img
+                  src={generateImage(question.questionData.imgPath)}
+                  alt=""
+                />
+              </div>
+              {!isEnd && (
               <QuestionControlButton
                 clickHandle={_skipBtnClickHandle}
                 content={"skip"}
@@ -153,25 +185,6 @@ const HostQuestionPage = () => {
                 content={"Next"}
               />
             )}
-          </div>
-
-          {!isEnd && (
-            <div className="host-question__detail-info">
-              <div className="host-question__detail-info-countdown">
-                <span>{questionCountDown}</span>
-              </div>
-              <div className="host-question__detail-info-image">
-                <img
-                  src={generateImage(question.questionData.imgPath)}
-                  alt=""
-                />
-              </div>
-              <div className="host-question__detail-info-answer-count">
-                <span>
-                  <p>{totalAnswer?.playerAnswers?.length ?? 0}</p>
-                  <p>Answers</p>
-                </span>
-              </div>
             </div>
           )}
 
@@ -191,6 +204,9 @@ const HostQuestionPage = () => {
               disabled={isEnd}
             />
           </div>
+
+          </div>
+          
         </div>
       )}
     </div>
