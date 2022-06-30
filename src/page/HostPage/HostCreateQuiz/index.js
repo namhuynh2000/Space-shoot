@@ -6,7 +6,7 @@ import React, {
   useRef,
 } from "react";
 import "./index.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { reducer, initState, initFunc } from "../../../Reducer/createForm";
 import { useSelector } from "react-redux";
 import { selectHost } from "../../../redux/reducers/hostReducer";
@@ -25,20 +25,31 @@ import { ReactComponent as DeleteIcon } from "../../../Icons/x-circle.svg";
 import { storage } from "../../../fire";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { toast, ToastContainer } from "react-toastify";
+import { CgPocket } from "react-icons/cg";
 
 // Components
-const HostCreateQuizPage = ({ quiz }) => {
+const HostCreateQuizPage = () => {
+  const [searchParams] = useSearchParams();
+
   const [state, dispatch] = useReducer(reducer, initState, initFunc);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [disable, setDisable] = useState(false);
   const [imgUpload, setImgUpload] = useState({});
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
   const host = useSelector(selectHost);
   const navigate = useNavigate();
 
   const imgRef = useRef(null);
 
   const inputFileRef = useRef(null);
+
+  useEffect(() => {
+    const id = searchParams.get("quizId");
+    if (id) {
+      socket.emit("getQuiz", id);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     const handleCreateGameResult = ({ message }) => {
@@ -54,29 +65,47 @@ const HostCreateQuizPage = ({ quiz }) => {
       }
     };
 
+    const handleGetQuizResult = (res) => {
+      if (res.msg === "success") {
+        dispatch({
+          type: "init",
+          payload: res.data,
+        });
+
+        setIsEdit(true);
+      }
+    };
+
+    const handleUpdateQuizResult = (res) => {
+      if (res.message === "success") {
+        setIsSuccess(true);
+        toast.success("Game updated successfully", {
+          onClose: () => {
+            navigate("/host");
+          },
+        });
+      } else {
+        toast.error("Game updated failed");
+      }
+    };
+
     socket.on("createGameResult", handleCreateGameResult);
+    socket.on("getQuizResult", handleGetQuizResult);
+    socket.on("updateQuizResult", handleUpdateQuizResult);
 
     return () => {
       socket.off("createGameResult", handleCreateGameResult);
+      socket.off("getQuizResult", handleGetQuizResult);
+      socket.off("updateQuizResult", handleUpdateQuizResult);
     };
   }, [navigate]);
 
   useEffect(() => {
-    console.log(host, 1);
     dispatch({
       type: "setUserId",
       payload: { userId: host.id },
     });
   }, [host]);
-
-  useEffect(() => {
-    if (quiz)
-      dispatch({
-        type: "init",
-        payload: quiz,
-      });
-    return;
-  }, [quiz]);
 
   const validateForm = useCallback(() => {
     if (!state.name) {
@@ -159,16 +188,21 @@ const HostCreateQuizPage = ({ quiz }) => {
     const sendData = { ...state };
     for (let i = 0; i < sendData.questions.length; i++) {
       if (sendData.questions[i].imgPath) {
-        console.log(imgUpload[i]);
-        const imgRef = ref(storage, `images/${imgUpload[i].name}`);
-        const snapshot = await uploadBytes(imgRef, imgUpload[i]);
-        console.log(snapshot);
-        const url = await getDownloadURL(snapshot.ref);
-        sendData.questions[i].imgPath = url;
+        if (imgUpload[i]) {
+          const imgRef = ref(storage, `images/${imgUpload[i].name}`);
+          const snapshot = await uploadBytes(imgRef, imgUpload[i]);
+          console.log(snapshot);
+          const url = await getDownloadURL(snapshot.ref);
+          sendData.questions[i].imgPath = url;
+        }
       }
     }
 
-    socket.emit("createGame", sendData);
+    if (!isEdit) socket.emit("createGame", sendData);
+    else {
+      const id = searchParams.get("quizId");
+      socket.emit("updateQuiz", id, sendData);
+    }
   };
 
   const _handleDeleteQuestionClick = () => {
@@ -211,7 +245,7 @@ const HostCreateQuizPage = ({ quiz }) => {
       )}
       <ToastContainer />
       <div className="logoSlave">SpaceShoot!</div>
-      <User/>
+      <User />
       <FrameHost>
         <div className="host-create__header">
           <input
@@ -358,7 +392,6 @@ const HostCreateQuizPage = ({ quiz }) => {
                       onChange={(e) => _handleAnswerInputOnChange(e, index)}
                       className="host-create__answers-content"
                     />
-                    
                   </li>
                 );
               })}

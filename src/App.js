@@ -30,13 +30,19 @@ import { onAuthStateChanged } from "firebase/auth";
 function App() {
   const dispatch = useDispatch();
   onAuthStateChanged(auth, (currentUser) => {
-    const host = {
-      name: currentUser.displayName,
-      email: currentUser.email,
-      id: currentUser.uid,
-      photoURL: currentUser.photoURL,
-    };
+
+    if(currentUser?.displayName)
+    {
+      const host = {
+        name: currentUser.displayName,
+        email: currentUser.email,
+        id: currentUser.uid,
+        photoURL: currentUser.photoURL,
+      };
     dispatch(setReduxHost(host));
+
+    }
+  
   });
 
   return (

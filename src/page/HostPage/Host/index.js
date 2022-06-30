@@ -63,7 +63,7 @@ export default function HostPage() {
     <div className="hostContainer">
       <ToastContainer />
       <div className="logoSlave">SpaceShoot!</div>
-      <User/>
+      <User />
       <FrameHost>
         <div className="header">
           <div className="numberQuiz">
@@ -88,7 +88,7 @@ export default function HostPage() {
                     alt="background"
                   ></img>
                   <div className="contentQuiz">
-                    <Link to="/host/edit">
+                    <Link to={`/host/edit?quizId=${item._id}`}>
                       <div className="quizName">{item.name}</div>
                     </Link>
                     <div className="quizButton">
@@ -113,45 +113,6 @@ export default function HostPage() {
           </ul>
         </div>
       </FrameHost>
-      {/* <div className="listQuizWrap">
-        <img className="planetIcon" src="images/Planet-1.png" alt="planetIcon" />
-        <img className="starIcon" src="images/Star2.png" alt="starIcon" />
-        <div className="header">
-          <div className="numberQuiz">Total Quizs <span>{quizList.length}</span></div>
-          <div className="title">List Quizs</div>
-          <Link to={"/host/create"}>
-            <button className="createButton">
-              <BiAddToQueue />
-              Create Quiz</button>
-          </Link>
-        </div>
-        <div className="listQuiz">
-          <ul className="myList">
-            {quizList &&
-              quizList.map((item) => (
-                <li
-                  className="quizDetail"
-                  key={item._id}
-                >
-                  <img
-                    className="imgQuiz"
-                    src={item.imgPath}
-                    alt="background"
-                  ></img>
-                  <div className="contentQuiz">
-                    <Link to="/host/edit">
-                      <div className="quizName">{item.name}</div>
-                    </Link>
-                    <div className="quizButton">
-                      <div className="playBtn" onClick={() => _handleClickToHostGame(item._id)}><HiOutlinePlay />Play</div>
-                      <div className="deleteBtn"><TiDeleteOutline />Delete</div>
-                    </div>
-                  </div>
-                </li>
-              ))}
-          </ul>
-        </div>
-      </div> */}
     </div>
   );
 }
