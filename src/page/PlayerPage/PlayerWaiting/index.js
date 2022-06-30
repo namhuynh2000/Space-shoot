@@ -9,6 +9,7 @@ import {
   setReduxPlayerName,
   setReduxPlayerRoom,
 } from "../../../redux/reducers/playerReducer";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function PlayerWaitingPage() {
   const [searchParams] = useSearchParams();
@@ -54,5 +55,11 @@ export default function PlayerWaitingPage() {
       socket.off("hostStartingGame", handleHostStartGameRes);
     };
   }, []);
-  return <div>Waiting...</div>;
+  return (
+    <div className="homeContainer">
+      <div>Wating...</div>
+      <img className="planetIcon" src="images/planet.png" alt="planetImage" />
+      <img className="roverIcon" src="images/Rover.png" alt="roverImage" />
+    </div>
+  );
 }

@@ -243,25 +243,25 @@ const HostCreateQuizPage = ({ quiz }) => {
         <div className="host-create__body">
           <div className="host-create__body__header">
             <div className="numberQuestion">
-              Question{" "}
-              <span>
-                {questionIndex + 1} / {state.questions.length}
+              Question <span>{questionIndex + 1} / {state.questions.length}
+                <ul className="anotherQuestion">
+                  {state.questions.map((ques, index) => (
+                    <li
+                      key={index}
+                      onClick={() => _handleQuestionItemClick(index)}
+                      className={
+                        index === questionIndex
+                          ? "numberAnotherQuestion numberAnotherQuestion--active"
+                          : "numberAnotherQuestion"
+                      }
+                    >
+                      {index + 1}
+                    </li>
+                  ))}
+                </ul>
               </span>
-              <ul className="anotherQuestion">
-                {state.questions.map((ques, index) => (
-                  <li
-                    key={index}
-                    onClick={() => _handleQuestionItemClick(index)}
-                    className={
-                      index === questionIndex
-                        ? "numberAnotherQuestion numberAnotherQuestion--active"
-                        : "numberAnotherQuestion"
-                    }
-                  >
-                    {index + 1}
-                  </li>
-                ))}
-              </ul>
+
+
             </div>
             {/* <div className="host-create__bottom">
               <ul className="host-create__questions-list">
