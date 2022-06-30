@@ -6,7 +6,6 @@ import PlayerList from "../../../components/PlayerList/PlayerList";
 import socket from "../../../connections/socket";
 import "./index.scss";
 import User from "../../../components/User/User"
-import 'animate.css';
 
 export default function HostWaiting() {
   const [players, setPlayers] = useState([]);

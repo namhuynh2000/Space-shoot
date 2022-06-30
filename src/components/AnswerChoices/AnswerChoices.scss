@@ -1,16 +1,25 @@
 .choices {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 5rem;
+  grid-gap: 2rem;
+
+  li:hover{
+    opacity: 70%;
+  }
 
   li {
     color: #fff;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
     font-size: 4rem;
+    padding-left: 1rem;
     font-weight: bold;
+    border-radius: 1rem;
+    height: 8rem;
     cursor: pointer;
+    gap: 2rem;
+
 
     &:nth-child(1) {
       background-color: #bbd22a;

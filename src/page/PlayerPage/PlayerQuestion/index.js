@@ -108,13 +108,23 @@ const PlayerQuestionPage = () => {
       )}
 
       {!isLoading && question && !isAnswer && !timeOut && (
-        <div className="player-question__detail">
-          <div className="player-question__detail-info">
-            <p>{question.quizName}</p>
-            <p>30</p>
-            <p>Point: {player.score}</p>
-          </div>
+        <div >
+          <div className="title">SpaceShoot!</div>
+          <div className="player-question__detail">
+          <div className="player-question__detail__info">
+              <div className="player-question__detail__info__number">
+                <div className="player-question__detail__info__number_text">Question </div>
+                <div className="player-question__detail__info__number_number"> {question.questionIndex + 1}/{question.questionLength}</div>
+               
+              </div>
+              <div>{question.questionData.content}</div>
+            </div>
           <div className="player-question__detail__question">
+            <div className="player-question__detail__question__number">
+                <div className="player-question__detail__question__number_text">Point </div>
+                <div className="player-question__detail__question__number_number"> {question.questionIndex + 1}/{question.questionLength}</div>
+               
+              </div>
             <img
               src={
                 question.questionData.imgPath
@@ -123,22 +133,19 @@ const PlayerQuestionPage = () => {
               }
               alt={"test"}
             ></img>
-            <div className="player-question__detail__question__text">
-              <p>
-                Question {question.questionIndex + 1}/{question.questionLength}
-              </p>
-              <p>{question.questionData.content}</p>
-            </div>
+            
           </div>
 
           <div className="player-question__detail-choices">
-            <p>Choose Answer</p>
             <AnswerChoices
               choices={question.questionData.choices}
               clickHandle={_handlePlayerAnswer}
               role={"host"}
             />
           </div>
+
+          </div>
+          
         </div>
       )}
 
