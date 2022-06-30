@@ -132,14 +132,16 @@ const HostCreateQuizPage = ({ quiz }) => {
     });
   };
 
-  const _handleCorrectAnswerInputOnChange = (e) => {
-    dispatch({
-      type: "updateQuestionCorrectAnswer",
-      payload: {
-        questionIndex,
-        correctAnswer: e.target.value,
-      },
-    });
+  const _handleCorrectAnswerInputOnChange = (index) => {
+    if (state.questions[questionIndex].choices[index].content) {
+      dispatch({
+        type: "updateQuestionCorrectAnswer",
+        payload: {
+          questionIndex,
+          correctAnswer: state.questions[questionIndex].choices[index].content,
+        },
+      });
+    }
   };
 
   const _handleQuestionItemClick = (index) => {
@@ -243,7 +245,9 @@ const HostCreateQuizPage = ({ quiz }) => {
         <div className="host-create__body">
           <div className="host-create__body__header">
             <div className="numberQuestion">
-              Question <span>{questionIndex + 1} / {state.questions.length}
+              Question{" "}
+              <span>
+                {questionIndex + 1} / {state.questions.length}
                 <ul className="anotherQuestion">
                   {state.questions.map((ques, index) => (
                     <li
@@ -260,8 +264,6 @@ const HostCreateQuizPage = ({ quiz }) => {
                   ))}
                 </ul>
               </span>
-
-
             </div>
             {/* <div className="host-create__bottom">
               <ul className="host-create__questions-list">
@@ -334,7 +336,16 @@ const HostCreateQuizPage = ({ quiz }) => {
               {state.questions[questionIndex].choices.map((ans, index) => {
                 return (
                   <li key={index}>
-                    <div className="logo">
+                    <div
+                      className={
+                        state.questions[questionIndex].correctAnswer &&
+                        state.questions[questionIndex].correctAnswer ===
+                          ans.content
+                          ? "logo logo--active"
+                          : "logo"
+                      }
+                      onClick={() => _handleCorrectAnswerInputOnChange(index)}
+                    >
                       {index === 0 && <Polygon></Polygon>}
                       {index === 1 && <Rectangle2></Rectangle2>}
                       {index === 2 && <Rectangle></Rectangle>}
@@ -348,7 +359,7 @@ const HostCreateQuizPage = ({ quiz }) => {
                       className="host-create__answers-content"
                     />
 
-                    <div className="host-create__answers-correct">
+                    {/* <div className="host-create__answers-correct">
                       <input
                         type="radio"
                         id={`correctAnswer${index}`}
@@ -361,7 +372,7 @@ const HostCreateQuizPage = ({ quiz }) => {
                         }
                         onChange={_handleCorrectAnswerInputOnChange}
                       />
-                    </div>
+                    </div> */}
                   </li>
                 );
               })}
