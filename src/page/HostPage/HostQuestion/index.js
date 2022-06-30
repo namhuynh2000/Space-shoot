@@ -12,6 +12,7 @@ import {
 import AnswerChoices from "../../../components/AnswerChoices/AnswerChoices";
 import AnswerChar from "../../../components/AnswerChart/AnswerChar";
 import QuestionControlButton from "../../../components/QuestionControlButton/QuestionControlButton";
+import { QuestionLoading } from "../../../components/QuestionLoading/QuestionLoading";
 const HostQuestionPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [question, setQuestion] = useState("");
@@ -123,10 +124,11 @@ const HostQuestionPage = () => {
         <div>
           <p>Question {params.get("question")}</p>
           <h2>{question.content}</h2>
-          <div
+          {/* <div
             className="host-question__progress"
             style={{ animationDuration: `${questionLoading}s` }}
-          ></div>
+          ></div> */}
+          <QuestionLoading duration={questionLoading} />
         </div>
       )}
 
