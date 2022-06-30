@@ -85,61 +85,64 @@
     .host-question__detail-info {
       display: flex;
       justify-content: space-between;
+      padding-right: 1rem;
       align-items: center;
-      min-height: 0;
       height: 100%;
 
-      .player-question__detail__info2 {
-
-        
-      }
-      .host-question__detail-info-countdown {
-        span {
-          font-weight: bold;
-          padding: 1.6rem 2rem;
-          background-color: rebeccapurple;
-          color: #fff;
-          font-size: 4rem;
-          border-radius: 50%;
-        }
-      }
-
-      .host-question__detail-info-answer-count {
-        
-        .player-question__detail__info__number {
-          display: flex;
-          flex-direction: row;
-          width: 15rem;
-          gap:1rem;
-          padding:1rem;
-          align-items: center;
-          background-color: #DF0772;
-          border-radius: 2rem;
-          .player-question__detail__info__number_text{
+      .host-question__detail-info__2{
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+        .host-question__detail-info-countdown {
+          span {
+            font-weight: bold;
+            padding: 1.6rem 2rem;
+            background-color: rebeccapurple;
             color: #fff;
-            font-size: large;
-          font-family: "Poppins";
+            font-size: 4rem;
+            border-radius: 50%;
           }
-          .player-question__detail__info__number_number{
-            color: #fff;
-            background-color: #3E3264;
-            padding-left:1rem;
-            padding-right:1rem;
+        }
+  
+        .host-question__detail-info-answer-count {
+          
+          .player-question__detail__info__number {
+            display: flex;
+            flex-direction: row;
+            width: 15rem;
+            gap:1rem;
+            padding:1rem;
+            align-items: center;
+            background-color: #DF0772;
             border-radius: 2rem;
+            .player-question__detail__info__number_text{
+              color: #fff;
+              font-size: large;
+            font-family: "Poppins";
+            }
+            .player-question__detail__info__number_number{
+              color: #fff;
+              background-color: #3E3264;
+              padding-left:1rem;
+              padding-right:1rem;
+              border-radius: 2rem;
+            }
+    
           }
-  
+    
+          div {
+            text-align: center;
+            width: 60%;
+            color: #000000;
+            font-weight: bolder;
+            font-size: x-large;
+            font-family: "Poppins";
+    
+          }
         }
-  
-        div {
-          text-align: center;
-          width: 60%;
-          color: #000000;
-          font-weight: bolder;
-          font-size: x-large;
-          font-family: "Poppins";
-  
-        }
+
       }
+      
 
       img {
         width: 100%;
