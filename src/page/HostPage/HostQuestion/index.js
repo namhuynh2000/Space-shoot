@@ -134,80 +134,87 @@ const HostQuestionPage = () => {
       )}
 
       {!isLoading && question && (
-        <div >
+        <div>
           <div className="logoSlave">SpaceShoot!</div>
-          <User/>
+          <User />
           <div className="host-question__detail">
-          <div className="player-question__detail__info">
-              <div className="player-question__detail__info__number">
-                <div className="player-question__detail__info__number_text">Question </div>
-                <div className="player-question__detail__info__number_number"> {question.questionIndex + 1}/{question.questionLength}</div>
+            <div className="host-question__detail__info">
+              <div className="host-question__detail__info__number">
+                <div className="host-question__detail__info__number_text">
+                  Question{" "}
+                </div>
+                <div className="host-question__detail__info__number_number">
+                  {" "}
+                  {question.questionIndex + 1}/{question.questionLength}
+                </div>
               </div>
-              <div>{question.questionData.content}</div>
+              <div className="host-question__detail__info__question-content">
+                {question.questionData.content}
+              </div>
             </div>
-          
-            
 
-
-          {!isEnd && (
-            <div className="host-question__detail-info">
-              <div className="host-question__detail-info__2">
-                <div className="host-question__detail-info-countdown">
-                  <span>{questionCountDown}</span>
-                </div>
-                <div className="host-question__detail-info-answer-count">
-                  <div className="player-question__detail__info__number">
-                  <div className="player-question__detail__info__number_text">Answers </div>
-                  <div className="player-question__detail__info__number_number"> {totalAnswer?.playerAnswers?.length ?? 0}</div>
-                </div>
-                  {/* <span>
+            {!isEnd && (
+              <div className="host-question__detail-info">
+                <div className="host-question__detail-info__2">
+                  <div className="host-question__detail-info-countdown">
+                    <span>{questionCountDown}</span>
+                  </div>
+                  <div className="host-question__detail-info-answer-count">
+                    <div className="host-question__detail__info__number">
+                      <div className="host-question__detail__info__number_text">
+                        Answers{" "}
+                      </div>
+                      <div className="host-question__detail__info__number_number">
+                        {" "}
+                        {totalAnswer?.playerAnswers?.length ?? 0}
+                      </div>
+                    </div>
+                    {/* <span>
                     <p>{totalAnswer?.playerAnswers?.length ?? 0}</p>
                     <p>Answers</p>
                   </span> */}
+                  </div>
                 </div>
-              </div>
-              <div className="host-question__detail-info-image">
-                <img
-                  src={generateImage(question.questionData.imgPath)}
-                  alt=""
-                />
-              </div>
-              {!isEnd && (
-              <QuestionControlButton
-                clickHandle={_skipBtnClickHandle}
-                content={"skip"}
-              />
-            )}
-            </div>
-          )}
-
-          {isEnd && (
-            <div className="host-question__result">
-              <AnswerChar
-                choices={question.questionData.choices}
-                playerAnswers={totalAnswer.playerAnswers}
-                correctAnswer={question.questionData.correctAnswer}
-              />
-              {isEnd && (
-                <div className="host-question__result__buttonNext">
+                <div className="host-question__detail-info-image">
+                  <img
+                    src={generateImage(question.questionData.imgPath)}
+                    alt=""
+                  />
+                </div>
+                {!isEnd && (
                   <QuestionControlButton
-                  clickHandle={_nextBtnClickHandle}
-                  content={"Next"}
-                /></div>
-              
+                    clickHandle={_skipBtnClickHandle}
+                    content={"skip"}
+                  />
+                )}
+              </div>
             )}
+
+            {isEnd && (
+              <div className="host-question__result">
+                <AnswerChar
+                  choices={question.questionData.choices}
+                  playerAnswers={totalAnswer.playerAnswers}
+                  correctAnswer={question.questionData.correctAnswer}
+                />
+                {isEnd && (
+                  <div className="host-question__result__buttonNext">
+                    <QuestionControlButton
+                      clickHandle={_nextBtnClickHandle}
+                      content={"Next"}
+                    />
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div>
+              <AnswerChoices
+                choices={question.questionData.choices}
+                disabled={isEnd}
+              />
             </div>
-          )}
-
-          <div>
-            <AnswerChoices
-              choices={question.questionData.choices}
-              disabled={isEnd}
-            />
           </div>
-
-          </div>
-          
         </div>
       )}
     </div>

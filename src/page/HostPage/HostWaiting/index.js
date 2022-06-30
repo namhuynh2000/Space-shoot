@@ -5,7 +5,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import PlayerList from "../../../components/PlayerList/PlayerList";
 import socket from "../../../connections/socket";
 import "./index.scss";
-import User from "../../../components/User/User"
+import User from "../../../components/User/User";
 
 export default function HostWaiting() {
   const [players, setPlayers] = useState([]);
@@ -13,11 +13,6 @@ export default function HostWaiting() {
   const [game, setGame] = useState("");
 
   const navigate = useNavigate();
-  useEffect(() => {
-    const quizId = params.get("quizId");
-    socket.emit("hostGame", quizId);
-  }, []);
-
   useEffect(() => {
     const quizId = params.get("quizId");
     socket.emit("hostGame", quizId);
@@ -55,7 +50,7 @@ export default function HostWaiting() {
       socket.off("receive__players", handlePlayerList);
       socket.off("hostGameRes", handleHostGameRes);
     };
-  }, [socket]);
+  }, []);
 
   const startBtn_click = (e) => {
     const quizId = params.get("quizId");
@@ -64,39 +59,44 @@ export default function HostWaiting() {
   };
 
   return (
-    <div className="waitingRoomContainer" >
+    <div className="waitingRoomContainer">
       <div className="headerContainer">
         <div className="logoSlave">SpaceShoot!</div>
         <User />
       </div>
 
-
       <div className="bodyContainer">
         <ul className="playerWaitList">
           {players.map((player) => (
-            <li className="grid-item" key={player.id}>{player.name}</li>
+            <li className="grid-item" key={player.id}>
+              {player.name}
+            </li>
           ))}
         </ul>
         <div className="quizWrap">
-          <div className="roomID">
-            Room ID: {game !== "" ? game.room : ''}
-          </div>
+          <div className="roomID">Room ID: {game !== "" ? game.room : ""}</div>
           <div className="nameQuiz">
-            Name: {game !== "" ? game.data.name : ''}
+            Name: {game !== "" ? game.data.name : ""}
           </div>
           <div className="avt-playerNumber">
-
-            <img className="imgQuiz" src={game !== "" ? game.data.imgPath : ''} alt="imgQuiz" />
+            <img
+              className="imgQuiz"
+              src={game !== "" ? game.data.imgPath : ""}
+              alt="imgQuiz"
+            />
 
             <div className="numberPlayerWrap">
               Player
               <div className="numberPlayer">
-                {players !== "" ? players.length : ''}
+                {players !== "" ? players.length : ""}
               </div>
             </div>
           </div>
-          <div className={players.length > 0 ? "startBtn--active" : "startBtn"} onClick={startBtn_click}
-          >Start Game
+          <div
+            className={players.length > 0 ? "startBtn--active" : "startBtn"}
+            onClick={startBtn_click}
+          >
+            Start Game
           </div>
         </div>
       </div>

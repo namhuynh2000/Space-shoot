@@ -20,16 +20,15 @@ const AnswerChoices = ({ choices, clickHandle, disabled, role }) => {
               onClick={() => {
                 _choiceClickHandle(choice);
               }}
+              className={role !== "player" ? "choice--no-select" : ""}
             >
               <div>
-              {index === 0 && <Polygon></Polygon>}
-                      {index === 1 && <Rectangle2></Rectangle2>}
-                      {index === 2 && <Rectangle></Rectangle>}
-                      {index === 3 && <Ellipse></Ellipse>}
+                {index === 0 && <Polygon></Polygon>}
+                {index === 1 && <Rectangle2></Rectangle2>}
+                {index === 2 && <Rectangle></Rectangle>}
+                {index === 3 && <Ellipse></Ellipse>}
               </div>
-              
-           
-              {role !== "player" ? `${choice.content}` : ""}
+              {choice.content}
             </li>
           );
 

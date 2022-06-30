@@ -9,7 +9,7 @@ import {
   selectPlayer,
   setReduxPlayer,
 } from "../../../redux/reducers/playerReducer";
-import RingLoader from "react-spinners/RingLoader"
+import RingLoader from "react-spinners/RingLoader";
 import PlayerQuestionResult from "../../../components/PlayerQuestionResult/PlayerQuestionResult";
 
 const PlayerQuestionPage = () => {
@@ -104,49 +104,63 @@ const PlayerQuestionPage = () => {
     <div className="player-question">
       {isLoading && (
         <div>
-          <RingLoader className="animationImg" color="#FFD080" size="10rem"></RingLoader>
+          <RingLoader
+            className="animationImg"
+            color="#FFD080"
+            size="10rem"
+          ></RingLoader>
         </div>
       )}
 
       {!isLoading && question && !isAnswer && !timeOut && (
-        <div >
+        <div>
           <div className="title">SpaceShoot!</div>
           <div className="player-question__detail">
-          <div className="player-question__detail__info">
+            <div className="player-question__detail__info">
               <div className="player-question__detail__info__number">
-                <div className="player-question__detail__info__number_text">Question </div>
-                <div className="player-question__detail__info__number_number"> {question.questionIndex + 1}/{question.questionLength}</div>
-               
+                <div className="player-question__detail__info__number_text">
+                  Question{" "}
+                </div>
+                <div className="player-question__detail__info__number_number">
+                  {" "}
+                  {question.questionIndex + 1}/{question.questionLength}
+                </div>
               </div>
-              <div>{question.questionData.content}</div>
+              <div className="player-question__detail__info__question-content">
+                {question.questionData.content}
+              </div>
+
+              <div></div>
             </div>
-          <div className="player-question__detail__question">
-            <div className="player-question__detail__question__number">
-                <div className="player-question__detail__question__number_text">Point </div>
-                <div className="player-question__detail__question__number_number"> {question.questionIndex + 1}/{question.questionLength}</div>
-               
+            <div className="player-question__detail__question">
+              <div className="player-question__detail__question__number">
+                <div className="player-question__detail__question__number_text">
+                  Point
+                </div>
+                <div className="player-question__detail__question__number_number">
+                  {player.score}
+                </div>
               </div>
-            <img
-              src={
-                question.questionData.imgPath
-                  ? question.questionData.imgPath
-                  : "/images/noImage.png"
-              }
-              alt={"test"}
-            ></img>
-            
-          </div>
+              <img
+                src={
+                  question.questionData.imgPath
+                    ? question.questionData.imgPath
+                    : "/images/noImage.png"
+                }
+                alt={"test"}
+              ></img>
 
-          <div className="player-question__detail-choices">
-            <AnswerChoices
-              choices={question.questionData.choices}
-              clickHandle={_handlePlayerAnswer}
-              role={"host"}
-            />
-          </div>
+              <div></div>
+            </div>
 
+            <div className="player-question__detail-choices">
+              <AnswerChoices
+                choices={question.questionData.choices}
+                clickHandle={_handlePlayerAnswer}
+                role={"player"}
+              />
+            </div>
           </div>
-          
         </div>
       )}
 

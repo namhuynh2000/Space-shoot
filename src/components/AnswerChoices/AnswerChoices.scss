@@ -3,8 +3,12 @@
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 2rem;
 
-  li:hover{
+  li:hover {
     opacity: 70%;
+  }
+
+  .choice--no-select {
+    pointer-events: none;
   }
 
   li {
@@ -12,14 +16,13 @@
     display: flex;
     align-items: center;
     justify-content: left;
-    font-size: 4rem;
+    font-size: 2rem;
     padding-left: 1rem;
     font-weight: bold;
     border-radius: 1rem;
     height: 8rem;
     cursor: pointer;
     gap: 2rem;
-
 
     &:nth-child(1) {
       background-color: #bbd22a;
