@@ -1,16 +1,20 @@
 .scoreboard__list {
   width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 
   .scoreboard__item {
-    background-color: #fff;
-
+    border-radius: 0.5rem;
+    background-color: #FFD080;
     margin-top: 2rem;
     display: flex;
     width: 100%;
     justify-content: space-between;
-    padding: 1.2rem 1.6rem;
+    padding: 1.2rem 2rem;
+    // margin-bottom: 0rem;
     p {
       font-size: 2rem;
+      font-weight: bolder;
     }
   }
 }

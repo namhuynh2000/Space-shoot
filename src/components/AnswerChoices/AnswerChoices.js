@@ -22,12 +22,11 @@ const AnswerChoices = ({ choices, clickHandle, disabled, role }) => {
               }}
               className={role !== "player" ? "choice--no-select" : ""}
             >
-              <div>
-                {index === 0 && <Polygon></Polygon>}
-                {index === 1 && <Rectangle2></Rectangle2>}
-                {index === 2 && <Rectangle></Rectangle>}
-                {index === 3 && <Ellipse></Ellipse>}
-              </div>
+              {index === 0 && <Polygon></Polygon>}
+              {index === 1 && <Rectangle2></Rectangle2>}
+              {index === 2 && <Rectangle></Rectangle>}
+              {index === 3 && <Ellipse></Ellipse>}
+
               {choice.content}
             </li>
           );

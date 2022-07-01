@@ -1,4 +1,4 @@
-export const questionCountDownInit = 20000;
+export const questionCountDownInit = 3000;
 export const questionLoading = 4;
 
 export const checkObjectEmpty = (value) => {

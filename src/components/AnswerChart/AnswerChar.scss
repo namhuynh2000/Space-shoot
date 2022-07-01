@@ -34,47 +34,49 @@
     }
 
     &:nth-child(1) {
+      color: #F4323C;
+
       .question__result-percentage {
-        background-color: red;
+        background-color: #F4323C;
 
         .question__result-count {
-          color: red;
+          color: #F4323C;
         }
       }
     }
 
     &:nth-child(2) {
-      color: blue;
+      color: #0B65D2;
 
       .question__result-percentage {
-        background-color: blue;
+        background-color: #0B65D2;
 
         .question__result-count {
-          color: blue;
+          color: #0B65D2;
         }
       }
     }
 
     &:nth-child(3) {
-      color: orange;
+      color: #DE9B00;
 
       .question__result-percentage {
-        background-color: orange;
+        background-color: #DE9B00;
 
         .question__result-count {
-          color: orange;
+          color: #DE9B00;
         }
       }
     }
 
     &:nth-child(4) {
-      color: green;
+      color: #237D09;
 
       .question__result-percentage {
-        background-color: green;
+        background-color: #237D09;
 
         .question__result-count {
-          color: green;
+          color: #237D09;
         }
       }
     }

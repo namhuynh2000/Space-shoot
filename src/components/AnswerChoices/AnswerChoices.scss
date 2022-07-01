@@ -9,6 +9,7 @@
 
   .choice--no-select {
     pointer-events: none;
+    padding-left: 3rem;
   }
 
   li {
@@ -22,22 +23,22 @@
     border-radius: 1rem;
     height: 8rem;
     cursor: pointer;
-    gap: 2rem;
+    gap: 4rem;
 
     &:nth-child(1) {
-      background-color: #bbd22a;
+      background-color: #F4323C;
     }
 
     &:nth-child(2) {
-      background-color: #e51a1a;
+      background-color: #0B65D2;
     }
 
     &:nth-child(3) {
-      background-color: #08a5fd;
+      background-color: #DE9B00;
     }
 
     &:nth-child(4) {
-      background-color: #08f14a;
+      background-color: #237D09;
     }
   }
 }
@@ -50,7 +51,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.3);
     z-index: 999;
     content: "";
     display: block;

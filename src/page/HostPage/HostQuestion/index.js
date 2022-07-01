@@ -162,7 +162,7 @@ const HostQuestionPage = () => {
                   <div className="host-question__detail-info-answer-count">
                     <div className="host-question__detail__info__number">
                       <div className="host-question__detail__info__number_text">
-                        Answers{" "}
+                        Answer{" "}
                       </div>
                       <div className="host-question__detail__info__number_number">
                         {" "}

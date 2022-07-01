@@ -4,6 +4,7 @@ import Scoreboard from "../../../components/Scoreboard/Scoreboard";
 import socket from "../../../connections/socket";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import QuestionControlButton from "../../../components/QuestionControlButton/QuestionControlButton";
+import User from "../../../components/User/User";
 
 const HostScoreboardPage = () => {
   const [rankList, setRankList] = useState([]);
@@ -52,13 +53,23 @@ const HostScoreboardPage = () => {
 
   return (
     <div className="scoreboard">
+      <div>
+        <div className="logoSlave">SpaceShoot!</div>
+        <User />
+      </div>
+
       <div className="scoreboard__container">
-        <h1>Ranking</h1>
-        <Scoreboard rankList={rankList} />
-        <QuestionControlButton
-          clickHandle={_nextBtnClickHandle}
-          content={"next"}
-        />
+        <div className="scoreboard_body">
+        <img src="/images/Star2.png" alt="Star2" />
+          <h1>Scoreboard</h1>
+          <Scoreboard className="scoreboard__list" rankList={rankList} />
+          <QuestionControlButton
+            className="nextButton"
+            clickHandle={_nextBtnClickHandle}
+            content={"next"}
+          />
+        </div>
+
       </div>
     </div>
   );
