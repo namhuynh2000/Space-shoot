@@ -123,8 +123,8 @@ const HostQuestionPage = () => {
     <div className="host-question">
       {!isEnd && isLoading && question && (
         <div>
-          <p>Question {params.get("question")}</p>
-          <h2>{question.content}</h2>
+          {/* <p>Question {params.get("question")}</p> */}
+          {/* <h2>{question.content}</h2> */}
           {/* <div
             className="host-question__progress"
             style={{ animationDuration: `${questionLoading}s` }}
