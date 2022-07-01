@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@redux-devtools/core": "^3.13.1",
     "@reduxjs/toolkit": "^1.8.2",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
@@ -18,12 +19,11 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-spinners": "^0.13.2",
-
+    "react-tagcloud": "^2.2.0",
     "react-toastify": "^9.0.4",
     "sass": "^1.52.2",
     "socket.io-client": "^4.5.1",
-    "web-vitals": "^2.1.4",
-    "@redux-devtools/core": "^3.13.1"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -49,5 +49,4 @@
       "last 1 safari version"
     ]
   }
-
 }

@@ -8,6 +8,7 @@ import "./index.scss";
 import User from "../../../components/User/User"
 import 'animate.css';
 // import TagCloud from 'react-tag-cloud';
+import { TagCloud } from 'react-tagcloud'
 
 import randomColor from 'randomcolor';
 
@@ -100,6 +101,12 @@ export default function HostWaiting() {
 
 
             </TagCloud>} */}
+            <TagCloud
+              minSize={12}
+              maxSize={35}
+              tags={playersLeft}
+              onClick={tag => alert(`'${tag.value}' was selected!`)}
+            />
           </div>
           <div className="quizWrap">
             <div className="roomID">
@@ -121,7 +128,8 @@ export default function HostWaiting() {
             >Start Game
             </div>
           </div>
-          {/* {playersRight && <TagCloud
+          <div className="playerRight">
+            {/* {playersRight && <TagCloud
             style={{
               fontWeight: 'bold',
               fontFamily: 'Poppins',
@@ -136,6 +144,8 @@ export default function HostWaiting() {
               })
             }
           </TagCloud>} */}
+          </div>
+
         </div>
       </div>
 
