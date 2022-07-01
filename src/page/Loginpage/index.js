@@ -48,7 +48,7 @@ export default function LoginPage() {
         toast.error("Oop! Something wrong!!!");
       });
   };
-
+  
   const login = async () => {
     try {
       const result = await signInWithEmailAndPassword(

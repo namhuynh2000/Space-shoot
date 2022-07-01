@@ -42,6 +42,7 @@ export default function HomePage() {
       }
     });
   }, [dispatch, navigate]);
+  console.log("Start");
 
   return (
     <div className="homeContainer">
