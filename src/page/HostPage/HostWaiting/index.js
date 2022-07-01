@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
@@ -7,9 +7,14 @@ import socket from "../../../connections/socket";
 import "./index.scss";
 import User from "../../../components/User/User"
 import 'animate.css';
+import TagCloud from 'react-tag-cloud';
+
+import randomColor from 'randomcolor';
 
 export default function HostWaiting() {
   const [players, setPlayers] = useState([]);
+  const [playersLeft, setPlayersLeft] = useState([]);
+  const [playersRight, setPlayersRight] = useState([]);
   const [params] = useSearchParams();
   const [game, setGame] = useState("");
 
@@ -24,6 +29,8 @@ export default function HostWaiting() {
     socket.emit("hostGame", quizId);
   }, []);
 
+  console.log(players);
+
   useEffect(() => {
     //Send request to get player list
     socket.emit("fetchPlayersInRoom");
@@ -31,6 +38,8 @@ export default function HostWaiting() {
     //Listen to receive player list
     function handlePlayerList(data) {
       setPlayers(data);
+      console.log("handlePlayerList run");
+
     }
     socket.on("receive__players", handlePlayerList);
     // socket.on("receive__players", (data) => {
@@ -52,10 +61,13 @@ export default function HostWaiting() {
     }
     socket.on("hostGameRes", handleHostGameRes);
     // socket.on("hostGameRes", (res) => {});
+
+
     return () => {
       socket.off("receive__players", handlePlayerList);
       socket.off("hostGameRes", handleHostGameRes);
     };
+
   }, [socket]);
 
   const startBtn_click = (e) => {
@@ -64,51 +76,80 @@ export default function HostWaiting() {
     navigate(`/host/question?quizId=${quizId}&question=1`);
   };
 
+  useEffect(() => {
+    setPlayersLeft(players.filter((player, index) => {
+      return index % 2 === 0;
+    }))
+    setPlayersRight(players.filter((player, index) => {
+      return index % 2 === 1;
+    }))
+  }, [players])
+
   return (
     <div className="waitingRoomContainer" >
       <div className="headerContainer">
         <div className="logoSlave">SpaceShoot!</div>
         <User />
       </div>
-
-
       <div className="bodyContainer">
-        <ul className="playerWaitList">
-          {players.map((player) => (
-            <li className="grid-item" key={player.id}>{player.name}</li>
-          ))}
-        </ul>
-        <div className="quizWrap">
-          <div className="roomID">
-            Room ID: {game !== "" ? game.room : ''}
-          </div>
-          <div className="nameQuiz">
-            Name: {game !== "" ? game.data.name : ''}
-          </div>
-          <div className="avt-playerNumber">
+        <div className="bodyHeader">
+          <div className="playerLeft">
+            {playersLeft && <TagCloud
+              style={{
+                fontWeight: 'bold',
+                fontFamily: 'Poppins',
+                padding: 15,
+                width: '100%',
+                height: '100%',
+                color: () => randomColor()
+              }}>
+              {
+                playersLeft.map((player) => {
+                  return <li className="animate__heartBeat" key={player.id}>{player.name}</li>
+                })
+              }
 
-            <img className="imgQuiz" src={game !== "" ? game.data.imgPath : ''} alt="imgQuiz" />
 
-            <div className="numberPlayerWrap">
-              Player
-              <div className="numberPlayer">
-                {players !== "" ? players.length : ''}
+            </TagCloud>}
+          </div>
+          <div className="quizWrap">
+            <div className="roomID">
+              Room ID: {game !== "" ? game.room : ''}
+            </div>
+            <div className="nameQuiz">
+              Name: {game !== "" ? game.data.name : ''}
+            </div>
+            <div className="avt-playerNumber">
+              <img className="imgQuiz" src={game !== "" ? game.data.imgPath : ''} alt="imgQuiz" />
+              <div className="numberPlayerWrap">
+                Player
+                <div className="numberPlayer">
+                  {players !== "" ? players.length : ''}
+                </div>
               </div>
             </div>
+            <div className={players.length > 0 ? "startBtn--active" : "startBtn"} onClick={startBtn_click}
+            >Start Game
+            </div>
           </div>
-          <div className={players.length > 0 ? "startBtn--active" : "startBtn"} onClick={startBtn_click}
-          >Start Game
-          </div>
+          {playersRight && <TagCloud
+            style={{
+              fontWeight: 'bold',
+              fontFamily: 'Poppins',
+              padding: 15,
+              width: '100%',
+              height: '100%',
+              color: () => randomColor()
+            }}>
+            {
+              playersRight.map((player) => {
+                return <li className="animate__heartBeat" key={player.id}>{player.name}</li>
+              })
+            }
+          </TagCloud>}
         </div>
       </div>
 
-      {/* <PlayerList players={players} room={room} /> */}
-      {/* <button className="startGameButton"
-        onClick={startBtn_click}
-        disabled={players.length > 0 ? false : true}
-      >
-        Start game
-      </button> */}
-    </div>
+    </div >
   );
 }
