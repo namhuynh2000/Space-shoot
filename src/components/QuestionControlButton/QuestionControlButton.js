@@ -1,10 +1,14 @@
 import React from "react";
 import "./QuestionControlButton.scss";
+import { ReactComponent as NextIcon } from "../../Icons/nextIcon.svg";
 const QuestionControlButton = ({ clickHandle, content }) => {
   return (
-    <button className="question-control-btn" onClick={clickHandle}>
-      {content}
-    </button>
+    <div className="nextButton" onClick={clickHandle}>
+      <NextIcon></NextIcon>
+      <div>{content}</div>
+
+    </div>
+
   );
 };
 

@@ -25,13 +25,6 @@ export default function HostWaiting() {
   }, []);
 
   useEffect(() => {
-    const quizId = params.get("quizId");
-    socket.emit("hostGame", quizId);
-  }, []);
-
-  console.log(players);
-
-  useEffect(() => {
     //Send request to get player list
     socket.emit("fetchPlayersInRoom");
 
@@ -42,10 +35,7 @@ export default function HostWaiting() {
 
     }
     socket.on("receive__players", handlePlayerList);
-    // socket.on("receive__players", (data) => {
-    //   console.log(data);
-    //   setPlayers(data);
-    // });
+
 
     // Listen to host game result
 
@@ -67,8 +57,7 @@ export default function HostWaiting() {
       socket.off("receive__players", handlePlayerList);
       socket.off("hostGameRes", handleHostGameRes);
     };
-
-  }, [socket]);
+  }, []);
 
   const startBtn_click = (e) => {
     const quizId = params.get("quizId");
@@ -86,7 +75,7 @@ export default function HostWaiting() {
   }, [players])
 
   return (
-    <div className="waitingRoomContainer" >
+    <div className="waitingRoomContainer">
       <div className="headerContainer">
         <div className="logoSlave">SpaceShoot!</div>
         <User />

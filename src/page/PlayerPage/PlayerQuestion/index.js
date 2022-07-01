@@ -9,6 +9,7 @@ import {
   selectPlayer,
   setReduxPlayer,
 } from "../../../redux/reducers/playerReducer";
+import RingLoader from "react-spinners/RingLoader";
 import PlayerQuestionResult from "../../../components/PlayerQuestionResult/PlayerQuestionResult";
 
 const PlayerQuestionPage = () => {
@@ -103,47 +104,68 @@ const PlayerQuestionPage = () => {
     <div className="player-question">
       {isLoading && (
         <div>
-          <p>Loading...</p>
+          <RingLoader
+            className="animationImg"
+            color="#FFD080"
+            size="10rem"
+          ></RingLoader>
         </div>
       )}
 
       {!isLoading && question && !isAnswer && !timeOut && (
-        <div className="player-question__detail">
-          <div className="player-question__detail-info">
-            <p>{question.quizName}</p>
-            <p>30</p>
-            <p>Point: {player.score}</p>
-          </div>
-          <div className="player-question__detail__question">
-            <img
-              src={
-                question.questionData.imgPath
-                  ? question.questionData.imgPath
-                  : "/images/noImage.png"
-              }
-              alt={"test"}
-            ></img>
-            <div className="player-question__detail__question__text">
-              <p>
-                Question {question.questionIndex + 1}/{question.questionLength}
-              </p>
-              <p>{question.questionData.content}</p>
-            </div>
-          </div>
+        <div>
+          <div className="title">SpaceShoot!</div>
+          <div className="player-question__detail">
+            <div className="player-question__detail__info">
+              <div className="player-question__detail__info__number">
+                <div className="player-question__detail__info__number_text">
+                  Question{" "}
+                </div>
+                <div className="player-question__detail__info__number_number">
+                  {" "}
+                  {question.questionIndex + 1}/{question.questionLength}
+                </div>
+              </div>
+              <div className="player-question__detail__info__question-content">
+                {question.questionData.content}
+              </div>
 
-          <div className="player-question__detail-choices">
-            <p>Choose Answer</p>
-            <AnswerChoices
-              choices={question.questionData.choices}
-              clickHandle={_handlePlayerAnswer}
-              role={"host"}
-            />
+              <div></div>
+            </div>
+            <div className="player-question__detail__question">
+              <div className="player-question__detail__question__number">
+                <div className="player-question__detail__question__number_text">
+                  Point
+                </div>
+                <div className="player-question__detail__question__number_number">
+                  {player.score}
+                </div>
+              </div>
+              <img
+                src={
+                  question.questionData.imgPath
+                    ? question.questionData.imgPath
+                    : "/images/noImage.png"
+                }
+                alt={"test"}
+              ></img>
+
+              <div></div>
+            </div>
+
+            <div className="player-question__detail-choices">
+              <AnswerChoices
+                choices={question.questionData.choices}
+                clickHandle={_handlePlayerAnswer}
+                role={"player"}
+              />
+            </div>
           </div>
         </div>
       )}
 
       {!isLoading && isAnswer && !timeOut && (
-        <div>Your answer has been submitted</div>
+        <div className="answerDone">Your answer has been submitted</div>
       )}
 
       {!isLoading && isAnswer && timeOut && (
@@ -157,7 +179,7 @@ const PlayerQuestionPage = () => {
       )}
 
       {!isLoading && timeOut && !isAnswer && (
-        <div>You have not answered the question</div>
+        <div className="answerDone">You have not answered the question</div>
       )}
     </div>
   );

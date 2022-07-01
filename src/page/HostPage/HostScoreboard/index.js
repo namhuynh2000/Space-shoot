@@ -15,6 +15,7 @@ const HostScoreboardPage = () => {
 
     function handleGetRankListRes(res) {
       if (res.result) {
+        console.log(res);
         setRankList(res.rankList);
         return;
       }

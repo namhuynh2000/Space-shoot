@@ -1,9 +1,29 @@
 .host-question {
   padding: 1.2rem 3rem;
   height: 100vh;
+  background: url("../../../../public/images/background-homepage.png") no-repeat
+    center;
+  background-size: cover;
+  overflow: hidden;
+
+  .logoSlave {
+    display: inline-block;
+    font-family: "Jolly Lodger", cursive;
+    font-size: 100px;
+    color: #0188a5;
+    margin-left: 40px;
+  }
 
   .host-question__result {
+    width: 100%;
     margin: 4rem auto;
+    position: relative;
+    .host-question__result__buttonNext {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 0;
+    }
   }
 
   .host-question__progress {
@@ -14,48 +34,129 @@
   }
 
   .host-question__detail {
-    height: 100%;
     display: grid;
-    grid-template-rows: 10% 70% 20%;
-    position: relative;
+    height: 90vh;
+    grid-template-rows: 10% 45% 40%;
+    grid-gap: 2%;
+    padding-left: 15%;
+    padding-right: 15%;
 
-    h1 {
-      text-align: center;
-      font-size: 5rem;
+    .host-question__detail__info {
+      padding-left: 2%;
+      display: grid;
+      grid-template-columns: 25% 46% 25%;
+      background-color: #fff;
+      align-items: center;
+      border-radius: 1rem;
+      padding: 1rem 2rem;
+      width: 100%;
+      font-weight: bolder;
+      font-size: x-2rem;
+      font-family: "Poppins";
+      gap: 4%;
+
+      .host-question__detail__info__number {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        padding: 1rem;
+        align-items: center;
+        background-color: #df0772;
+        border-radius: 2rem;
+        width: 100%;
+        justify-content: space-between;
+        .host-question__detail__info__number_text {
+          color: #fff;
+          font-size: 2rem;
+          font-family: "Poppins";
+        }
+        .host-question__detail__info__number_number {
+          color: #fff;
+          background-color: #3e3264;
+          padding-left: 1rem;
+          padding-right: 1rem;
+          border-radius: 2rem;
+
+          font-size: 2rem;
+        }
+      }
+
+      .host-question__detail__info__question-content {
+        text-align: center;
+        color: #000000;
+        font-weight: bolder;
+        font-size: 2rem;
+        flex: 1;
+        width: 100%;
+        font-family: "Poppins";
+        left: 50%;
+      }
     }
 
     .host-question__detail-info {
       display: flex;
-      grid-template-columns: 10% 70% 10%;
       justify-content: space-between;
+      padding-right: 1rem;
       align-items: center;
-      min-height: 0;
       height: 100%;
 
-      .host-question__detail-info-countdown {
-        span {
-          font-weight: bold;
-          padding: 1.6rem 2rem;
-          background-color: rebeccapurple;
-          color: #fff;
-          font-size: 4rem;
-          border-radius: 50%;
-        }
-      }
-
-      .host-question__detail-info-answer-count {
-        span {
-          font-weight: bold;
-          p {
-            font-size: 2rem;
+      .host-question__detail-info__2 {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+        .host-question__detail-info-countdown {
+          span {
+            width: 120px;
+            font-weight: bold;
+            background-color: rebeccapurple;
+            color: #fff;
+            font-size: 4rem;
+            border-radius: 50%;
+            text-align: center;
+            padding: 1rem 0.6rem;
+            display: block;
           }
-          text-align: center;
+        }
+
+        .host-question__detail-info-answer-count {
+          .host-question__detail__info__number {
+            display: flex;
+            flex-direction: row;
+            width: 15rem;
+            gap: 1rem;
+            padding: 1rem;
+            align-items: center;
+            background-color: #df0772;
+            border-radius: 2rem;
+            .host-question__detail__info__number_text {
+              color: #fff;
+              font-size: 2rem;
+              font-family: "Poppins";
+            }
+            .host-question__detail__info__number_number {
+              color: #fff;
+              background-color: #3e3264;
+              padding-left: 1rem;
+              padding-right: 1rem;
+              border-radius: 2rem;
+            }
+          }
+
+          div {
+            text-align: center;
+            width: 60%;
+            color: #000000;
+            font-weight: bolder;
+            font-size: x-2rem;
+            font-family: "Poppins";
+          }
         }
       }
 
       img {
         width: 100%;
         height: 100%;
+        height: 30rem;
         object-fit: contain;
       }
     }
