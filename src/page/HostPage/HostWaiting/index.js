@@ -7,7 +7,7 @@ import socket from "../../../connections/socket";
 import "./index.scss";
 import User from "../../../components/User/User"
 import 'animate.css';
-import TagCloud from 'react-tag-cloud';
+// import TagCloud from 'react-tag-cloud';
 
 import randomColor from 'randomcolor';
 
@@ -83,7 +83,7 @@ export default function HostWaiting() {
       <div className="bodyContainer">
         <div className="bodyHeader">
           <div className="playerLeft">
-            {playersLeft && <TagCloud
+            {/* {playersLeft && <TagCloud
               style={{
                 fontWeight: 'bold',
                 fontFamily: 'Poppins',
@@ -99,7 +99,7 @@ export default function HostWaiting() {
               }
 
 
-            </TagCloud>}
+            </TagCloud>} */}
           </div>
           <div className="quizWrap">
             <div className="roomID">
@@ -121,7 +121,7 @@ export default function HostWaiting() {
             >Start Game
             </div>
           </div>
-          {playersRight && <TagCloud
+          {/* {playersRight && <TagCloud
             style={{
               fontWeight: 'bold',
               fontFamily: 'Poppins',
@@ -135,7 +135,7 @@ export default function HostWaiting() {
                 return <li className="animate__heartBeat" key={player.id}>{player.name}</li>
               })
             }
-          </TagCloud>}
+          </TagCloud>} */}
         </div>
       </div>
 
