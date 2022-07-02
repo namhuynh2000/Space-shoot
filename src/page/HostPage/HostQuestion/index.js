@@ -123,8 +123,8 @@ const HostQuestionPage = () => {
     <div className="host-question">
       {!isEnd && isLoading && question && (
         <div>
-          {/* <p>Question {params.get("question")}</p> */}
-          {/* <h2>{question.content}</h2> */}
+          <p>Question {params.get("question")}</p>
+          <h2>{question.content}</h2>
           {/* <div
             className="host-question__progress"
             style={{ animationDuration: `${questionLoading}s` }}
@@ -162,7 +162,7 @@ const HostQuestionPage = () => {
                   <div className="host-question__detail-info-answer-count">
                     <div className="host-question__detail__info__number">
                       <div className="host-question__detail__info__number_text">
-                        Answer{" "}
+                        Answers{" "}
                       </div>
                       <div className="host-question__detail__info__number_number">
                         {" "}

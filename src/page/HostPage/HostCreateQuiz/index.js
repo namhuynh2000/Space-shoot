@@ -135,6 +135,9 @@ const HostCreateQuizPage = () => {
     setDisable(false);
   }, [state]);
 
+
+
+
   useEffect(() => {
     validateForm();
   }, [validateForm]);
@@ -218,7 +221,6 @@ const HostCreateQuizPage = () => {
       inputFileRef.current.click();
     }
 
-    console.log("Importerrrrrr");
   };
 
   const _handleLoadImg = () => {
