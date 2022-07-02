@@ -125,8 +125,6 @@ const PlayerQuestionPage = () => {
               <div className="player-question__detail__info__question-content">
                 {question.questionData.content}
               </div>
-
-              <div></div>
             </div>
             <div className="player-question__detail__question">
               <div className="player-question__detail__question__number">
