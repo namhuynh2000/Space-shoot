@@ -1,71 +1,20 @@
 .scoreboard {
-  background-image: url("../../../../public/images/background-homepage.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
   height: 100vh;
-  // padding: 1.2rem 3rem;
+  padding: 1.2rem 3rem;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  // background-color: orange;
-
-  .logoSlave {
-    display: inline-block;
-    font-family: 'Jolly Lodger', cursive;
-    font-size: 100px;
-    color: #0188A5;
-    margin-left: 40px;
-  }
+  background-color: orange;
 
   .scoreboard__container {
-    margin-top: -2rem;
     display: flex;
     flex-direction: column;
     height: 100%;
     align-items: center;
-    // justify-content: center;
+    justify-content: center;
     gap: 2rem;
     position: relative;
-
-
-    .scoreboard_body {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      width: 40%;
-      height: 100%;
-      margin-bottom: 3rem;
-      background-color: #FF9E7D;
-      border-radius: 80px;
-      border: #FE546F 15px solid;
-      position: relative;
-
-      img {
-        width: 120px;
-        height: 120px;
-        position: absolute;
-        top: -5rem;
-        right: -2rem;
-      }
-
-      .scoreboard__list {
-        flex: 1;
-      }
-
-      .nextButton {
-        // display: inline-block;
-        width: 10rem;
-        margin: auto;
-        margin-bottom: 2rem;
-      }
-    }
   }
-
   h1 {
-    font-size: 8rem;
+    font-size: 3rem;
     text-align: center;
-    font-family: Jolly Lodger;
-    color: #352A55;
   }
 }

@@ -6,6 +6,9 @@
   grid-column-gap: 2rem;
   height: 100%;
 
+  .hide {
+    display: none;
+  }
   li {
     padding: 0 2rem;
     display: flex;
@@ -34,49 +37,41 @@
     }
 
     &:nth-child(1) {
-      color: #F4323C;
-
       .question__result-percentage {
-        background-color: #F4323C;
+        background-color: #bbd22a;
 
         .question__result-count {
-          color: #F4323C;
+          color: #bbd22a;
         }
       }
     }
 
     &:nth-child(2) {
-      color: #0B65D2;
-
       .question__result-percentage {
-        background-color: #0B65D2;
+        background-color: #e51a1a;
 
         .question__result-count {
-          color: #0B65D2;
+          color: #e51a1a;
         }
       }
     }
 
     &:nth-child(3) {
-      color: #DE9B00;
-
       .question__result-percentage {
-        background-color: #DE9B00;
+        background-color: #08a5fd;
 
         .question__result-count {
-          color: #DE9B00;
+          color: #08a5fd;
         }
       }
     }
 
     &:nth-child(4) {
-      color: #237D09;
-
       .question__result-percentage {
-        background-color: #237D09;
+        background-color: #08f14a;
 
         .question__result-count {
-          color: #237D09;
+          color: #08f14a;
         }
       }
     }

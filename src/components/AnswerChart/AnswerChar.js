@@ -12,9 +12,10 @@ const AnswerChar = ({ choices, playerAnswers, correctAnswer }) => {
       console.log(items);
       const totalResult = playerAnswers.length;
 
+      console.log(playerAnswers);
       Array.from(items).forEach((item, index) => {
         const itemHeight =
-          (countPlayerAnswers(playerAnswers, choices[index].content) * 100) /
+          (countPlayerAnswers(playerAnswers, index) * 100) /
           totalResult;
         console.log(itemHeight);
         item.children[0].style.height = itemHeight ? itemHeight + "%" : "10%";
@@ -24,16 +25,14 @@ const AnswerChar = ({ choices, playerAnswers, correctAnswer }) => {
 
   return (
     <ul className={"question__result"} ref={resultRef}>
-      {choices.map((choice, index) => (
-        <li key={index}>
+      {choices.map((choice, index) =>   <li key={index} className={!choice.content ? "hide": ""}>
           <div className="question__result-percentage">
             <p className="question__result-count">
               {choice.content === correctAnswer && <FaCheck />}
-              {countPlayerAnswers(playerAnswers, choice.content)}
+              {countPlayerAnswers(playerAnswers, index)}
             </p>
           </div>
-        </li>
-      ))}
+        </li>)}
     </ul>
   );
 };

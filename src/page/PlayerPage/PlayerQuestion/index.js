@@ -26,7 +26,6 @@ const PlayerQuestionPage = () => {
   useEffect(() => {
     function handleGetQuestionRes(res) {
       if (res.result) {
-        console.log(res.questionData);
         setQuestion(res.questionData);
         setIsLoading(false);
       } else {
@@ -88,13 +87,13 @@ const PlayerQuestionPage = () => {
     };
   }, [currentQuestion]);
 
-  const _handlePlayerAnswer = (choice) => {
-    console.log(choice);
+  const _handlePlayerAnswer = (choice,index) => {
     socket.emit(
       "playerAnswer",
       player.id,
       question.questionData.id,
-      choice.content
+      choice.content,
+      index
     );
     setIsAnswer(true);
     setPlayerChoice(choice);
