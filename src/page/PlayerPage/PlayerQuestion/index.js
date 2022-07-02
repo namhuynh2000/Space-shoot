@@ -69,16 +69,8 @@ const PlayerQuestionPage = () => {
     }
 
     socket.on("nextQuestionRes", handleNextQuestionRes);
-    // socket.on("nextQuestionRes", (res) => {
-    //   if (res.result) {
-    //     setIsLoading(true);
-    //     setTimeOut(false);
-    //     setIsAnswer(false);
-    //     setCurrentQuestion((old) => old + 1);
-    //   } else {
-    //     navigate("/summary");
-    //   }
-    // });
+
+
 
     return () => {
       socket.off("getQuestionRes", handleGetQuestionRes);
@@ -100,8 +92,12 @@ const PlayerQuestionPage = () => {
     setPlayerChoice(choice);
   };
 
+  const findIndexPlayerChoice = (element) => element.content === playerChoice.content;
+
+
   return (
     <div className="player-question">
+      <div className="logoSlave">SpaceShoot!</div>
       {isLoading && (
         <div>
           <RingLoader
@@ -114,7 +110,7 @@ const PlayerQuestionPage = () => {
 
       {!isLoading && question && !isAnswer && !timeOut && (
         <div>
-          <div className="title">SpaceShoot!</div>
+          {/* <div className="title">SpaceShoot!</div> */}
           <div className="player-question__detail">
             <div className="player-question__detail__info">
               <div className="player-question__detail__info__number">
@@ -174,7 +170,7 @@ const PlayerQuestionPage = () => {
             question.questionData.correctAnswer === playerChoice.content
           }
           score={player.score}
-          rank={player.rank}
+          playerChoiceIndex={question.questionData.choices.findIndex(findIndexPlayerChoice)}
         />
       )}
 
