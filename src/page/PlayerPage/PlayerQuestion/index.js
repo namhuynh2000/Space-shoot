@@ -120,10 +120,13 @@ const PlayerQuestionPage = () => {
                   {" "}
                   {question.questionIndex + 1}/{question.questionLength}
                 </div>
+        
               </div>
+              
               <div className="player-question__detail__info__question-content">
                 {question.questionData.content}
               </div>
+              <div className="player-question__detail__info__div"></div>
             </div>
             <div className="player-question__detail__question">
               <div className="player-question__detail__question__number">
