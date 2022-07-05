@@ -5,9 +5,9 @@ import { ReactComponent as Rectangle } from "../../Icons/Rectangle.svg";
 import { ReactComponent as Rectangle2 } from "../../Icons/Rectangle2.svg";
 import { ReactComponent as Ellipse } from "../../Icons/Ellipse.svg";
 const AnswerChoices = ({ choices, clickHandle, disabled, role }) => {
-  const _choiceClickHandle = (choice) => {
+  const _choiceClickHandle = (choice, answerIndex) => {
     if (clickHandle) {
-      clickHandle(choice);
+      clickHandle(choice, answerIndex);
     }
   };
   return (
@@ -18,7 +18,7 @@ const AnswerChoices = ({ choices, clickHandle, disabled, role }) => {
             <li
               key={index}
               onClick={() => {
-                _choiceClickHandle(choice);
+                _choiceClickHandle(choice, index);
               }}
               className={role !== "player" ? "choice--no-select" : ""}
             >

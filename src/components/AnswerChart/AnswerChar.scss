@@ -1,10 +1,10 @@
 .question__result {
-  display: grid;
+  display: flex;
   width: 60%;
   margin: 0 auto;
-  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
   grid-column-gap: 2rem;
   height: 100%;
+  justify-content: center;
 
   li {
     padding: 0 2rem;
@@ -14,7 +14,7 @@
     text-align: end;
     height: 100%;
     justify-content: flex-end;
-
+    width: 20%;
     .question__result-percentage {
       width: 100%;
       position: relative;
@@ -34,49 +34,49 @@
     }
 
     &:nth-child(1) {
-      color: #F4323C;
+      color: #f4323c;
 
       .question__result-percentage {
-        background-color: #F4323C;
+        background-color: #f4323c;
 
         .question__result-count {
-          color: #F4323C;
+          color: #f4323c;
         }
       }
     }
 
     &:nth-child(2) {
-      color: #0B65D2;
+      color: #0b65d2;
 
       .question__result-percentage {
-        background-color: #0B65D2;
+        background-color: #0b65d2;
 
         .question__result-count {
-          color: #0B65D2;
+          color: #0b65d2;
         }
       }
     }
 
     &:nth-child(3) {
-      color: #DE9B00;
+      color: #de9b00;
 
       .question__result-percentage {
-        background-color: #DE9B00;
+        background-color: #de9b00;
 
         .question__result-count {
-          color: #DE9B00;
+          color: #de9b00;
         }
       }
     }
 
     &:nth-child(4) {
-      color: #237D09;
+      color: #237d09;
 
       .question__result-percentage {
-        background-color: #237D09;
+        background-color: #237d09;
 
         .question__result-count {
-          color: #237D09;
+          color: #237d09;
         }
       }
     }

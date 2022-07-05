@@ -70,7 +70,6 @@ const PlayerQuestionPage = () => {
 
     socket.on("nextQuestionRes", handleNextQuestionRes);
 
-
     return () => {
       socket.off("getQuestionRes", handleGetQuestionRes);
       socket.off("updatePlayerInfo", handleUpdatePlayerRes);
@@ -79,13 +78,14 @@ const PlayerQuestionPage = () => {
     };
   }, [currentQuestion]);
 
-  const _handlePlayerAnswer = (choice) => {
+  const _handlePlayerAnswer = (choice, answerIndex) => {
     console.log(choice);
     socket.emit(
       "playerAnswer",
       player.id,
       question.questionData.id,
-      choice.content
+      choice.content,
+      answerIndex
     );
     setIsAnswer(true);
     setPlayerChoice(choice);
