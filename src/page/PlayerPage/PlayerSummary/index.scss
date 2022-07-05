@@ -1,0 +1,89 @@
+.playerSummaryContainer {
+    background: url(../../../../public/images/background-homepage.png) no-repeat center;
+    background-size: cover;
+    height: 100vh;
+    // text-align: center;
+    // width: ;
+    display: flex;
+    flex-direction: column;
+
+    .logoSlave {
+        display: inline-block;
+        font-family: 'Jolly Lodger', cursive;
+        font-size: 100px;
+        color: #0188A5;
+        margin-left: 40px;
+    }
+
+    .notifi{
+        font-weight: bolder;
+        color: #DF0772;
+    }
+
+    .summaryWrap {
+        background-color: #FF9E7D;
+        border-radius: 8rem;
+        border: #FE546F solid 1.5rem;
+        width: 40%;
+        height: 70%;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        // justify-content: space-evenly;
+        gap: 1.5rem;
+
+        .logoRocket {
+            // display: flex;
+            // justify-content: center;
+
+            img {
+                margin-top: -5rem;
+                width: 20rem;
+            }
+        }
+
+        
+
+        .name {
+            font-weight: 700;
+            font-size: 4rem;
+            margin-top: -7rem;
+            color: #fff;
+        }
+
+        .rank {
+            color: #fff;
+            padding: 0.5rem 1.5rem;
+            text-align: center;
+            background-color: rgba($color: #000000, $alpha: 0.2);
+            display: inline-block;
+            border-radius: 3rem;
+            font-size: 2rem;
+            font-weight: bold;
+            position: relative;
+
+            .logoStar {
+                img {
+                    width: 4rem;
+                }
+                position: absolute;
+                top: -2rem;
+                left: -1.2rem;
+            }
+        }
+
+        .score {
+            font-weight: bold;
+        }
+
+        .title {
+            font-size: 8rem;
+            text-align: center;
+            font-family: Jolly Lodger;
+            color: #352A55;
+            margin-top: 2rem;
+        }
+    }
+}

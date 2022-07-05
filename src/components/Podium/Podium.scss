@@ -5,9 +5,10 @@
   justify-content: center;
   margin: 0 auto;
   width: 40%;
-  height: 50vh;
+  height: 60vh;
+
   .podium__item {
-    background-color: #864cbf;
+    background-color: #864BBF;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -16,11 +17,13 @@
     opacity: 0;
     border-radius: 4px;
     height: 0;
+
     img {
       width: 150px;
       height: 150px;
       object-fit: fill;
     }
+
     &:nth-child(1) {
       //   height: 90%;
       order: 2;
@@ -37,6 +40,7 @@
       animation: second 1s forwards;
       animation-delay: 1s;
     }
+
     &:nth-child(3) {
       //   height: 80%;
       order: 3;
@@ -45,19 +49,26 @@
 
     .podium__player-info {
       color: #fff;
+      display: flex;
+      flex-direction: column;
+      // justify-content: center;
+      align-items: center;
+
       h2 {
-        font-size: 6rem;
-        font-weight: bold;
+        font-size: 3rem;
+        font-weight: 500;
         position: absolute;
-        top: -7rem;
-        display: block;
-        text-align: center;
+        top: -4rem;
         width: 100%;
-        left: 0;
+        display: flex;
+        justify-content: center;
+        // align-items: center;
+        // left: -4rem;
+        // transform: translateX(50%);
       }
 
       h3 {
-        font-size: 4rem;
+        font-size: 3rem;
         display: flex;
         align-items: center;
         gap: 2rem;

@@ -37,6 +37,7 @@ const HostSummaryPage = () => {
           <h1 className="summary__title">{gameName}</h1>
           <Podium rankList={finalRankList} topNumber={3} />
           <QuestionControlButton
+            className="nextButton"
             clickHandle={_exitBtnClickHandle}
             content={"Exit"}
           />

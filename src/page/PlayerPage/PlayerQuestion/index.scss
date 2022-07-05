@@ -1,12 +1,23 @@
 .player-question {
-  background: url("../../../../public/images/background-homepage.png") no-repeat
-    center;
+  background: url("../../../../public/images/background-homepage.png") no-repeat center;
   background-size: cover;
   height: 100vh;
   width: 100vw;
   // gap: 1rem;
   overflow: hidden;
   // padding: 1.2rem 3rem;
+  display: flex;
+  flex-direction: column;
+  // background-color: orange;
+
+  .logoSlave {
+    display: inline-block;
+    font-family: 'Jolly Lodger', cursive;
+    font-size: 100px;
+    color: #0188A5;
+    margin-left: 40px;
+  }
+
   .title {
     font-family: "Jolly Lodger", cursive;
     font-size: 100px;
@@ -26,10 +37,11 @@
   .answerDone {
     position: absolute;
     top: 50%;
-    left: 38%;
+    left: 50%;
+    transform: translate(-50%,-50%);
     color: #fff;
     font-weight: bolder;
-    font-size: 2rem;
+    font-size: 5rem;
     font-family: "Jolly Lodger";
   }
   .player-question__detail {

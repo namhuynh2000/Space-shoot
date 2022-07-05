@@ -1,6 +1,10 @@
 import React from "react";
 import "./Podium.scss";
+import "animate.css"
+
 const Podium = ({ rankList, topNumber }) => {
+  // var audio = new Audio('/audios/ho_reo.mp3');
+  // audio.play();
   return (
     <ul className="podium">
       {Array.from(Array(topNumber).keys()).map((rank) => (
@@ -9,7 +13,6 @@ const Podium = ({ rankList, topNumber }) => {
           {rankList[rank] && (
             <div className="podium__player-info">
               <h2>{rankList[rank].name}</h2>
-
               <h3>{rankList[rank].score}</h3>
             </div>
           )}
