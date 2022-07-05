@@ -69,16 +69,6 @@ const PlayerQuestionPage = () => {
     }
 
     socket.on("nextQuestionRes", handleNextQuestionRes);
-    // socket.on("nextQuestionRes", (res) => {
-    //   if (res.result) {
-    //     setIsLoading(true);
-    //     setTimeOut(false);
-    //     setIsAnswer(false);
-    //     setCurrentQuestion((old) => old + 1);
-    //   } else {
-    //     navigate("/summary");
-    //   }
-    // });
 
     return () => {
       socket.off("getQuestionRes", handleGetQuestionRes);
@@ -88,13 +78,14 @@ const PlayerQuestionPage = () => {
     };
   }, [currentQuestion]);
 
-  const _handlePlayerAnswer = (choice) => {
+  const _handlePlayerAnswer = (choice, answerIndex) => {
     console.log(choice);
     socket.emit(
       "playerAnswer",
       player.id,
       question.questionData.id,
-      choice.content
+      choice.content,
+      answerIndex
     );
     setIsAnswer(true);
     setPlayerChoice(choice);

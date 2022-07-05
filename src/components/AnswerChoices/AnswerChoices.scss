@@ -26,19 +26,19 @@
     gap: 4rem;
 
     &:nth-child(1) {
-      background-color: #F4323C;
+      background-color: #f4323c;
     }
 
     &:nth-child(2) {
-      background-color: #0B65D2;
+      background-color: #0b65d2;
     }
 
     &:nth-child(3) {
-      background-color: #DE9B00;
+      background-color: #de9b00;
     }
 
     &:nth-child(4) {
-      background-color: #237D09;
+      background-color: #237d09;
     }
   }
 }
@@ -55,5 +55,22 @@
     z-index: 999;
     content: "";
     display: block;
+  }
+}
+
+.disable {
+  pointer-events: none;
+  visibility: hidden;
+  position: relative;
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 999;
   }
 }
