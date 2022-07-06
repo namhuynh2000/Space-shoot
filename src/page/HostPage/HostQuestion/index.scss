@@ -42,14 +42,14 @@
     padding-right: 15%;
 
     .host-question__detail__info {
-      padding-left: 2%;
       display: grid;
-      grid-template-columns: auto 1fr;
+      grid-template-columns: 18% 60% 18%;
       background-color: #fff;
       align-items: center;
+      min-height: 7rem;
       border-radius: 1rem;
-      // padding: 1rem 2rem;
-      width: 100%;
+      padding: 1rem 2rem;
+      gap: 4%;
       font-weight: bolder;
       // font-size: 5rem;
       font-family: "Poppins";

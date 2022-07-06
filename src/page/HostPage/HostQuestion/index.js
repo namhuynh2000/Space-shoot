@@ -151,6 +151,7 @@ const HostQuestionPage = () => {
               <div className="host-question__detail__info__question-content">
                 {question.questionData.content}
               </div>
+              <div className="host-question__detail__info__div"></div>
             </div>
 
             {!isEnd && (
