@@ -26,7 +26,6 @@ const PlayerQuestionPage = () => {
   useEffect(() => {
     function handleGetQuestionRes(res) {
       if (res.result) {
-        console.log(res.questionData);
         setQuestion(res.questionData);
         setIsLoading(false);
       } else {
@@ -70,6 +69,8 @@ const PlayerQuestionPage = () => {
 
     socket.on("nextQuestionRes", handleNextQuestionRes);
 
+
+
     return () => {
       socket.off("getQuestionRes", handleGetQuestionRes);
       socket.off("updatePlayerInfo", handleUpdatePlayerRes);
@@ -78,20 +79,20 @@ const PlayerQuestionPage = () => {
     };
   }, [currentQuestion]);
 
-  const _handlePlayerAnswer = (choice, answerIndex) => {
-    console.log(choice);
+  const _handlePlayerAnswer = (choice,index) => {
     socket.emit(
       "playerAnswer",
       player.id,
       question.questionData.id,
       choice.content,
-      answerIndex
+      index
     );
     setIsAnswer(true);
     setPlayerChoice(choice);
   };
 
   const findIndexPlayerChoice = (element) => element.content === playerChoice.content;
+
 
   return (
     <div className="player-question">
@@ -119,12 +120,13 @@ const PlayerQuestionPage = () => {
                   {" "}
                   {question.questionIndex + 1}/{question.questionLength}
                 </div>
+        
               </div>
+              
               <div className="player-question__detail__info__question-content">
                 {question.questionData.content}
               </div>
-
-              <div></div>
+              <div className="player-question__detail__info__div"></div>
             </div>
             <div className="player-question__detail__question">
               <div className="player-question__detail__question__number">
@@ -168,7 +170,6 @@ const PlayerQuestionPage = () => {
             question.questionData.correctAnswer === playerChoice.content
           }
           score={player.score}
-          rank={player.rank}
           playerChoiceIndex={question.questionData.choices.findIndex(findIndexPlayerChoice)}
         />
       )}
