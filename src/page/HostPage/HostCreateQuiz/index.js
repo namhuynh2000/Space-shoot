@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import "./index.scss";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { reducer, initState, initFunc } from "../../../Reducer/createForm";
+import { reducer, initState, initFunc } from "../../../reducers/createForm";
 import { useSelector } from "react-redux";
 import { selectHost } from "../../../redux/reducers/hostReducer";
 import socket from "../../../connections/socket";
@@ -19,13 +19,11 @@ import { ReactComponent as Polygon } from "../../../Icons/Polygon.svg";
 import { ReactComponent as Rectangle } from "../../../Icons/Rectangle.svg";
 import { ReactComponent as Rectangle2 } from "../../../Icons/Rectangle2.svg";
 import { ReactComponent as Ellipse } from "../../../Icons/Ellipse.svg";
-import { TiDeleteOutline } from "react-icons/ti";
 import { ReactComponent as PlusIcon } from "../../../Icons/plus-circle.svg";
 import { ReactComponent as DeleteIcon } from "../../../Icons/x-circle.svg";
 import { storage } from "../../../fire";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { toast, ToastContainer } from "react-toastify";
-import { CgPocket } from "react-icons/cg";
 
 // Components
 const HostCreateQuizPage = () => {
@@ -119,8 +117,18 @@ const HostCreateQuizPage = () => {
         return;
       }
       let count = 0;
-      for (let choice of question.choices) {
-        if (choice.content) count++;
+      for (let i in question.choices) {
+        if (question.choices[i].content) {
+          for (let j in question.choices) {
+            if (i === j) continue;
+
+            if (question.choices[j].content === question.choices[i].content) {
+              setDisable(true);
+              return;
+            }
+          }
+          count++;
+        }
       }
       if (count < 2) {
         setDisable(true);

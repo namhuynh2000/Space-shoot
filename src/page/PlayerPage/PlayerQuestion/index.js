@@ -69,17 +69,15 @@ const PlayerQuestionPage = () => {
 
     socket.on("nextQuestionRes", handleNextQuestionRes);
 
-
-
     return () => {
       socket.off("getQuestionRes", handleGetQuestionRes);
       socket.off("updatePlayerInfo", handleUpdatePlayerRes);
       socket.off("questionTimeOut", handleQuestionTimeOut);
       socket.off("nextQuestionRes", handleNextQuestionRes);
     };
-  }, [currentQuestion]);
+  }, [currentQuestion, navigate, dispatch]);
 
-  const _handlePlayerAnswer = (choice,index) => {
+  const _handlePlayerAnswer = (choice, index) => {
     socket.emit(
       "playerAnswer",
       player.id,
@@ -91,8 +89,18 @@ const PlayerQuestionPage = () => {
     setPlayerChoice(choice);
   };
 
-  const findIndexPlayerChoice = (element) => element.content === playerChoice.content;
+  const findIndexPlayerChoice = (playerChoiceContent) => {
+    const newArray = question.questionData.choices.filter(
+      (choice) => choice.content !== ""
+    );
 
+    console.log("newArray: ", newArray);
+    console.log("element: ", playerChoiceContent);
+
+    return newArray.findIndex(
+      (choice) => choice.content === playerChoiceContent
+    );
+  };
 
   return (
     <div className="player-question">
@@ -120,9 +128,8 @@ const PlayerQuestionPage = () => {
                   {" "}
                   {question.questionIndex + 1}/{question.questionLength}
                 </div>
-        
               </div>
-              
+
               <div className="player-question__detail__info__question-content">
                 {question.questionData.content}
               </div>
@@ -170,7 +177,7 @@ const PlayerQuestionPage = () => {
             question.questionData.correctAnswer === playerChoice.content
           }
           score={player.score}
-          playerChoiceIndex={question.questionData.choices.findIndex(findIndexPlayerChoice)}
+          playerChoiceIndex={findIndexPlayerChoice(playerChoice.content)}
         />
       )}
 

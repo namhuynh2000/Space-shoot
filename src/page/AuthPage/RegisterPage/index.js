@@ -1,30 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./index.scss";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { auth } from "../../fire";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import {
-  onAuthStateChanged,
-  createUserWithEmailAndPassword,
-} from "firebase/auth";
-import { useDispatch, useSelector } from "react-redux";
-import { selectHost, setReduxHost } from "../../redux/reducers/hostReducer";
+import { auth } from "../../../fire";
+import { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 export default function RegisterPage() {
-  const navigate = useNavigate();
-  const host = useSelector(selectHost);
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [registerRePassword, setRegisterRePassword] = useState("");
   const [typePassword, setTypePassword] = useState("password");
-
+  const navigate = useNavigate();
   const eyeHandle = () => {
-    if (typePassword === 'password')
-      setTypePassword("text");
+    if (typePassword === "password") setTypePassword("text");
     else setTypePassword("password");
-  }
+  };
 
   const register = async () => {
     if (registerPassword !== registerRePassword) {
@@ -32,36 +23,34 @@ export default function RegisterPage() {
       return;
     }
     try {
-      const user = await createUserWithEmailAndPassword(
+      await createUserWithEmailAndPassword(
         auth,
         registerEmail,
         registerPassword
       );
       toast.success("Register success!");
       ClearInputs();
+      navigate("/login");
     } catch (error) {
-      console.log(error)
-      if (error.code === 'auth/email-already-in-use')
+      console.log(error);
+      if (error.code === "auth/email-already-in-use")
         toast.error("Email already exist!");
-      else if (error.code === 'auth/invalid-email') {
+      else if (error.code === "auth/invalid-email") {
         toast.error("Invalid email!");
-      }
-      else if (error.code === 'auth/weak-password') {
+      } else if (error.code === "auth/weak-password") {
         toast.error("Password too weak!");
         toast.warn("Password should be at least 6 characters!");
-      }
-      else {
+      } else {
         toast.error("Oop! Something wrong!!!");
       }
     }
-
   };
 
   const ClearInputs = () => {
     setRegisterEmail("");
     setRegisterPassword("");
     setRegisterRePassword("");
-  }
+  };
 
   return (
     <div className="registerContainer">
@@ -71,7 +60,6 @@ export default function RegisterPage() {
         <img className="starIcon" src="images/Star2.png" alt="starImage" />
         <Link to="/">
           <div className="logo">SpaceShoot!</div>
-
         </Link>
         <div className="title">Signup to create Account</div>
         <input
@@ -93,7 +81,16 @@ export default function RegisterPage() {
               setRegisterPassword(e.target.value);
             }}
           ></input>
-          <img className="eyeIcon" src={typePassword === 'password' ? 'images/eye-close.png' : 'images/eye-open.png'} alt="eyeIcon" onClick={eyeHandle} />
+          <img
+            className="eyeIcon"
+            src={
+              typePassword === "password"
+                ? "images/eye-close.png"
+                : "images/eye-open.png"
+            }
+            alt="eyeIcon"
+            onClick={eyeHandle}
+          />
         </div>
         <input
           className="registerContainer__form__passwordInput"

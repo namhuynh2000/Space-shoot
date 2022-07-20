@@ -22,8 +22,20 @@ export default function HomePage() {
     setPlayerName(e.target.value);
   };
 
+  const validateInput = () => {
+    if (!playerName) {
+      toast.error("Please enter your name");
+      return false;
+    }
+    if (!room) {
+      toast.error("Please enter room name");
+      return false;
+    }
+    return true;
+  };
+
   const _handleSubmit = () => {
-    socket.emit("joinRoom", { room, name: playerName });
+    if (validateInput()) socket.emit("joinRoom", { room, name: playerName });
   };
 
   const _handleRoomInput = (e) => {
@@ -38,18 +50,21 @@ export default function HomePage() {
           `/waiting?room=${res.player.room}&playerName=${res.player.name}`
         );
       } else {
-        toast.error("Oop! Maybe the code is wrong!!!");
+        toast.error(res.msg);
       }
     });
+
+    return () => {
+      socket.off("joinRoomRes");
+    };
   }, [dispatch, navigate]);
-  console.log("Start");
 
   return (
     <div className="homeContainer">
       <ToastContainer />
       <img className="planetIcon" src="images/planet.png" alt="planetImage" />
       <img className="roverIcon" src="images/Rover.png" alt="roverImage" />
-      <div className="groupButton" >
+      <div className="groupButton">
         <img className="cometIcon" src="images/Comet.png" alt="cometImage" />
         <div className="logo">SpaceShoot!</div>
         <JoinInput

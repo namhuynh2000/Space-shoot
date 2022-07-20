@@ -6,11 +6,11 @@ import HostWaiting from "./HostPage/HostWaiting";
 import PlayerQuestionPage from "./PlayerPage/PlayerQuestion";
 // import PlayerStartPage from "./PlayerPage/PlayerStart";
 import PlayerWaitingPage from "./PlayerPage/PlayerWaiting";
-import HostQuestionDetailPage from "./HostPage/HostQuestionDetail"
+import HostQuestionDetailPage from "./HostPage/HostQuestionDetail";
 import HostScoreboardPage from "./HostPage/HostScoreboard";
-import LoginPage from "./LoginPage";
-import RegisterPage from "./RegisterPage";
-import ForgotPassword from "./ForgotPasswordPage";
+import LoginPage from "./AuthPage/LoginPage";
+import RegisterPage from "./AuthPage/RegisterPage";
+import ForgotPassword from "./AuthPage/ForgotPasswordPage";
 export {
   LoginPage,
   RegisterPage,
@@ -24,5 +24,5 @@ export {
   HostQuestionDetailPage,
   PlayerQuestionPage,
   HostScoreboardPage,
-  ForgotPassword
+  ForgotPassword,
 };

@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 import "./index.scss";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { auth } from "../../fire";
+import { auth } from "../../../fire";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
-import { selectHost, setReduxHost } from "../../redux/reducers/hostReducer";
+import { selectHost, setReduxHost } from "../../../redux/reducers/hostReducer";
 export default function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ export default function LoginPage() {
 
   const provider = new GoogleAuthProvider();
   provider.setCustomParameters({
-    prompt: 'select_account'
+    prompt: "select_account",
   });
 
   useEffect(() => {
@@ -27,10 +27,9 @@ export default function LoginPage() {
   }, [host, navigate]);
 
   const eyeHandle = () => {
-    if (typePassword === 'password')
-      setTypePassword("text");
+    if (typePassword === "password") setTypePassword("text");
     else setTypePassword("password");
-  }
+  };
 
   const signInWithGoogle = () => {
     signInWithPopup(auth, provider)
@@ -48,7 +47,7 @@ export default function LoginPage() {
         toast.error("Oop! Something wrong!!!");
       });
   };
-  
+
   const login = async () => {
     try {
       const result = await signInWithEmailAndPassword(
@@ -66,15 +65,13 @@ export default function LoginPage() {
       // console.log(user);
       navigate("/host");
     } catch (error) {
-      if (error.code === 'auth/wrong-password') {
+      if (error.code === "auth/wrong-password") {
         toast.error("Password incorrect!");
-      }
-      else if (error.code === 'auth/user-not-found')
+      } else if (error.code === "auth/user-not-found")
         toast.error("Email does not exist!");
-      else if (error.code === 'auth/too-many-requests')
+      else if (error.code === "auth/too-many-requests")
         toast.error("Temporarily disabled due to many failed login attempts!");
-      else
-        toast.error("Oop! Something wrong!!!")
+      else toast.error("Oop! Something wrong!!!");
       console.log(error.message);
     }
   };
@@ -85,15 +82,17 @@ export default function LoginPage() {
       <img className="planetIcon" src="images/planet.png" alt="planetImage" />
       <div className="loginContainer__form">
         <img className="starIcon" src="images/Star2.png" alt="starImage" />
-        <Link to='/'>
+        <Link to="/">
           <div className="logo">SpaceShoot!</div>
         </Link>
         <div className="loginContentWrap">
-          <img className="telescopeIcon" src="images/Telescope.png" alt="telescopeImage" />
+          <img
+            className="telescopeIcon"
+            src="images/Telescope.png"
+            alt="telescopeImage"
+          />
           <div className="loginContent">
-            <p className="loginContainer__form__text">
-              Login to your Account
-            </p>
+            <p className="loginContainer__form__text">Login to your Account</p>
             <input
               className="loginContainer__form__emailInput"
               placeholder="Email address"
@@ -109,9 +108,17 @@ export default function LoginPage() {
                 onChange={(e) => {
                   setloginPassword(e.target.value);
                 }}
-              >
-              </input>
-              <img className="eyeIcon" src={typePassword === 'password' ? 'images/eye-close.png' : 'images/eye-open.png'} alt="eyeIcon" onClick={eyeHandle} />
+              ></input>
+              <img
+                className="eyeIcon"
+                src={
+                  typePassword === "password"
+                    ? "images/eye-close.png"
+                    : "images/eye-open.png"
+                }
+                alt="eyeIcon"
+                onClick={eyeHandle}
+              />
             </div>
             <Link to={"/forgot"}>
               <div className="forgot">Forgot password?</div>
@@ -120,20 +127,24 @@ export default function LoginPage() {
               Login
             </button>
             <p className="loginContainer__form__hr">Or</p>
-            <img className="googleButton" onClick={signInWithGoogle} src="images/icons8-google-500 1.png" alt="" />
+            <img
+              className="googleButton"
+              onClick={signInWithGoogle}
+              src="images/icons8-google-500 1.png"
+              alt=""
+            />
             <div>
               Not a member?{" "}
-              <Link style={{ color: "red", fontWeight: "700" }} to={"/register"}>
+              <Link
+                style={{ color: "red", fontWeight: "700" }}
+                to={"/register"}
+              >
                 Register!
               </Link>
             </div>
           </div>
         </div>
-
-
       </div>
     </div>
-
-
   );
 }

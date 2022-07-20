@@ -1,4 +1,4 @@
-export const questionCountDownInit = 3000;
+export const questionCountDownInit = 30;
 export const questionLoading = 4;
 
 export const checkObjectEmpty = (value) => {
@@ -6,7 +6,6 @@ export const checkObjectEmpty = (value) => {
 };
 
 export const countPlayerAnswers = (AnswerList, answerIndex) => {
-  console.log(answerIndex);
   let count = 0;
   AnswerList.forEach((ans) => {
     if (ans.index === +answerIndex) {

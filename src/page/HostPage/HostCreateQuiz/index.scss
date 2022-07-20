@@ -12,6 +12,7 @@
   .disable {
     pointer-events: none;
     opacity: 0.5;
+    visibility: unset !important;
   }
 
   .layout {
