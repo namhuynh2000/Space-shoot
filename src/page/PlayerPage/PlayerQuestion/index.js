@@ -98,7 +98,7 @@ const PlayerQuestionPage = () => {
     <div className="player-question">
       <div className="logoSlave">SpaceShoot!</div>
       {isLoading && (
-        <div>
+        <div className="loaderContainer">
           <RingLoader
             className="animationImg"
             color="#FFD080"

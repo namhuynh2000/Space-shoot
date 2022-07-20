@@ -57,19 +57,21 @@
 
       .host-question__detail__info__number {
         display: flex;
-        // flex-direction: row;
+        flex-direction: row;
         gap: 1rem;
+        min-width: 20rem;
         padding: 1rem;
-        // align-items: center;
+        align-items: center;
         background-color: #df0772;
+        width: 100%;
         border-radius: 2rem;
-
-        // width: 100%;
-        // justify-content: space-between;
         .host-question__detail__info__number_text {
           color: #fff;
-          font-size: 2rem;
+          font-size: large;
           font-family: "Poppins";
+          font-weight: bolder;
+          font-size: 2rem;
+          flex: 1;
         }
 
         .host-question__detail__info__number_number {
@@ -78,7 +80,7 @@
           padding-left: 1rem;
           padding-right: 1rem;
           border-radius: 2rem;
-
+          font-weight: bolder;
           font-size: 2rem;
         }
       }
